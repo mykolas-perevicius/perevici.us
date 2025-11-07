@@ -8,6 +8,7 @@
 
 const { writeFileSync } = require('fs');
 const { join } = require('path');
+const https = require('https');
 
 const GITHUB_USERNAME = 'mykolas-perevicius';
 const GITHUB_TOKEN = process.env.GITHUB_TOKEN; // Optional, increases rate limits
@@ -22,22 +23,45 @@ interface MetricsData {
 }
 
 async function fetchGitHub(endpoint: string): Promise<any> {
-    const headers: HeadersInit = {
-        'Accept': 'application/vnd.github+json',
-        'User-Agent': 'perevici.us-metrics-builder'
-    };
+    return new Promise((resolve, reject) => {
+        const options = {
+            hostname: 'api.github.com',
+            port: 443,
+            path: endpoint,
+            method: 'GET',
+            headers: {
+                'Accept': 'application/vnd.github+json',
+                'User-Agent': 'perevici.us-metrics-builder',
+                ...(GITHUB_TOKEN && { 'Authorization': `Bearer ${GITHUB_TOKEN}` })
+            }
+        };
 
-    if (GITHUB_TOKEN) {
-        headers['Authorization'] = `Bearer ${GITHUB_TOKEN}`;
-    }
+        const req = https.request(options, (res: any) => {
+            let data = '';
 
-    const response = await fetch(`https://api.github.com${endpoint}`, { headers });
+            res.on('data', (chunk: any) => {
+                data += chunk;
+            });
 
-    if (!response.ok) {
-        throw new Error(`GitHub API error: ${response.status} ${response.statusText}`);
-    }
+            res.on('end', () => {
+                if (res.statusCode >= 200 && res.statusCode < 300) {
+                    try {
+                        resolve(JSON.parse(data));
+                    } catch (error) {
+                        reject(new Error(`Failed to parse JSON: ${error}`));
+                    }
+                } else {
+                    reject(new Error(`GitHub API error: ${res.statusCode} ${res.statusMessage}`));
+                }
+            });
+        });
 
-    return response.json();
+        req.on('error', (error: any) => {
+            reject(error);
+        });
+
+        req.end();
+    });
 }
 
 async function fetchAllRepos(): Promise<any[]> {
