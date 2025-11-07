@@ -1,0 +1,24 @@
+{
+  "name": "perevici.us",
+  "version": "2.0.0",
+  "description": "Personal portfolio website for Mykolas Perevicius",
+  "type": "module",
+  "scripts": {
+    "build-metrics": "ts-node scripts/build-metrics.ts",
+    "serve": "python3 -m http.server 8000",
+    "test": "echo \"No tests configured\""
+  },
+  "keywords": [
+    "portfolio",
+    "personal-website",
+    "github-metrics"
+  ],
+  "author": "Mykolas Perevicius <Perevicius.Mykolas@gmail.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "ts-node": "^10.9.0",
+    "typescript": "^5.0.0"
+  },
+  "dependencies": {}
+}

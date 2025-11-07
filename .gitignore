@@ -26,3 +26,12 @@ npm-debug.log*
 # Environment
 .env
 .env.local
+
+# Dependencies
+node_modules/
+package-lock.json
+yarn.lock
+
+# Build outputs
+dist/
+build/

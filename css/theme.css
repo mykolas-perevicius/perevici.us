@@ -1,0 +1,97 @@
+/* Theme CSS Variables */
+:root {
+    /* Core theme tokens - Dark (default) */
+    --bg: #0A0A0A;
+    --bg-elev: #111318;
+    --text: #F3F4F6;
+    --muted: #9CA3AF;
+    --border: #1F2937;
+    --chip-bg: #111827;
+    --chip-text: #E5E7EB;
+    --link: #93C5FD;
+
+    /* Accent colors (theme-independent) */
+    --primary-color: #00d4ff;
+    --secondary-color: #00a6cc;
+    --accent-color: #40e0d0;
+    --success: #10b981;
+
+    /* Typography */
+    --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+    --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    --font-display: 'Space Grotesk', 'Inter', sans-serif;
+
+    /* Layout */
+    --max-width: 1200px;
+    --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Light theme overrides */
+[data-theme="light"] {
+    --bg: #FAFAFA;
+    --bg-elev: #FFFFFF;
+    --text: #0A0A0A;
+    --muted: #4B5563;
+    --border: #E5E7EB;
+    --chip-bg: #F3F4F6;
+    --chip-text: #111827;
+    --link: #1D4ED8;
+}
+
+/* Base styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: var(--font-sans);
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    overflow-x: hidden;
+}
+
+h1, h2, h3 {
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: 1rem;
+    color: var(--text);
+}
+
+h1 { font-size: clamp(2rem, 5vw, 3.5rem); }
+h2 { font-size: clamp(1.5rem, 3vw, 2.5rem); }
+h3 { font-size: clamp(1.25rem, 2vw, 1.75rem); }
+
+p {
+    margin-bottom: 1rem;
+    color: var(--text);
+}
+
+a {
+    color: var(--link);
+    text-decoration: none;
+    transition: var(--transition);
+}
+
+a:hover {
+    color: var(--accent-color);
+}
+
+/* Focus states for accessibility */
+*:focus-visible {
+    outline: 2px solid var(--primary-color);
+    outline-offset: 2px;
+}
+
+button:focus-visible,
+a:focus-visible {
+    outline: 2px solid var(--primary-color);
+    outline-offset: 2px;
+}
