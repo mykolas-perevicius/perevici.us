@@ -6,8 +6,8 @@
  * Run: npm run build-metrics or ts-node scripts/build-metrics.ts
  */
 
-import { writeFileSync } from 'fs';
-import { join } from 'path';
+const { writeFileSync } = require('fs');
+const { join } = require('path');
 
 const GITHUB_USERNAME = 'mykolas-perevicius';
 const GITHUB_TOKEN = process.env.GITHUB_TOKEN; // Optional, increases rate limits

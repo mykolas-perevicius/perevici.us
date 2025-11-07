@@ -2,7 +2,6 @@
   "name": "perevici.us",
   "version": "2.0.0",
   "description": "Personal portfolio website for Mykolas Perevicius",
-  "type": "module",
   "scripts": {
     "build-metrics": "ts-node scripts/build-metrics.ts",
     "serve": "python3 -m http.server 8000",
