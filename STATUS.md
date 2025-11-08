@@ -1,6 +1,6 @@
 # 🎉 Portfolio Status - LIVE!
 
-**Last Updated:** 2025-11-07 09:30 UTC
+**Last Updated:** 2025-11-07 21:10 UTC
 
 ---
 
@@ -34,15 +34,15 @@ $ dig perevici.us A +short
 
 ## 📦 Latest Push
 
-**Commit:** bbc987e
-**Message:** Add comprehensive documentation and deployment guides
-**Files Added:**
-- CHANGELOG.md (complete feature documentation)
-- DEPLOYMENT_GUIDE.md (full deployment instructions)
-- SETUP_NAMECHEAP_DNS.md (step-by-step DNS guide)
+**Commit:** [Pending]
+**Message:** fix(metrics): regenerate GitHub stats and remove static statistics
+**Changes:**
+- Regenerated metrics.json with real GitHub API data (7,633 lines added, 13 PRs merged, 6 stars)
+- Removed static stats bar (90% coverage, 500+ taught, etc.)
+- Now showing only live GitHub metrics section
 
-**Previous Commit:** 38849f5
-**Message:** Initial commit: Portfolio website with all features
+**Previous Commit:** bbc987e
+**Message:** Add comprehensive documentation and deployment guides
 
 ---
 
@@ -50,8 +50,7 @@ $ dig perevici.us A +short
 
 ### Core Features ✅
 - Hero with animated typing (6 roles)
-- Live GitHub stats via API
-- Stats bar (90% coverage, 60% reduction, 4.6× speedup, 500+ taught)
+- Live GitHub metrics (7.6K lines added, 13 PRs merged, 6 stars)
 - Experience timeline (4 positions)
 - Featured projects (6 projects with tech tags)
 - Skills grid (4 categories: Languages, Frameworks, Infrastructure, Specialized)
