@@ -17,7 +17,7 @@ interface MetricsData {
     generatedAt: string;
     username: string;
     linesAddedLifetime: number | null;
-    commits12mo: number | null;
+    commits2025: number | null;
     prsMerged: number | null;
     starsTotal: number | null;
 }
@@ -107,30 +107,16 @@ async function calculateLinesAdded(repos: any[]): Promise<number> {
     return totalLines;
 }
 
-async function calculateCommits12mo(repos: any[]): Promise<number> {
-    let totalCommits = 0;
-    const oneYearAgo = new Date();
-    oneYearAgo.setFullYear(oneYearAgo.getFullYear() - 1);
-
-    for (const repo of repos) {
-        try {
-            const activity = await fetchGitHub(`/repos/${GITHUB_USERNAME}/${repo.name}/stats/commit_activity`);
-
-            if (Array.isArray(activity)) {
-                // Each week contains 'total' commits
-                for (const week of activity) {
-                    totalCommits += week.total || 0;
-                }
-            }
-
-            // Rate limiting: sleep 100ms between repos
-            await new Promise(resolve => setTimeout(resolve, 100));
-        } catch (error) {
-            console.warn(`Warning: Could not fetch commit activity for ${repo.name}:`, error);
-        }
+async function calculateCommits2025(): Promise<number> {
+    try {
+        // Use search API which is more reliable than stats/commit_activity
+        // Search for all commits by this author in 2025
+        const search = await fetchGitHub(`/search/commits?q=author:${GITHUB_USERNAME}+author-date:2025-01-01..2025-12-31`);
+        return search.total_count || 0;
+    } catch (error) {
+        console.warn('Warning: Could not fetch commit count for 2025:', error);
+        return 0;
     }
-
-    return totalCommits;
 }
 
 async function calculatePRsMerged(): Promise<number> {
@@ -157,9 +143,9 @@ async function buildMetrics(): Promise<MetricsData> {
     const linesAddedLifetime = await calculateLinesAdded(repos);
     console.log(`Lines added: ${linesAddedLifetime.toLocaleString()}`);
 
-    console.log('Calculating commits in last 12 months...');
-    const commits12mo = await calculateCommits12mo(repos);
-    console.log(`Commits (12mo): ${commits12mo.toLocaleString()}`);
+    console.log('Calculating commits in 2025...');
+    const commits2025 = await calculateCommits2025();
+    console.log(`Commits (2025): ${commits2025.toLocaleString()}`);
 
     console.log('Calculating merged PRs...');
     const prsMerged = await calculatePRsMerged();
@@ -172,7 +158,7 @@ async function buildMetrics(): Promise<MetricsData> {
         generatedAt: new Date().toISOString(),
         username: GITHUB_USERNAME,
         linesAddedLifetime,
-        commits12mo,
+        commits2025,
         prsMerged,
         starsTotal
     };
@@ -189,7 +175,7 @@ async function main() {
         console.log(`📁 Output: ${outputPath}`);
         console.log('\nMetrics summary:');
         console.log(`  Lines Added (lifetime): ${metrics.linesAddedLifetime?.toLocaleString() || 'N/A'}`);
-        console.log(`  Commits (12 months): ${metrics.commits12mo?.toLocaleString() || 'N/A'}`);
+        console.log(`  Commits (2025): ${metrics.commits2025?.toLocaleString() || 'N/A'}`);
         console.log(`  PRs Merged: ${metrics.prsMerged?.toLocaleString() || 'N/A'}`);
         console.log(`  Total Stars: ${metrics.starsTotal?.toLocaleString() || 'N/A'}`);
     } catch (error) {

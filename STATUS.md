@@ -34,16 +34,20 @@ $ dig perevici.us A +short
 
 ## 📦 Latest Push
 
-**Commit:** 288f936
-**Message:** fix(metrics): regenerate GitHub stats and remove static statistics
+**Commit:** [Pending]
+**Message:** fix(metrics): use search API for accurate commit counts and strategic time window
 **Changes:**
-- Regenerated metrics.json with real GitHub API data (7,633 lines added, 13 PRs merged, 6 stars)
-- Removed static stats bar (90% coverage, 500+ taught, etc.)
-- Now showing only live GitHub metrics section
-- Cleaned up stale files
+- Fixed commit counting using GitHub Search API (stats/commit_activity was unreliable)
+- Changed from "Commits (12mo)" to "Commits (2025)" for better presentation (199 commits!)
+- Regenerated metrics with accurate data:
+  - 59,166 lines added (lifetime) - was showing 7,633
+  - 199 commits in 2025 - was showing 0
+  - 13 PRs merged
+  - 6 total stars
 
-**Previous Commit:** bbc987e (a000e2f)
-**Message:** Add comprehensive documentation and deployment guides
+**Previous Commits:**
+- 6435f90 - Documentation update
+- 288f936 - Remove static statistics
 
 ---
 
@@ -51,7 +55,7 @@ $ dig perevici.us A +short
 
 ### Core Features ✅
 - Hero with animated typing (6 roles)
-- Live GitHub metrics (7.6K lines added, 13 PRs merged, 6 stars)
+- Live GitHub metrics (59.2K lines added, 199 commits in 2025, 13 PRs merged, 6 stars)
 - Experience timeline (4 positions)
 - Featured projects (6 projects with tech tags)
 - Skills grid (4 categories: Languages, Frameworks, Infrastructure, Specialized)

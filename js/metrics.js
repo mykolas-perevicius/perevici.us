@@ -60,9 +60,9 @@ function renderMetrics(container, data) {
             link: null
         },
         {
-            value: data.commits12mo,
-            label: 'Commits (12mo)',
-            tooltip: 'Total commits in the last 12 months across public repositories',
+            value: data.commits2025,
+            label: 'Commits (2025)',
+            tooltip: 'Total commits in 2025 across all public repositories',
             link: null
         },
         {
@@ -116,7 +116,7 @@ function renderError(container) {
         </div>
         <div class="metric-card">
             <div class="metric-value">—</div>
-            <div class="metric-label">Commits (12mo)</div>
+            <div class="metric-label">Commits (2025)</div>
         </div>
         <div class="metric-card">
             <div class="metric-value">—</div>
