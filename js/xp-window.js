@@ -1,6 +1,8 @@
 // Windows XP Window - Browser Controls & Interactivity
 // Handles address bar filtering, navigation buttons, window management
 
+import { initContextMenus } from './xp-context-menu.js';
+
 let filterHistory = [];
 let historyIndex = -1;
 let allProjects = [];
@@ -100,6 +102,9 @@ export function initXPWindow() {
 
     // Enable double-click to spawn windows
     attachProjectCardHandlers();
+
+    // Initialize context menus
+    initContextMenus();
 }
 
 function cacheProjects() {
@@ -321,7 +326,7 @@ function showError(message) {
 let openWindows = [];
 let nextZIndex = 1000;
 
-function spawnProjectWindow(projectCard) {
+export function spawnProjectWindow(projectCard) {
     if (openWindows.length >= 3) {
         alert('Maximum number of windows reached (3)');
         return;
