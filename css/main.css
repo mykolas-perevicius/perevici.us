@@ -296,13 +296,16 @@ section {
 }
 
 .project-card {
-    background: var(--bg-elev);
-    border: 1px solid var(--border);
-    border-radius: 0.5rem;
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    backdrop-filter: blur(var(--glass-blur)) saturate(120%);
+    -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(120%);
+    border-radius: 12px;
     padding: 1.5rem;
-    transition: var(--transition);
+    transition: all 0.3s ease;
     position: relative;
     overflow: hidden;
+    box-shadow: 0 4px 12px var(--glass-glow);
 }
 
 .project-card::before {
@@ -314,16 +317,25 @@ section {
     height: 3px;
     background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
     transform: scaleX(0);
-    transition: transform 0.3s;
+    transition: transform 0.3s ease;
+}
+
+.project-card:hover {
+    background: rgba(255, 255, 255, 0.08);
+    border-color: var(--primary-color);
+    box-shadow: 0 8px 24px rgba(0, 212, 255, 0.4);
+    transform: translateY(-4px);
 }
 
 .project-card:hover::before {
     transform: scaleX(1);
 }
 
-.project-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 30px rgba(0, 212, 255, 0.1);
+/* Fallback for no backdrop-filter */
+@supports not (backdrop-filter: blur(20px)) {
+    .project-card {
+        background: var(--bg-elev);
+    }
 }
 
 .project-header {
@@ -373,10 +385,25 @@ section {
 }
 
 .skill-category {
-    background: var(--bg-elev);
-    border: 1px solid var(--border);
-    border-radius: 0.5rem;
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    backdrop-filter: blur(var(--glass-blur)) saturate(120%);
+    -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(120%);
+    border-radius: 12px;
     padding: 1.5rem;
+    box-shadow: 0 4px 12px var(--glass-glow);
+    transition: all 0.3s ease;
+}
+
+.skill-category:hover {
+    border-color: var(--primary-color);
+    box-shadow: 0 8px 24px rgba(0, 212, 255, 0.3);
+}
+
+@supports not (backdrop-filter: blur(20px)) {
+    .skill-category {
+        background: var(--bg-elev);
+    }
 }
 
 .skill-category h3 {
@@ -426,12 +453,21 @@ section {
 
 /* Education */
 .education-card {
-    background: var(--bg-elev);
-    border: 1px solid var(--border);
-    border-radius: 0.5rem;
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    backdrop-filter: blur(var(--glass-blur)) saturate(120%);
+    -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(120%);
+    border-radius: 12px;
     padding: 2rem;
     max-width: 800px;
     margin: 0 auto;
+    box-shadow: 0 4px 12px var(--glass-glow);
+}
+
+@supports not (backdrop-filter: blur(20px)) {
+    .education-card {
+        background: var(--bg-elev);
+    }
 }
 
 .education-header {
