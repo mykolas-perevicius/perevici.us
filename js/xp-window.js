@@ -2,6 +2,7 @@
 // Handles address bar filtering, navigation buttons, window management
 
 import { initContextMenus } from './xp-context-menu.js';
+import { initEasterEggs } from './xp-easter-eggs.js';
 
 let filterHistory = [];
 let historyIndex = -1;
@@ -105,6 +106,9 @@ export function initXPWindow() {
 
     // Initialize context menus
     initContextMenus();
+
+    // Initialize easter eggs
+    initEasterEggs();
 }
 
 function cacheProjects() {
