@@ -4,6 +4,7 @@ import { initKonami } from './konami.js';
 import { initHints } from './hints.js';
 import { initShortcuts } from './shortcuts.js';
 import { initMetrics } from './metrics.js';
+import { initXPWindow } from './xp-window.js';
 
 // Theme Management
 function initTheme() {
@@ -160,6 +161,7 @@ document.addEventListener('DOMContentLoaded', () => {
     initShortcuts();
     initScrollReveal();
     initMetrics();
+    initXPWindow();
     fetchGitHubStats();
     initConsoleMessage();
 });
