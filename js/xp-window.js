@@ -29,14 +29,38 @@ function updateViewDisplay() {
     }
 
     if (currentViewMode === 'xp') {
+        // Fade out modern, fade in XP
+        if (modernGrid) {
+            modernGrid.classList.add('fade-out');
+            setTimeout(() => {
+                modernGrid.style.display = 'none';
+                modernGrid.classList.remove('fade-out');
+            }, 300);
+        }
+
         if (xpWindow) {
             xpWindow.style.display = '';
             xpWindow.classList.remove('minimized');
+            // Force reflow then fade in
+            xpWindow.offsetHeight;
+            xpWindow.style.opacity = '1';
         }
-        if (modernGrid) modernGrid.style.display = 'none';
     } else {
-        if (xpWindow) xpWindow.style.display = 'none';
-        if (modernGrid) modernGrid.style.display = '';
+        // Fade out XP, fade in modern
+        if (xpWindow) {
+            xpWindow.classList.add('fade-out');
+            setTimeout(() => {
+                xpWindow.style.display = 'none';
+                xpWindow.classList.remove('fade-out');
+            }, 300);
+        }
+
+        if (modernGrid) {
+            modernGrid.style.display = '';
+            // Force reflow then fade in
+            modernGrid.offsetHeight;
+            modernGrid.style.opacity = '1';
+        }
     }
 }
 

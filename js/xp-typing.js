@@ -4,20 +4,10 @@
 let typingInProgress = false;
 
 export async function startXPTypingAnimation() {
-    console.log('[XP Typing] Starting animation...');
-
-    if (typingInProgress) {
-        console.log('[XP Typing] Already in progress, skipping');
-        return;
-    }
+    if (typingInProgress) return;
 
     const projectCards = document.querySelectorAll('.xp-content .project-card');
-    console.log('[XP Typing] Found', projectCards.length, 'project cards');
-
-    if (!projectCards.length) {
-        console.warn('[XP Typing] No project cards found!');
-        return;
-    }
+    if (!projectCards.length) return;
 
     typingInProgress = true;
 
@@ -49,12 +39,7 @@ async function typeOutProjectCard(card, initialDelay) {
     await sleep(initialDelay);
 
     // Skip document cards (Resume.doc)
-    if (card.dataset.document) {
-        console.log('[XP Typing] Skipping document card:', card.dataset.document);
-        return;
-    }
-
-    console.log('[XP Typing] Typing card...');
+    if (card.dataset.document) return;
 
     // Store original HTML for restoration
     if (!card.dataset.originalHtml) {
@@ -63,7 +48,6 @@ async function typeOutProjectCard(card, initialDelay) {
 
     // Extract content from card
     const content = extractProjectContent(card);
-    console.log('[XP Typing] Content extracted:', content);
 
     // Build DOM structure with empty text containers
     const { container, targets } = createProjectElements();
@@ -169,13 +153,18 @@ function createProjectElements() {
 
 function applyWordStyling(card) {
     card.classList.add('xp-typing-card');
-    card.style.fontFamily = "'Times New Roman', serif";
-    card.style.fontSize = '11pt';
-    card.style.lineHeight = '1.5';
-    card.style.color = '#000';
-    card.style.background = '#fff';
-    card.style.padding = '12px';
-    card.style.border = '1px solid #ccc';
+    card.style.cssText = `
+        font-family: 'Times New Roman', serif !important;
+        font-size: 11pt !important;
+        line-height: 1.5 !important;
+        color: #000 !important;
+        background: #fff !important;
+        padding: 12px !important;
+        border: 1px solid #ccc !important;
+        border-radius: 0 !important;
+        box-shadow: none !important;
+        backdrop-filter: none !important;
+    `;
 }
 
 function createCursor() {

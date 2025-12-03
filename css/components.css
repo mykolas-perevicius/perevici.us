@@ -738,3 +738,48 @@
     border-color: rgba(0, 100, 200, 0.4);
     box-shadow: 0 4px 12px rgba(0, 100, 200, 0.2);
 }
+
+/* Fade transitions between views */
+.xp-window,
+.modern-projects-grid {
+    transition: opacity 0.3s ease-in-out;
+}
+
+.xp-window.fade-out,
+.modern-projects-grid.fade-out {
+    opacity: 0;
+}
+
+/* Resume.doc special styling */
+.project-card-document {
+    background: linear-gradient(135deg, #2b579a 0%, #1a3d6b 100%) !important;
+    border: 2px solid #4a7ac2 !important;
+    color: #ffffff !important;
+}
+
+.project-card-document h3 {
+    color: #ffffff !important;
+}
+
+.project-card-document .project-description {
+    color: #e0e8f0 !important;
+}
+
+.project-card-document .project-stats {
+    color: #b0c8e0 !important;
+}
+
+/* XP typing cards - override all other styles */
+.xp-typing-card {
+    all: unset !important;
+    display: block !important;
+    font-family: 'Times New Roman', serif !important;
+    font-size: 11pt !important;
+    line-height: 1.5 !important;
+    color: #000 !important;
+    background: #fff !important;
+    padding: 12px !important;
+    border: 1px solid #ccc !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+}
