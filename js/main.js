@@ -2,6 +2,7 @@
 import { initI18n } from './i18n.js';
 import { initMetrics } from './metrics.js';
 import { initImageOptimization } from './image-optimizer.js';
+import { initBlogModal } from './blog-modal.js';
 
 // Theme Management
 function initTheme() {
@@ -185,6 +186,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             import('./contact-form.js').then(m => m.initContactForm()),
             import('./hints.js').then(m => m.initHints())
         ]);
+        initBlogModal();
     }, { timeout: 2000 });
 
     // Low priority: Load when browser is truly idle

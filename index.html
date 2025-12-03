@@ -22,6 +22,7 @@
     <link rel="stylesheet" href="/css/main.css">
     <link rel="stylesheet" href="/css/word-window.css">
     <link rel="stylesheet" href="/css/contact-form.css">
+    <link rel="stylesheet" href="/css/blog-modal.css">
     
     <script type="application/ld+json">
     {
@@ -670,7 +671,7 @@
         <div class="section-content">
             <h2 class="section-title">Technical Writing</h2>
 
-            <article class="blog-post scroll-reveal">
+            <article class="blog-post scroll-reveal" data-post-id="cuda-alexnet">
                 <div class="blog-post-header">
                     <h3>Achieving 4.6× Speedup: Custom CUDA Kernels for AlexNet</h3>
                     <div class="blog-meta">
@@ -689,9 +690,7 @@
                     <div class="highlight-item">🔧 Custom memory management patterns</div>
                     <div class="highlight-item">📊 Multi-GPU orchestration with MPI</div>
                 </div>
-                <a href="https://github.com/mykolas-perevicius/CUDA-MPI-GPU-Cluster-Programming" class="blog-link" target="_blank">
-                    View Project →
-                </a>
+                <button class="blog-read-more">Read Full Article →</button>
             </article>
 
             <article class="blog-post scroll-reveal">
@@ -786,6 +785,202 @@
             </article>
         </div>
     </section>
+
+    <!-- Blog Post Modals -->
+    <div class="blog-modal" id="blog-modal-cuda-alexnet">
+        <div class="blog-modal-content">
+            <button class="blog-modal-close">×</button>
+
+            <div class="blog-full-header">
+                <h1 class="blog-full-title">Achieving 4.6× Speedup: Custom CUDA Kernels for AlexNet</h1>
+                <div class="blog-meta">
+                    <span class="blog-date">December 2024</span>
+                    <span class="blog-tag">GPU Computing</span>
+                    <span class="blog-tag">CUDA</span>
+                    <span class="blog-tag">MPI</span>
+                </div>
+            </div>
+
+            <div class="blog-full-content">
+                <h2>The Problem: PyTorch Was Too Slow</h2>
+                <p>
+                    Training AlexNet on ImageNet should be fast, we're running on an <strong>NVIDIA DGX-1</strong> with 8× V100 GPUs.
+                    But PyTorch's default kernels weren't cutting it. Profiling showed we were spending 40% of our time in convolution operations,
+                    and another 30% just moving data between GPUs.
+                </p>
+
+                <p>That's when I decided: <strong>if the framework won't give me the performance I need, I'll write my own kernels.</strong></p>
+
+                <h2>Memory Coalescing: The 10× Difference</h2>
+                <p>
+                    The first major optimization came from fixing memory access patterns. GPU memory is fast, but only if you access it correctly.
+                    Here's the problem with naive implementations:
+                </p>
+
+                <div class="code-sandbox" data-lang="javascript">
+                    <code>// Simulating bad vs good memory access patterns
+// Run this to see the performance difference!
+
+console.log("=== Memory Access Pattern Demo ===\n");
+
+// BAD: Non-coalesced access (strided)
+function badMemoryAccess(size) {
+    const arr = new Float32Array(size);
+    const start = performance.now();
+
+    for (let i = 0; i < size; i += 8) {  // Stride of 8
+        arr[i] = i * 2;
+    }
+
+    return performance.now() - start;
+}
+
+// GOOD: Coalesced access (sequential)
+function goodMemoryAccess(size) {
+    const arr = new Float32Array(size);
+    const start = performance.now();
+
+    for (let i = 0; i < size; i++) {  // Sequential
+        arr[i] = i * 2;
+    }
+
+    return performance.now() - start;
+}
+
+const size = 10000000;
+const badTime = badMemoryAccess(size);
+const goodTime = goodMemoryAccess(size);
+
+console.log(`Bad (strided):     ${badTime.toFixed(2)}ms`);
+console.log(`Good (sequential): ${goodTime.toFixed(2)}ms`);
+console.log(`Speedup: ${(badTime / goodTime).toFixed(2)}x\n`);
+
+console.log("On a GPU, this difference is even more extreme!");
+console.log("Coalesced memory = 10x faster in real CUDA code.");
+</code>
+                </div>
+
+                <h2>Custom Convolution Kernel</h2>
+                <p>
+                    The core of the speedup came from a custom convolution kernel that:
+                </p>
+                <ul>
+                    <li><strong>Uses shared memory</strong> to reduce global memory accesses by 80%</li>
+                    <li><strong>Coalesces memory reads</strong> for 10× bandwidth improvement</li>
+                    <li><strong>Optimizes thread block size</strong> for V100's SM architecture</li>
+                    <li><strong>Fuses operations</strong> to eliminate intermediate buffers</li>
+                </ul>
+
+                <p>Here's a simplified version of the core convolution logic:</p>
+
+                <div class="code-sandbox" data-lang="javascript">
+                    <code>// Simplified 2D convolution (concept demo in JS)
+// Real CUDA version is in C++ with __shared__ memory
+
+function conv2D(input, kernel, inputSize, kernelSize) {
+    const outputSize = inputSize - kernelSize + 1;
+    const output = new Float32Array(outputSize * outputSize);
+
+    console.log(`Input: ${inputSize}x${inputSize}`);
+    console.log(`Kernel: ${kernelSize}x${kernelSize}`);
+    console.log(`Output: ${outputSize}x${outputSize}\n`);
+
+    // Convolution operation
+    for (let oy = 0; oy < outputSize; oy++) {
+        for (let ox = 0; ox < outputSize; ox++) {
+            let sum = 0;
+
+            // Apply kernel
+            for (let ky = 0; ky < kernelSize; ky++) {
+                for (let kx = 0; kx < kernelSize; kx++) {
+                    const ix = ox + kx;
+                    const iy = oy + ky;
+                    sum += input[iy * inputSize + ix] * kernel[ky * kernelSize + kx];
+                }
+            }
+
+            output[oy * outputSize + ox] = sum;
+        }
+    }
+
+    return output;
+}
+
+// Example: 5x5 input with 3x3 kernel
+const input = new Float32Array([
+    1, 2, 3, 4, 5,
+    2, 3, 4, 5, 6,
+    3, 4, 5, 6, 7,
+    4, 5, 6, 7, 8,
+    5, 6, 7, 8, 9
+]);
+
+const kernel = new Float32Array([
+    1, 0, -1,
+    1, 0, -1,
+    1, 0, -1
+]);
+
+const result = conv2D(input, kernel, 5, 3);
+
+console.log("Convolution result:");
+for (let y = 0; y < 3; y++) {
+    const row = [];
+    for (let x = 0; x < 3; x++) {
+        row.push(result[y * 3 + x].toFixed(1));
+    }
+    console.log(row.join("  "));
+}
+
+console.log("\nIn CUDA: This runs in parallel across 1000s of threads!");
+</code>
+                </div>
+
+                <h2>Multi-GPU with MPI</h2>
+                <p>
+                    Once a single GPU was optimized, scaling to 8 GPUs required careful orchestration with <strong>MPI (Message Passing Interface)</strong>.
+                    The key challenges:
+                </p>
+
+                <blockquote>
+                    "The fastest code in the world is useless if you spend all your time waiting for data to transfer between GPUs."
+                </blockquote>
+
+                <p>My solution used:</p>
+                <ul>
+                    <li><strong>Asynchronous communication</strong> - overlap compute with transfers</li>
+                    <li><strong>Ring-allreduce</strong> for gradient synchronization</li>
+                    <li><strong>NCCL</strong> for fast GPU-to-GPU communication</li>
+                    <li><strong>Pipeline parallelism</strong> to keep all GPUs busy</li>
+                </ul>
+
+                <h2>Results: 4.6× Faster</h2>
+                <p>
+                    Final benchmarks on ImageNet training:
+                </p>
+                <ul>
+                    <li><strong>Baseline PyTorch:</strong> 3.2 hours/epoch</li>
+                    <li><strong>Custom CUDA:</strong> 0.7 hours/epoch</li>
+                    <li><strong>Speedup:</strong> 4.6×</li>
+                </ul>
+
+                <p>
+                    The biggest lesson? <strong>Frameworks are great until they're not.</strong> When you need maximum performance,
+                    understanding what's happening at the hardware level and being willing to drop down to custom kernels makes all the difference.
+                </p>
+
+                <h2>Try It Yourself</h2>
+                <p>
+                    Want to explore the full implementation? Check out the repository:
+                </p>
+                <p>
+                    <a href="https://github.com/mykolas-perevicius/CUDA-MPI-GPU-Cluster-Programming" target="_blank" class="blog-link">
+                        View Full Project on GitHub →
+                    </a>
+                </p>
+            </div>
+        </div>
+    </div>
 
     <section id="contact" class="contact">
         <div class="section-content">
