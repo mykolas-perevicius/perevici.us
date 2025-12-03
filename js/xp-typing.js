@@ -4,10 +4,20 @@
 let typingInProgress = false;
 
 export async function startXPTypingAnimation() {
-    if (typingInProgress) return;
+    console.log('[XP Typing] Starting animation...');
+
+    if (typingInProgress) {
+        console.log('[XP Typing] Already in progress, skipping');
+        return;
+    }
 
     const projectCards = document.querySelectorAll('.xp-content .project-card');
-    if (!projectCards.length) return;
+    console.log('[XP Typing] Found', projectCards.length, 'project cards');
+
+    if (!projectCards.length) {
+        console.warn('[XP Typing] No project cards found!');
+        return;
+    }
 
     typingInProgress = true;
 
@@ -39,7 +49,12 @@ async function typeOutProjectCard(card, initialDelay) {
     await sleep(initialDelay);
 
     // Skip document cards (Resume.doc)
-    if (card.dataset.document) return;
+    if (card.dataset.document) {
+        console.log('[XP Typing] Skipping document card:', card.dataset.document);
+        return;
+    }
+
+    console.log('[XP Typing] Typing card...');
 
     // Store original HTML for restoration
     if (!card.dataset.originalHtml) {
@@ -48,6 +63,7 @@ async function typeOutProjectCard(card, initialDelay) {
 
     // Extract content from card
     const content = extractProjectContent(card);
+    console.log('[XP Typing] Content extracted:', content);
 
     // Build DOM structure with empty text containers
     const { container, targets } = createProjectElements();
