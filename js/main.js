@@ -7,6 +7,7 @@ import { initMetrics } from './metrics.js';
 import { initXPWindow } from './xp-window.js';
 import { initWordWindow } from './word-window.js';
 import { initContactForm } from './contact-form.js';
+import { initThreeBackground } from './three-background.js';
 
 // Theme Management
 function initTheme() {
@@ -173,6 +174,7 @@ document.addEventListener('DOMContentLoaded', () => {
     initXPWindow();
     initWordWindow();
     initContactForm();
+    initThreeBackground();
     fetchGitHubStats();
     initConsoleMessage();
 });
