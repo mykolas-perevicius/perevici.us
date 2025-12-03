@@ -287,6 +287,68 @@
     }
 }
 
+/* Resume Widget - Standalone card */
+.resume-widget {
+    margin-top: 2rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1.25rem 1.5rem;
+    background: linear-gradient(135deg, rgba(43, 87, 154, 0.15), rgba(26, 61, 107, 0.1));
+    border: 2px solid rgba(43, 87, 154, 0.3);
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    max-width: 400px;
+    animation: slideInUp 0.8s ease-out 0.6s both;
+}
+
+.resume-widget:hover {
+    border-color: rgba(43, 87, 154, 0.6);
+    transform: translateY(-4px);
+    box-shadow: 0 12px 24px rgba(43, 87, 154, 0.25);
+    background: linear-gradient(135deg, rgba(43, 87, 154, 0.25), rgba(26, 61, 107, 0.15));
+}
+
+.resume-widget-icon {
+    flex-shrink: 0;
+    width: 48px;
+    height: 48px;
+    background: linear-gradient(135deg, #2b579a, #1a3d6b);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 12px rgba(43, 87, 154, 0.3);
+}
+
+.resume-widget-icon svg {
+    width: 28px;
+    height: 28px;
+    fill: #ffffff;
+}
+
+.resume-widget-content h4 {
+    margin: 0 0 0.25rem 0;
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: var(--text);
+    font-family: var(--font-sans);
+}
+
+.resume-widget-content p {
+    margin: 0;
+    font-size: 0.875rem;
+    color: var(--muted);
+    font-family: var(--font-mono);
+}
+
+@media (max-width: 480px) {
+    .resume-widget {
+        max-width: 100%;
+    }
+}
+
 /* Terminal Overlay */
 .terminal-overlay {
     display: none;

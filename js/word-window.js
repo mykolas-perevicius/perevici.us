@@ -14,11 +14,11 @@ export async function initWordWindow() {
         console.error('Failed to load resume data:', error);
     }
 
-    // Add click handler to Resume.doc card
-    const resumeCard = document.querySelector('[data-document="resume"]');
-    if (resumeCard) {
-        resumeCard.addEventListener('click', openWordWindow);
-        resumeCard.addEventListener('dblclick', openWordWindow);
+    // Add click handler to Resume widget
+    const resumeWidget = document.querySelector('.resume-widget');
+    if (resumeWidget) {
+        resumeWidget.addEventListener('click', openWordWindow);
+        resumeWidget.addEventListener('dblclick', openWordWindow);
     }
 }
 

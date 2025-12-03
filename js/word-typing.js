@@ -7,73 +7,52 @@ export function startTypingAnimation(resumeData, targetElement) {
     if (typingInProgress) return;
 
     typingInProgress = true;
-    const fullText = buildResumeHTML(resumeData);
-    const engine = new TypingEngine(fullText, targetElement);
+    const engine = new TypingEngine(resumeData, targetElement);
     engine.start();
 }
 
 class TypingEngine {
-    constructor(htmlContent, targetElement) {
-        this.content = htmlContent;
+    constructor(resumeData, targetElement) {
+        this.data = resumeData;
         this.target = targetElement;
-        this.position = 0;
         this.line = 1;
         this.col = 1;
         this.wordCount = 0;
         this.isTyping = true;
-
-        // Pre-generate typo positions (2-3 typos randomly placed)
-        this.typos = this.generateTypoPositions();
+        this.currentElement = null;
 
         // Add cursor
         this.cursor = document.createElement('span');
         this.cursor.className = 'word-cursor';
         this.cursor.textContent = '|';
-        this.target.appendChild(this.cursor);
-    }
-
-    generateTypoPositions() {
-        const typoCount = 2 + Math.floor(Math.random() * 2); // 2-3 typos
-        const typos = [];
-        const contentLength = this.content.length;
-
-        for (let i = 0; i < typoCount; i++) {
-            // Place typos at random positions (not too early, not in last 20%)
-            const pos = Math.floor(contentLength * 0.2 + Math.random() * contentLength * 0.6);
-            typos.push(pos);
-        }
-
-        return typos.sort((a, b) => a - b);
-    }
-
-    getDelay(char, nextChar) {
-        // Variable speed based on character type
-        if (char === ' ') return 10;
-        if (char === '\n') return 50;
-        if (char === ',') return 80;
-        if (char === '.') return 80;
-        if (char === ':' || char === ';') return 80;
-
-        // Letters and numbers
-        return 80;
-    }
-
-    getPauseAfter(char) {
-        // Pause after punctuation
-        if (char === '.') return 300;
-        if (char === ',') return 200;
-        if (char === ':' || char === ';') return 150;
-        return 0;
     }
 
     async start() {
-        while (this.isTyping && this.position < this.content.length) {
-            // Check for typo at this position
-            if (this.typos.includes(this.position)) {
-                await this.performTypo();
-            } else {
-                await this.typeCharacter();
-            }
+        // Type header section
+        await this.typeHeader();
+
+        // Type professional summary
+        await this.typeSection('PROFESSIONAL SUMMARY', this.data.summary, { justify: true });
+
+        // Type experience
+        await this.typeSectionTitle('EXPERIENCE');
+        for (const exp of this.data.experience) {
+            await this.typeExperience(exp);
+        }
+
+        // Type skills
+        await this.typeSectionTitle('TECHNICAL SKILLS');
+        for (const [category, items] of Object.entries(this.data.skills)) {
+            await this.typeSkillCategory(category, items);
+        }
+
+        // Type education
+        await this.typeEducation();
+
+        // Type projects
+        await this.typeSectionTitle('PROJECTS');
+        for (const project of this.data.projects) {
+            await this.typeProject(project);
         }
 
         // Remove cursor when done
@@ -81,140 +60,182 @@ class TypingEngine {
         typingInProgress = false;
     }
 
-    async typeCharacter() {
-        const char = this.content[this.position];
-        const nextChar = this.content[this.position + 1];
+    async typeHeader() {
+        // Create centered header container
+        const headerDiv = document.createElement('div');
+        headerDiv.style.cssText = 'text-align: center; margin-bottom: 12px;';
+        this.target.appendChild(headerDiv);
 
-        // Handle HTML tags - insert without typing effect
-        if (char === '<') {
-            const tagEnd = this.content.indexOf('>', this.position);
-            if (tagEnd !== -1) {
-                const tag = this.content.substring(this.position, tagEnd + 1);
-                this.insertAtCursor(tag);
-                this.position = tagEnd + 1;
-                await this.sleep(20);
-                return;
-            }
-        }
+        // Name (bold, larger)
+        const nameDiv = document.createElement('div');
+        nameDiv.style.cssText = 'font-size: 14pt; font-weight: bold; margin-bottom: 4px;';
+        headerDiv.appendChild(nameDiv);
+        await this.typeIntoElement(nameDiv, this.data.header.name);
 
-        // Type regular character
-        this.insertAtCursor(char);
-        this.position++;
+        // Contact info
+        const contactDiv = document.createElement('div');
+        contactDiv.style.cssText = 'font-size: 10pt; color: #333;';
+        headerDiv.appendChild(contactDiv);
+        await this.typeIntoElement(contactDiv, this.data.header.contact.join(' | '));
 
-        // Update position tracking
-        if (char === '\n') {
-            this.line++;
-            this.col = 1;
-        } else if (char !== '<' && char !== '>') {
-            this.col++;
-        }
-
-        // Update word count occasionally
-        if (char === ' ' || char === '\n') {
-            this.wordCount++;
-            if (this.wordCount % 5 === 0) {
-                updateStatusBar(1, this.line, this.col, this.wordCount);
-            }
-        }
-
-        const delay = this.getDelay(char, nextChar);
-        const pause = this.getPauseAfter(char);
-
-        await this.sleep(delay + pause);
+        await this.sleep(150);
     }
 
-    async performTypo() {
-        const correctChar = this.content[this.position];
-        const wrongChars = 'abcdefghijklmnopqrstuvwxyz';
-        const wrongChar = wrongChars[Math.floor(Math.random() * wrongChars.length)];
-
-        // Type wrong character
-        this.insertAtCursor(wrongChar);
-        await this.sleep(400);
-
-        // Backspace
-        const textNode = this.cursor.previousSibling;
-        if (textNode && textNode.nodeType === Node.TEXT_NODE) {
-            textNode.textContent = textNode.textContent.slice(0, -1);
-        }
-        await this.sleep(100);
-
-        // Type correct character
-        this.insertAtCursor(correctChar);
-        this.position++;
-        this.col++;
-
-        await this.sleep(80);
+    async typeSectionTitle(title) {
+        const titleDiv = document.createElement('div');
+        titleDiv.style.cssText = 'font-weight: bold; font-size: 11pt; margin: 16px 0 6px 0; border-bottom: 1px solid #000; padding-bottom: 2px;';
+        this.target.appendChild(titleDiv);
+        await this.typeIntoElement(titleDiv, title);
     }
 
-    insertAtCursor(text) {
-        const textNode = document.createTextNode(text);
-        this.target.insertBefore(textNode, this.cursor);
+    async typeSection(title, content, options = {}) {
+        await this.typeSectionTitle(title);
+
+        const contentDiv = document.createElement('div');
+        contentDiv.style.cssText = `margin-bottom: 12px; ${options.justify ? 'text-align: justify;' : ''}`;
+        this.target.appendChild(contentDiv);
+        await this.typeIntoElement(contentDiv, content);
+    }
+
+    async typeExperience(exp) {
+        const expDiv = document.createElement('div');
+        expDiv.style.cssText = 'margin-bottom: 12px;';
+        this.target.appendChild(expDiv);
+
+        // Title and company line
+        const titleLine = document.createElement('div');
+        titleLine.style.cssText = 'margin-bottom: 4px;';
+        expDiv.appendChild(titleLine);
+
+        const titleSpan = document.createElement('span');
+        titleSpan.style.fontWeight = 'bold';
+        titleLine.appendChild(titleSpan);
+        await this.typeIntoElement(titleSpan, exp.title);
+
+        await this.typeIntoElement(titleLine, ` | ${exp.company} | ${exp.dates}`);
+
+        // Bullets
+        const ul = document.createElement('ul');
+        ul.style.cssText = 'margin: 4px 0; padding-left: 20px;';
+        expDiv.appendChild(ul);
+
+        for (const bullet of exp.bullets) {
+            const li = document.createElement('li');
+            li.style.marginBottom = '3px';
+            ul.appendChild(li);
+            await this.typeIntoElement(li, bullet);
+        }
+    }
+
+    async typeSkillCategory(category, items) {
+        const skillDiv = document.createElement('div');
+        skillDiv.style.cssText = 'margin-bottom: 4px;';
+        this.target.appendChild(skillDiv);
+
+        const categorySpan = document.createElement('span');
+        categorySpan.style.fontWeight = 'bold';
+        skillDiv.appendChild(categorySpan);
+        await this.typeIntoElement(categorySpan, category + ':');
+
+        await this.typeIntoElement(skillDiv, ' ' + items.join(', '));
+    }
+
+    async typeEducation() {
+        await this.typeSectionTitle('EDUCATION');
+
+        const eduDiv = document.createElement('div');
+        eduDiv.style.cssText = 'margin-bottom: 12px;';
+        this.target.appendChild(eduDiv);
+
+        // School name and location
+        const schoolDiv = document.createElement('div');
+        schoolDiv.style.marginBottom = '2px';
+        eduDiv.appendChild(schoolDiv);
+
+        const schoolSpan = document.createElement('span');
+        schoolSpan.style.fontWeight = 'bold';
+        schoolDiv.appendChild(schoolSpan);
+        await this.typeIntoElement(schoolSpan, this.data.education.school);
+        await this.typeIntoElement(schoolDiv, ` | ${this.data.education.location}`);
+
+        // Degree and graduation
+        const degreeDiv = document.createElement('div');
+        degreeDiv.style.marginBottom = '2px';
+        eduDiv.appendChild(degreeDiv);
+        await this.typeIntoElement(degreeDiv, `${this.data.education.degree} | ${this.data.education.graduation}`);
+
+        // GPA
+        const gpaDiv = document.createElement('div');
+        gpaDiv.style.marginBottom = '4px';
+        eduDiv.appendChild(gpaDiv);
+        await this.typeIntoElement(gpaDiv, this.data.education.gpa);
+
+        // Coursework
+        const courseDiv = document.createElement('div');
+        eduDiv.appendChild(courseDiv);
+
+        const courseLabel = document.createElement('span');
+        courseLabel.style.fontWeight = 'bold';
+        courseDiv.appendChild(courseLabel);
+        await this.typeIntoElement(courseLabel, 'Relevant Coursework:');
+        await this.typeIntoElement(courseDiv, ' ' + this.data.education.coursework);
+    }
+
+    async typeProject(project) {
+        const projectDiv = document.createElement('div');
+        projectDiv.style.cssText = 'margin-bottom: 6px;';
+        this.target.appendChild(projectDiv);
+
+        const nameSpan = document.createElement('span');
+        nameSpan.style.fontWeight = 'bold';
+        projectDiv.appendChild(nameSpan);
+        await this.typeIntoElement(nameSpan, project.name);
+
+        await this.typeIntoElement(projectDiv, ' - ' + project.description);
+    }
+
+    async typeIntoElement(element, text) {
+        this.currentElement = element;
+        element.appendChild(this.cursor);
+
+        for (let i = 0; i < text.length; i++) {
+            const char = text[i];
+
+            // Insert character before cursor
+            const textNode = document.createTextNode(char);
+            element.insertBefore(textNode, this.cursor);
+
+            // Update tracking
+            if (char === ' ') {
+                this.wordCount++;
+                this.col++;
+                if (this.wordCount % 10 === 0) {
+                    updateStatusBar(1, this.line, this.col, this.wordCount);
+                }
+            } else if (char === '\n') {
+                this.line++;
+                this.col = 1;
+            } else {
+                this.col++;
+            }
+
+            const delay = this.getDelay(char);
+            await this.sleep(delay);
+        }
+
+        // Remove cursor from this element (will be added to next)
+        this.cursor.remove();
+    }
+
+    getDelay(char) {
+        if (char === ' ') return 15;
+        if (char === ',') return 40;
+        if (char === '.') return 60;
+        if (char === ':' || char === ';') return 50;
+        return 25;
     }
 
     sleep(ms) {
         return new Promise(resolve => setTimeout(resolve, ms));
     }
-}
-
-function buildResumeHTML(data) {
-    let html = '';
-
-    // Header (centered, bold)
-    html += `<div style="text-align: center; margin-bottom: 8px;">`;
-    html += `<div style="font-size: 14pt; font-weight: bold;">${data.header.name}</div>`;
-    html += `<div style="font-size: 10pt;">${data.header.contact.join(' | ')}</div>`;
-    html += `</div>\n\n`;
-
-    // Professional Summary
-    html += `<div style="margin-bottom: 12px;">`;
-    html += `<div style="font-weight: bold; font-size: 11pt; margin-bottom: 4px;">PROFESSIONAL SUMMARY</div>`;
-    html += `<div style="text-align: justify;">${data.summary}</div>`;
-    html += `</div>\n\n`;
-
-    // Experience
-    html += `<div style="margin-bottom: 12px;">`;
-    html += `<div style="font-weight: bold; font-size: 11pt; margin-bottom: 4px;">EXPERIENCE</div>`;
-    data.experience.forEach(exp => {
-        html += `<div style="margin-bottom: 8px;">`;
-        html += `<div><span style="font-weight: bold;">${exp.title}</span> | ${exp.company} | ${exp.dates}</div>`;
-        html += `<ul style="margin: 4px 0; padding-left: 20px;">`;
-        exp.bullets.forEach(bullet => {
-            html += `<li style="margin-bottom: 2px;">${bullet}</li>`;
-        });
-        html += `</ul>`;
-        html += `</div>`;
-    });
-    html += `</div>\n\n`;
-
-    // Technical Skills
-    html += `<div style="margin-bottom: 12px;">`;
-    html += `<div style="font-weight: bold; font-size: 11pt; margin-bottom: 4px;">TECHNICAL SKILLS</div>`;
-    Object.entries(data.skills).forEach(([category, items]) => {
-        html += `<div style="margin-bottom: 2px;">`;
-        html += `<span style="font-weight: bold;">${category}:</span> ${items.join(', ')}`;
-        html += `</div>`;
-    });
-    html += `</div>\n\n`;
-
-    // Education
-    html += `<div style="margin-bottom: 12px;">`;
-    html += `<div style="font-weight: bold; font-size: 11pt; margin-bottom: 4px;">EDUCATION</div>`;
-    html += `<div><span style="font-weight: bold;">${data.education.school}</span> | ${data.education.location}</div>`;
-    html += `<div>${data.education.degree} | ${data.education.graduation}</div>`;
-    html += `<div>${data.education.gpa}</div>`;
-    html += `<div style="margin-top: 2px;"><span style="font-weight: bold;">Relevant Coursework:</span> ${data.education.coursework}</div>`;
-    html += `</div>\n\n`;
-
-    // Projects
-    html += `<div style="margin-bottom: 12px;">`;
-    html += `<div style="font-weight: bold; font-size: 11pt; margin-bottom: 4px;">PROJECTS</div>`;
-    data.projects.forEach(project => {
-        html += `<div style="margin-bottom: 4px;">`;
-        html += `<span style="font-weight: bold;">${project.name}</span> - ${project.description}`;
-        html += `</div>`;
-    });
-    html += `</div>`;
-
-    return html;
 }
