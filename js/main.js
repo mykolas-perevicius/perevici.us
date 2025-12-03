@@ -9,9 +9,17 @@ import { initWordWindow } from './word-window.js';
 
 // Theme Management
 function initTheme() {
-    const savedTheme = localStorage.getItem('theme') || 'dark';
-    document.documentElement.setAttribute('data-theme', savedTheme);
-    updateThemeIcon(savedTheme);
+    // Auto-detect system preference if no saved preference
+    let theme = localStorage.getItem('theme');
+
+    if (!theme) {
+        // Check system preference
+        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        theme = prefersDark ? 'dark' : 'light';
+    }
+
+    document.documentElement.setAttribute('data-theme', theme);
+    updateThemeIcon(theme);
 
     const themeToggle = document.getElementById('themeToggle');
     if (themeToggle) {

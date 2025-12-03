@@ -3,11 +3,86 @@
 
 import { initContextMenus } from './xp-context-menu.js';
 import { initEasterEggs } from './xp-easter-eggs.js';
+import { startXPTypingAnimation } from './xp-typing.js';
 
 let filterHistory = [];
 let historyIndex = -1;
 let allProjects = [];
 let isAnimating = false;
+
+// View mode management (XP vs Modern)
+let currentViewMode = 'xp'; // 'xp' or 'modern'
+
+export function setViewMode(mode) {
+    currentViewMode = mode;
+    localStorage.setItem('projectViewMode', mode);
+    updateViewDisplay();
+}
+
+function updateViewDisplay() {
+    const xpWindow = document.querySelector('.xp-window');
+    let modernGrid = document.querySelector('.modern-projects-grid');
+
+    // Create modern grid if it doesn't exist
+    if (!modernGrid) {
+        modernGrid = createModernGrid();
+    }
+
+    if (currentViewMode === 'xp') {
+        if (xpWindow) {
+            xpWindow.style.display = '';
+            xpWindow.classList.remove('minimized');
+        }
+        if (modernGrid) modernGrid.style.display = 'none';
+    } else {
+        if (xpWindow) xpWindow.style.display = 'none';
+        if (modernGrid) modernGrid.style.display = '';
+    }
+}
+
+function createModernGrid() {
+    const projectsSection = document.getElementById('projects');
+    if (!projectsSection) return null;
+
+    const sectionContent = projectsSection.querySelector('.section-content');
+    if (!sectionContent) return null;
+
+    // Clone the project cards from XP window
+    const xpGrid = document.querySelector('.xp-content .projects-grid');
+    if (!xpGrid) return null;
+
+    const modernContainer = document.createElement('div');
+    modernContainer.className = 'modern-projects-grid';
+    modernContainer.style.display = 'none'; // Hidden by default
+
+    // Clone the grid
+    const clonedGrid = xpGrid.cloneNode(true);
+
+    // Remove any XP-specific classes from cloned cards
+    const cards = clonedGrid.querySelectorAll('.project-card');
+    cards.forEach(card => {
+        card.classList.remove('xp-typing-card');
+        card.style.fontFamily = '';
+        card.style.fontSize = '';
+        card.style.lineHeight = '';
+        card.style.color = '';
+        card.style.background = '';
+        card.style.padding = '';
+        card.style.border = '';
+    });
+
+    modernContainer.appendChild(clonedGrid);
+
+    // Insert after XP window
+    const xpWindow = projectsSection.querySelector('.xp-window');
+    if (xpWindow && xpWindow.parentNode) {
+        xpWindow.parentNode.insertBefore(modernContainer, xpWindow.nextSibling);
+    } else {
+        sectionContent.appendChild(modernContainer);
+    }
+
+    return modernContainer;
+}
 
 export function initXPWindow() {
     const xpWindow = document.querySelector('.xp-window');
@@ -92,9 +167,8 @@ export function initXPWindow() {
     if (closeBtn) {
         closeBtn.addEventListener('click', (e) => {
             e.stopPropagation();
-            if (confirm('Are you sure you want to close this window?')) {
-                xpWindow.classList.add('minimized');
-            }
+            // Closing XP window switches to modern view
+            setViewMode('modern');
         });
     }
 
@@ -109,6 +183,88 @@ export function initXPWindow() {
 
     // Initialize easter eggs
     initEasterEggs();
+
+    // Load saved view mode preference (default to 'xp')
+    const savedMode = localStorage.getItem('projectViewMode') || 'xp';
+    currentViewMode = savedMode;
+
+    // Create view toggle button
+    createViewToggleButton();
+
+    // Update display based on mode
+    updateViewDisplay();
+
+    // Start typing animation if in XP mode
+    if (currentViewMode === 'xp') {
+        // Small delay to let DOM settle
+        setTimeout(() => {
+            startXPTypingAnimation();
+        }, 500);
+    }
+}
+
+function createViewToggleButton() {
+    const section = document.getElementById('projects');
+    if (!section) return;
+
+    // Check if button already exists
+    if (document.getElementById('viewModeToggle')) return;
+
+    const toggleContainer = document.createElement('div');
+    toggleContainer.id = 'viewModeToggle';
+    toggleContainer.style.cssText = `
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        z-index: 100;
+    `;
+
+    const toggleBtn = document.createElement('button');
+    toggleBtn.className = 'view-toggle-btn';
+    toggleBtn.textContent = currentViewMode === 'xp' ? '📊 Modern View' : '🪟 XP View';
+    toggleBtn.style.cssText = `
+        background: var(--glass-bg);
+        border: 2px solid var(--glass-border);
+        backdrop-filter: blur(10px);
+        padding: 8px 16px;
+        border-radius: 6px;
+        color: var(--text);
+        font-size: 0.9rem;
+        cursor: pointer;
+        transition: all 0.3s ease;
+    `;
+
+    toggleBtn.addEventListener('mouseenter', () => {
+        toggleBtn.style.background = 'rgba(255, 255, 255, 0.1)';
+        toggleBtn.style.transform = 'translateY(-2px)';
+    });
+
+    toggleBtn.addEventListener('mouseleave', () => {
+        toggleBtn.style.background = 'var(--glass-bg)';
+        toggleBtn.style.transform = 'translateY(0)';
+    });
+
+    toggleBtn.addEventListener('click', () => {
+        const newMode = currentViewMode === 'xp' ? 'modern' : 'xp';
+        setViewMode(newMode);
+        toggleBtn.textContent = newMode === 'xp' ? '📊 Modern View' : '🪟 XP View';
+
+        // Start typing animation when switching to XP mode
+        if (newMode === 'xp') {
+            setTimeout(() => {
+                startXPTypingAnimation();
+            }, 300);
+        }
+    });
+
+    toggleContainer.appendChild(toggleBtn);
+
+    // Insert at the beginning of the section
+    const sectionContent = section.querySelector('.section-content');
+    if (sectionContent) {
+        sectionContent.style.position = 'relative';
+        sectionContent.insertBefore(toggleContainer, sectionContent.firstChild);
+    }
 }
 
 function cacheProjects() {
