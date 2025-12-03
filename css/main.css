@@ -901,3 +901,50 @@ section {
         opacity: 0.2;
     }
 }
+
+/* Swipe Gesture Feedback */
+.swipe-feedback {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0);
+    width: 80px;
+    height: 80px;
+    background: var(--glass-bg);
+    backdrop-filter: blur(20px);
+    border: 2px solid var(--primary-color);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    color: var(--primary-color);
+    pointer-events: none;
+    z-index: 10000;
+    opacity: 0;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.swipe-feedback.next,
+.swipe-feedback.prev {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+}
+
+.swipe-feedback.next {
+    animation: swipeNext 0.3s ease-out;
+}
+
+.swipe-feedback.prev {
+    animation: swipePrev 0.3s ease-out;
+}
+
+@keyframes swipeNext {
+    0% { transform: translate(-50%, -50%) scale(0.5) translateX(-20px); }
+    100% { transform: translate(-50%, -50%) scale(1) translateX(0); }
+}
+
+@keyframes swipePrev {
+    0% { transform: translate(-50%, -50%) scale(0.5) translateX(20px); }
+    100% { transform: translate(-50%, -50%) scale(1) translateX(0); }
+}

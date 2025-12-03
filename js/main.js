@@ -10,6 +10,7 @@ import { initContactForm } from './contact-form.js';
 import { initThreeBackground } from './three-background.js';
 import { initI18n } from './i18n.js';
 import { initProjectCards } from './project-cards.js';
+import { initSwipeGestures } from './swipe-gestures.js';
 
 // Theme Management
 function initTheme() {
@@ -179,6 +180,7 @@ document.addEventListener('DOMContentLoaded', () => {
     initContactForm();
     initThreeBackground();
     initProjectCards();
+    initSwipeGestures();
     fetchGitHubStats();
     initConsoleMessage();
 });
