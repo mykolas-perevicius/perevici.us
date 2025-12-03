@@ -11,10 +11,10 @@ export async function startXPTypingAnimation() {
 
     typingInProgress = true;
 
-    // Convert all project cards to typing format
+    // Type out each card with staggered start
     const typingPromises = [];
     projectCards.forEach((card, index) => {
-        const delay = index * 300; // Stagger start times
+        const delay = index * 300;
         typingPromises.push(typeOutProjectCard(card, delay));
     });
 
@@ -36,29 +36,122 @@ export function restoreOriginalCards() {
 }
 
 async function typeOutProjectCard(card, initialDelay) {
-    // Wait for stagger delay
     await sleep(initialDelay);
 
     // Skip document cards (Resume.doc)
     if (card.dataset.document) return;
 
-    // Store original HTML for potential restoration
+    // Store original HTML for restoration
     if (!card.dataset.originalHtml) {
         card.dataset.originalHtml = card.innerHTML;
     }
 
-    // Get all text content from the card
+    // Extract content from card
+    const content = extractProjectContent(card);
+
+    // Build DOM structure with empty text containers
+    const { container, targets } = createProjectElements();
+
+    // Clear card and apply Word 2003 styling
+    card.innerHTML = '';
+    applyWordStyling(card);
+
+    // Add the container
+    card.appendChild(container);
+
+    // Add blinking cursor
+    const cursor = createCursor();
+    card.appendChild(cursor);
+
+    // Type each section in sequence
+    await typeIntoElement(targets.header, content.header);
+    await sleep(100); // Pause between sections
+
+    await typeIntoElement(targets.description, content.description);
+    await sleep(100);
+
+    // Type stats
+    for (const stat of content.stats) {
+        const statSpan = document.createElement('span');
+        statSpan.style.marginRight = '12px';
+        targets.statsContainer.appendChild(statSpan);
+        await typeIntoElement(statSpan, '• ' + stat);
+    }
+    await sleep(100);
+
+    // Type tags
+    if (content.tags.length > 0) {
+        await typeIntoElement(targets.tagsText, content.tags.join(', '));
+    }
+
+    // Remove cursor when done
+    cursor.remove();
+}
+
+function extractProjectContent(card) {
     const headerEl = card.querySelector('.project-header h3') || card.querySelector('h3');
     const header = headerEl?.textContent || '';
     const description = card.querySelector('.project-description')?.textContent?.trim() || '';
-    const stats = Array.from(card.querySelectorAll('.project-stats .stat-item, .stat-item')).map(el => el.textContent.trim());
-    const tags = Array.from(card.querySelectorAll('.tech-tags .tag, .tag')).map(el => el.textContent.trim()).filter(t => !t.includes('Double-click'));
+    const stats = Array.from(card.querySelectorAll('.project-stats .stat-item, .stat-item'))
+        .map(el => el.textContent.trim())
+        .filter(text => text.length > 0);
+    const tags = Array.from(card.querySelectorAll('.tech-tags .tag, .tag'))
+        .map(el => el.textContent.trim())
+        .filter(t => t.length > 0 && !t.includes('Double-click'));
 
-    // Build HTML structure with Word 2003 styling
-    const content = buildProjectHTML(header, description, stats, tags);
+    return { header, description, stats, tags };
+}
 
-    // Clear the card and add Word-style container
-    card.innerHTML = '';
+function createProjectElements() {
+    const container = document.createElement('div');
+
+    // Header (bold, larger)
+    const header = document.createElement('div');
+    header.style.fontSize = '13pt';
+    header.style.fontWeight = 'bold';
+    header.style.marginBottom = '6px';
+    container.appendChild(header);
+
+    // Description
+    const description = document.createElement('div');
+    description.style.marginBottom = '8px';
+    description.style.textAlign = 'justify';
+    container.appendChild(description);
+
+    // Stats container
+    const statsContainer = document.createElement('div');
+    statsContainer.style.marginBottom = '6px';
+    statsContainer.style.fontSize = '10pt';
+    statsContainer.style.color = '#666';
+    container.appendChild(statsContainer);
+
+    // Tags container
+    const tagsContainer = document.createElement('div');
+    tagsContainer.style.fontSize = '10pt';
+    tagsContainer.style.color = '#0066cc';
+
+    const tagsLabel = document.createElement('span');
+    tagsLabel.style.fontWeight = 'bold';
+    tagsLabel.textContent = 'Technologies: ';
+    tagsContainer.appendChild(tagsLabel);
+
+    const tagsText = document.createElement('span');
+    tagsContainer.appendChild(tagsText);
+
+    container.appendChild(tagsContainer);
+
+    return {
+        container,
+        targets: {
+            header,
+            description,
+            statsContainer,
+            tagsText
+        }
+    };
+}
+
+function applyWordStyling(card) {
     card.classList.add('xp-typing-card');
     card.style.fontFamily = "'Times New Roman', serif";
     card.style.fontSize = '11pt';
@@ -67,93 +160,24 @@ async function typeOutProjectCard(card, initialDelay) {
     card.style.background = '#fff';
     card.style.padding = '12px';
     card.style.border = '1px solid #ccc';
+}
 
-    const contentDiv = document.createElement('div');
-    contentDiv.className = 'xp-typed-content';
-    card.appendChild(contentDiv);
-
-    // Add cursor
+function createCursor() {
     const cursor = document.createElement('span');
     cursor.className = 'xp-typing-cursor';
     cursor.textContent = '|';
     cursor.style.animation = 'xpCursorBlink 1s step-end infinite';
-    contentDiv.appendChild(cursor);
-
-    // Type out the content
-    await typeHTML(content, contentDiv, cursor);
-
-    // Remove cursor when done
-    cursor.remove();
+    cursor.style.marginLeft = '2px';
+    return cursor;
 }
 
-function buildProjectHTML(header, description, stats, tags) {
-    let html = '';
+async function typeIntoElement(element, text) {
+    for (let i = 0; i < text.length; i++) {
+        const char = text[i];
+        element.textContent += char;
 
-    // Header (bold, larger)
-    html += `<div style="font-size: 13pt; font-weight: bold; margin-bottom: 6px;">${header}</div>\n\n`;
-
-    // Description
-    html += `<div style="margin-bottom: 8px; text-align: justify;">${description}</div>\n\n`;
-
-    // Stats
-    if (stats.length) {
-        html += `<div style="margin-bottom: 6px; font-size: 10pt; color: #666;">`;
-        stats.forEach(stat => {
-            html += `<span style="margin-right: 12px;">• ${stat}</span>`;
-        });
-        html += `</div>\n\n`;
-    }
-
-    // Tags
-    if (tags.length) {
-        html += `<div style="font-size: 10pt; color: #0066cc;">`;
-        html += `<span style="font-weight: bold;">Technologies:</span> `;
-        html += tags.join(', ');
-        html += `</div>`;
-    }
-
-    return html;
-}
-
-async function typeHTML(htmlContent, targetElement, cursor) {
-    // Parse HTML into DOM
-    const parser = new DOMParser();
-    const doc = parser.parseFromString(`<div>${htmlContent}</div>`, 'text/html');
-    const root = doc.body.firstChild;
-
-    // Walk the DOM tree and type text content
-    await walkAndType(root, targetElement, cursor);
-}
-
-async function walkAndType(node, currentParent, cursor) {
-    for (let child of node.childNodes) {
-        if (child.nodeType === Node.ELEMENT_NODE) {
-            // Create element instantly (no typing)
-            const newElement = document.createElement(child.tagName);
-
-            // Copy all attributes (style, class, etc.)
-            for (let attr of child.attributes) {
-                newElement.setAttribute(attr.name, attr.value);
-            }
-
-            // Insert before cursor
-            currentParent.insertBefore(newElement, cursor);
-
-            // Recurse into children with new element as parent
-            await walkAndType(child, newElement, cursor);
-
-        } else if (child.nodeType === Node.TEXT_NODE) {
-            // Type text content character-by-character
-            const text = child.textContent;
-            for (let i = 0; i < text.length; i++) {
-                const char = text[i];
-                const textNode = document.createTextNode(char);
-                currentParent.insertBefore(textNode, cursor);
-
-                const delay = getTypingDelay(char);
-                await sleep(delay);
-            }
-        }
+        const delay = getTypingDelay(char);
+        await sleep(delay);
     }
 }
 
@@ -162,7 +186,7 @@ function getTypingDelay(char) {
     if (char === '\n') return 30;
     if (char === '.') return 40;
     if (char === ',') return 35;
-    return 25; // Faster than Word resume since multiple cards typing
+    return 25;
 }
 
 function sleep(ms) {
