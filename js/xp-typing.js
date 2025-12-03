@@ -116,30 +116,44 @@ function buildProjectHTML(header, description, stats, tags) {
 }
 
 async function typeHTML(htmlContent, targetElement, cursor) {
-    let position = 0;
+    // Parse HTML into DOM
+    const parser = new DOMParser();
+    const doc = parser.parseFromString(`<div>${htmlContent}</div>`, 'text/html');
+    const root = doc.body.firstChild;
 
-    while (position < htmlContent.length) {
-        const char = htmlContent[position];
+    // Walk the DOM tree and type text content
+    await walkAndType(root, targetElement, cursor);
+}
 
-        // Handle HTML tags - insert without typing effect
-        if (char === '<') {
-            const tagEnd = htmlContent.indexOf('>', position);
-            if (tagEnd !== -1) {
-                const tag = htmlContent.substring(position, tagEnd + 1);
-                insertBeforeCursor(tag, targetElement, cursor);
-                position = tagEnd + 1;
-                await sleep(5);
-                continue;
+async function walkAndType(node, currentParent, cursor) {
+    for (let child of node.childNodes) {
+        if (child.nodeType === Node.ELEMENT_NODE) {
+            // Create element instantly (no typing)
+            const newElement = document.createElement(child.tagName);
+
+            // Copy all attributes (style, class, etc.)
+            for (let attr of child.attributes) {
+                newElement.setAttribute(attr.name, attr.value);
+            }
+
+            // Insert before cursor
+            currentParent.insertBefore(newElement, cursor);
+
+            // Recurse into children with new element as parent
+            await walkAndType(child, newElement, cursor);
+
+        } else if (child.nodeType === Node.TEXT_NODE) {
+            // Type text content character-by-character
+            const text = child.textContent;
+            for (let i = 0; i < text.length; i++) {
+                const char = text[i];
+                const textNode = document.createTextNode(char);
+                currentParent.insertBefore(textNode, cursor);
+
+                const delay = getTypingDelay(char);
+                await sleep(delay);
             }
         }
-
-        // Type regular character
-        insertBeforeCursor(char, targetElement, cursor);
-        position++;
-
-        // Variable speed
-        const delay = getTypingDelay(char);
-        await sleep(delay);
     }
 }
 
@@ -149,11 +163,6 @@ function getTypingDelay(char) {
     if (char === '.') return 40;
     if (char === ',') return 35;
     return 25; // Faster than Word resume since multiple cards typing
-}
-
-function insertBeforeCursor(text, container, cursor) {
-    const textNode = document.createTextNode(text);
-    container.insertBefore(textNode, cursor);
 }
 
 function sleep(ms) {

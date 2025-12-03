@@ -45,10 +45,12 @@
     --chip-text: #111827;
     --link: #1D4ED8;
 
-    /* Glass effect adjustments for light mode */
-    --glass-bg: rgba(0, 0, 0, 0.03);
-    --glass-border: rgba(0, 0, 0, 0.08);
-    --glass-glow: rgba(0, 212, 255, 0.15);
+    /* Glass effect adjustments for light mode - stronger contrast */
+    --glass-bg: rgba(0, 0, 0, 0.04);
+    --glass-border: rgba(0, 0, 0, 0.15);
+    --glass-border-alt: rgba(0, 100, 200, 0.2);
+    --glass-glow: rgba(0, 100, 200, 0.12);
+    --glass-glow-alt: rgba(150, 0, 200, 0.08);
 }
 
 /* Base styles */

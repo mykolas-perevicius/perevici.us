@@ -375,6 +375,35 @@ section {
     }
 }
 
+/* Light mode project cards - stronger visibility */
+[data-theme="light"] .project-card {
+    background: rgba(255, 255, 255, 0.6);
+    border: 2px solid transparent;
+    border-image: linear-gradient(135deg,
+        rgba(0, 100, 200, 0.25) 0%,
+        rgba(150, 0, 200, 0.2) 50%,
+        rgba(0, 100, 200, 0.25) 100%) 1;
+    box-shadow:
+        2px 0 8px rgba(0, 100, 200, 0.15),
+        -1px 0 6px rgba(150, 0, 200, 0.1),
+        0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+[data-theme="light"] .project-card:hover {
+    background: rgba(255, 255, 255, 0.9);
+    box-shadow:
+        3px 0 12px rgba(0, 100, 200, 0.25),
+        -2px 0 8px rgba(150, 0, 200, 0.15),
+        0 6px 16px rgba(0, 0, 0, 0.12);
+}
+
+@supports not (backdrop-filter: blur(20px)) {
+    [data-theme="light"] .project-card {
+        background: #ffffff;
+        border: 2px solid rgba(0, 100, 200, 0.2);
+    }
+}
+
 .project-header {
     display: flex;
     justify-content: space-between;
@@ -440,6 +469,25 @@ section {
 @supports not (backdrop-filter: blur(20px)) {
     .skill-category {
         background: var(--bg-elev);
+    }
+}
+
+/* Light mode skill categories */
+[data-theme="light"] .skill-category {
+    background: rgba(255, 255, 255, 0.6);
+    border: 1px solid rgba(0, 100, 200, 0.2);
+    box-shadow: 0 4px 12px rgba(0, 100, 200, 0.1);
+}
+
+[data-theme="light"] .skill-category:hover {
+    border-color: rgba(0, 100, 200, 0.4);
+    box-shadow: 0 8px 24px rgba(0, 100, 200, 0.25);
+}
+
+@supports not (backdrop-filter: blur(20px)) {
+    [data-theme="light"] .skill-category {
+        background: #ffffff;
+        border: 1px solid rgba(0, 100, 200, 0.25);
     }
 }
 
