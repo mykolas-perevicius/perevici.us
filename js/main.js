@@ -11,6 +11,7 @@ import { initThreeBackground } from './three-background.js';
 import { initI18n } from './i18n.js';
 import { initProjectCards } from './project-cards.js';
 import { initSwipeGestures } from './swipe-gestures.js';
+import { initChatAssistant } from './chat-assistant.js';
 
 // Theme Management
 function initTheme() {
@@ -181,6 +182,7 @@ document.addEventListener('DOMContentLoaded', () => {
     initThreeBackground();
     initProjectCards();
     initSwipeGestures();
+    initChatAssistant();
     fetchGitHubStats();
     initConsoleMessage();
 });
