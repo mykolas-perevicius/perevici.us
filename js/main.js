@@ -1,17 +1,7 @@
-// Main initialization
-import { initTerminal } from './terminal.js';
-import { initKonami } from './konami.js';
-import { initHints } from './hints.js';
-import { initShortcuts } from './shortcuts.js';
-import { initMetrics } from './metrics.js';
-import { initXPWindow } from './xp-window.js';
-import { initWordWindow } from './word-window.js';
-import { initContactForm } from './contact-form.js';
-import { initThreeBackground } from './three-background.js';
+// Main initialization - Critical modules only
 import { initI18n } from './i18n.js';
-import { initProjectCards } from './project-cards.js';
-import { initSwipeGestures } from './swipe-gestures.js';
-import { initChatAssistant } from './chat-assistant.js';
+import { initMetrics } from './metrics.js';
+import { initImageOptimization } from './image-optimizer.js';
 
 // Theme Management
 function initTheme() {
@@ -165,24 +155,43 @@ function initConsoleMessage() {
     );
 }
 
-// Initialize everything
-document.addEventListener('DOMContentLoaded', () => {
-    initI18n(); // Initialize i18n first
+// Initialize everything with lazy loading
+document.addEventListener('DOMContentLoaded', async () => {
+    // Critical: Initialize immediately
+    initI18n();
     initTheme();
     initTypingAnimation();
-    initTerminal();
-    initKonami();
-    initHints();
-    initShortcuts();
     initScrollReveal();
     initMetrics();
-    initXPWindow();
-    initWordWindow();
-    initContactForm();
-    initThreeBackground();
-    initProjectCards();
-    initSwipeGestures();
-    initChatAssistant();
+    initImageOptimization();
     fetchGitHubStats();
     initConsoleMessage();
+
+    // High priority: Load after critical content
+    requestIdleCallback(() => {
+        Promise.all([
+            import('./terminal.js').then(m => m.initTerminal()),
+            import('./shortcuts.js').then(m => m.initShortcuts()),
+            import('./swipe-gestures.js').then(m => m.initSwipeGestures()),
+            import('./project-cards.js').then(m => m.initProjectCards())
+        ]);
+    });
+
+    // Medium priority: Load when user might need them
+    requestIdleCallback(() => {
+        Promise.all([
+            import('./xp-window.js').then(m => m.initXPWindow()),
+            import('./word-window.js').then(m => m.initWordWindow()),
+            import('./contact-form.js').then(m => m.initContactForm()),
+            import('./hints.js').then(m => m.initHints())
+        ]);
+    }, { timeout: 2000 });
+
+    // Low priority: Load when browser is truly idle
+    requestIdleCallback(() => {
+        Promise.all([
+            import('./konami.js').then(m => m.initKonami()),
+            import('./three-background.js').then(m => m.initThreeBackground())
+        ]);
+    }, { timeout: 3000 });
 });

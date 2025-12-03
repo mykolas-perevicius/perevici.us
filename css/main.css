@@ -948,3 +948,44 @@ section {
     0% { transform: translate(-50%, -50%) scale(0.5) translateX(20px); }
     100% { transform: translate(-50%, -50%) scale(1) translateX(0); }
 }
+
+/* Image Optimization & Lazy Loading */
+img[data-src],
+img[loading="lazy"] {
+    opacity: 0;
+    transition: opacity 0.3s ease, filter 0.3s ease;
+}
+
+img.lazy-loaded {
+    opacity: 1;
+}
+
+/* Blur-up placeholder effect */
+img[data-src]::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: var(--glass-bg);
+    animation: pulse 1.5s ease-in-out infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.5; }
+}
+
+/* Responsive images */
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+/* Picture element support */
+picture {
+    display: block;
+}
+
+picture img {
+    width: 100%;
+}
