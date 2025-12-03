@@ -21,6 +21,7 @@
     <link rel="stylesheet" href="/css/components.css">
     <link rel="stylesheet" href="/css/main.css">
     <link rel="stylesheet" href="/css/word-window.css">
+    <link rel="stylesheet" href="/css/contact-form.css">
     
     <script type="application/ld+json">
     {
@@ -48,7 +49,7 @@
                 <a href="#skills">Skills</a>
                 <a href="#blog">Blog</a>
                 <a href="#contact">Contact</a>
-                <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">🌙</button>
+                <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme"></button>
             </div>
         </div>
     </nav>
@@ -652,11 +653,14 @@
                 If your team is uniting robust infrastructure with intuitive applications, let's talk.
             </p>
             <div class="contact-methods">
-                <a href="mailto:Perevicius.Mykolas@gmail.com" class="contact-button primary">
-                    Send Email
-                </a>
+                <button id="openContactForm" class="contact-button primary">
+                    📧 Send Message
+                </button>
                 <a href="https://linkedin.com/in/mykolasperevicius" target="_blank" class="contact-button">
-                    Connect on LinkedIn
+                    💼 Connect on LinkedIn
+                </a>
+                <a href="mailto:Perevicius.Mykolas@gmail.com" class="contact-button">
+                    ✉️ Direct Email
                 </a>
             </div>
         </div>
@@ -696,6 +700,44 @@
                 <div class="terminal-line"></div>
                 <div class="terminal-line" style="color: #00d4ff;">&gt; Press ESC or click outside to close</div>
             </div>
+        </div>
+    </div>
+
+    <!-- Contact Form Modal -->
+    <div class="contact-modal" id="contactModal">
+        <div class="contact-modal-content">
+            <button class="contact-modal-close" id="closeContactForm" aria-label="Close">×</button>
+            <h2>Get In Touch</h2>
+            <p class="contact-modal-subtitle">Have a project in mind or want to chat? Let's connect!</p>
+
+            <form id="contactForm" class="contact-form">
+                <div class="form-group">
+                    <label for="name">Name</label>
+                    <input type="text" id="name" name="name" required placeholder="Your name">
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" required placeholder="your.email@example.com">
+                </div>
+
+                <div class="form-group">
+                    <label for="subject">Subject</label>
+                    <input type="text" id="subject" name="subject" required placeholder="What's this about?">
+                </div>
+
+                <div class="form-group">
+                    <label for="message">Message</label>
+                    <textarea id="message" name="message" rows="6" required placeholder="Tell me about your project or idea..."></textarea>
+                </div>
+
+                <button type="submit" class="contact-form-submit">
+                    <span class="submit-text">Send Message</span>
+                    <span class="submit-loading" style="display: none;">Sending...</span>
+                </button>
+
+                <div class="form-status" id="formStatus"></div>
+            </form>
         </div>
     </div>
 

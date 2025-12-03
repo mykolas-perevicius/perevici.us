@@ -179,20 +179,62 @@
 }
 
 .theme-toggle {
-    background: none;
-    border: 2px solid var(--border);
-    border-radius: 50%;
-    width: 40px;
+    position: relative;
+    background: var(--glass-bg);
+    backdrop-filter: blur(10px);
+    border: 2px solid var(--glass-border);
+    border-radius: 24px;
+    width: 80px;
     height: 40px;
-    font-size: 1.25rem;
     cursor: pointer;
-    transition: var(--transition);
-    color: var(--text);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.theme-toggle::before {
+    content: '';
+    position: absolute;
+    top: 4px;
+    left: 4px;
+    width: 32px;
+    height: 32px;
+    background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+    border-radius: 50%;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 2px 8px rgba(0, 212, 255, 0.4);
+}
+
+.theme-toggle::after {
+    content: '🌙';
+    position: absolute;
+    top: 50%;
+    left: 12px;
+    transform: translateY(-50%);
+    font-size: 1.25rem;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 1;
+}
+
+[data-theme="light"] .theme-toggle::before {
+    left: 44px;
+    background: linear-gradient(135deg, #fbbf24, #f59e0b);
+    box-shadow: 0 2px 8px rgba(251, 191, 36, 0.4);
+}
+
+[data-theme="light"] .theme-toggle::after {
+    content: '☀️';
+    left: 52px;
 }
 
 .theme-toggle:hover {
     border-color: var(--primary-color);
-    transform: rotate(20deg);
+    box-shadow: 0 4px 16px rgba(0, 212, 255, 0.3);
+    transform: scale(1.05);
+}
+
+[data-theme="light"] .theme-toggle:hover {
+    box-shadow: 0 4px 16px rgba(251, 191, 36, 0.3);
 }
 
 /* Status Badge */

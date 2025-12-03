@@ -6,6 +6,7 @@ import { initShortcuts } from './shortcuts.js';
 import { initMetrics } from './metrics.js';
 import { initXPWindow } from './xp-window.js';
 import { initWordWindow } from './word-window.js';
+import { initContactForm } from './contact-form.js';
 
 // Theme Management
 function initTheme() {
@@ -30,7 +31,6 @@ function initTheme() {
 function updateThemeIcon(theme) {
     const themeToggle = document.getElementById('themeToggle');
     if (themeToggle) {
-        themeToggle.textContent = theme === 'dark' ? '🌙' : '☀️';
         themeToggle.setAttribute('aria-label', `Switch to ${theme === 'dark' ? 'light' : 'dark'} mode`);
     }
 }
@@ -172,6 +172,7 @@ document.addEventListener('DOMContentLoaded', () => {
     initMetrics();
     initXPWindow();
     initWordWindow();
+    initContactForm();
     fetchGitHubStats();
     initConsoleMessage();
 });
