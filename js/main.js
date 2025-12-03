@@ -8,6 +8,7 @@ import { initXPWindow } from './xp-window.js';
 import { initWordWindow } from './word-window.js';
 import { initContactForm } from './contact-form.js';
 import { initThreeBackground } from './three-background.js';
+import { initI18n } from './i18n.js';
 
 // Theme Management
 function initTheme() {
@@ -163,6 +164,7 @@ function initConsoleMessage() {
 
 // Initialize everything
 document.addEventListener('DOMContentLoaded', () => {
+    initI18n(); // Initialize i18n first
     initTheme();
     initTypingAnimation();
     initTerminal();

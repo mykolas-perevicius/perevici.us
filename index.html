@@ -44,11 +44,11 @@
         <div class="nav-content">
             <div class="nav-logo">MP</div>
             <div class="nav-links">
-                <a href="#experience">Experience</a>
-                <a href="#projects">Projects</a>
-                <a href="#skills">Skills</a>
-                <a href="#blog">Blog</a>
-                <a href="#contact">Contact</a>
+                <a href="#experience" data-i18n="nav.experience">Experience</a>
+                <a href="#projects" data-i18n="nav.projects">Projects</a>
+                <a href="#skills" data-i18n="nav.skills">Skills</a>
+                <a href="#blog" data-i18n="nav.blog">Blog</a>
+                <a href="#contact" data-i18n="nav.contact">Contact</a>
                 <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme"></button>
             </div>
         </div>
@@ -654,13 +654,13 @@
             </p>
             <div class="contact-methods">
                 <button id="openContactForm" class="contact-button primary">
-                    📧 Send Message
+                    📧 <span data-i18n="contact.send">Send Message</span>
                 </button>
                 <a href="https://linkedin.com/in/mykolasperevicius" target="_blank" class="contact-button">
-                    💼 Connect on LinkedIn
+                    💼 <span data-i18n="contact.linkedin">Connect on LinkedIn</span>
                 </a>
                 <a href="mailto:Perevicius.Mykolas@gmail.com" class="contact-button">
-                    ✉️ Direct Email
+                    ✉️ <span data-i18n="contact.email">Direct Email</span>
                 </a>
             </div>
         </div>
@@ -706,34 +706,34 @@
     <!-- Contact Form Modal -->
     <div class="contact-modal" id="contactModal">
         <div class="contact-modal-content">
-            <button class="contact-modal-close" id="closeContactForm" aria-label="Close">×</button>
-            <h2>Get In Touch</h2>
-            <p class="contact-modal-subtitle">Have a project in mind or want to chat? Let's connect!</p>
+            <button class="contact-modal-close" id="closeContactForm" data-i18n-aria="aria.closeModal" aria-label="Close">×</button>
+            <h2 data-i18n="form.title">Get In Touch</h2>
+            <p class="contact-modal-subtitle" data-i18n="form.subtitle">Have a project in mind or want to chat? Let's connect!</p>
 
             <form id="contactForm" class="contact-form">
                 <div class="form-group">
-                    <label for="name">Name</label>
-                    <input type="text" id="name" name="name" required placeholder="Your name">
+                    <label for="name" data-i18n="form.name">Name</label>
+                    <input type="text" id="name" name="name" required data-i18n-placeholder="form.namePlaceholder" placeholder="Your name">
                 </div>
 
                 <div class="form-group">
-                    <label for="email">Email</label>
-                    <input type="email" id="email" name="email" required placeholder="your.email@example.com">
+                    <label for="email" data-i18n="form.email">Email</label>
+                    <input type="email" id="email" name="email" required data-i18n-placeholder="form.emailPlaceholder" placeholder="your.email@example.com">
                 </div>
 
                 <div class="form-group">
-                    <label for="subject">Subject</label>
-                    <input type="text" id="subject" name="subject" required placeholder="What's this about?">
+                    <label for="subject" data-i18n="form.subject">Subject</label>
+                    <input type="text" id="subject" name="subject" required data-i18n-placeholder="form.subjectPlaceholder" placeholder="What's this about?">
                 </div>
 
                 <div class="form-group">
-                    <label for="message">Message</label>
-                    <textarea id="message" name="message" rows="6" required placeholder="Tell me about your project or idea..."></textarea>
+                    <label for="message" data-i18n="form.message">Message</label>
+                    <textarea id="message" name="message" rows="6" required data-i18n-placeholder="form.messagePlaceholder" placeholder="Tell me about your project or idea..."></textarea>
                 </div>
 
                 <button type="submit" class="contact-form-submit">
-                    <span class="submit-text">Send Message</span>
-                    <span class="submit-loading" style="display: none;">Sending...</span>
+                    <span class="submit-text" data-i18n="form.submit">Send Message</span>
+                    <span class="submit-loading" data-i18n="form.sending" style="display: none;">Sending...</span>
                 </button>
 
                 <div class="form-status" id="formStatus"></div>

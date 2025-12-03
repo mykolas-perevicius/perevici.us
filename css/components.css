@@ -237,6 +237,113 @@
     box-shadow: 0 4px 16px rgba(251, 191, 36, 0.3);
 }
 
+/* Language Toggle */
+.language-toggle {
+    position: relative;
+    background: var(--glass-bg);
+    backdrop-filter: blur(10px);
+    border: 2px solid var(--glass-border);
+    border-radius: 20px;
+    padding: 8px 16px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-right: 1rem;
+    user-select: none;
+}
+
+.language-toggle:hover {
+    border-color: var(--primary-color);
+    box-shadow: 0 4px 16px rgba(0, 212, 255, 0.2);
+}
+
+.language-toggle-current {
+    font-family: var(--font-mono);
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--text);
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.language-toggle-current::after {
+    content: '▼';
+    font-size: 0.625rem;
+    transition: transform 0.3s ease;
+}
+
+.language-toggle.active .language-toggle-current::after {
+    transform: rotate(180deg);
+}
+
+.language-toggle-dropdown {
+    position: absolute;
+    top: calc(100% + 8px);
+    right: 0;
+    background: var(--bg-elev);
+    border: 2px solid var(--glass-border);
+    border-radius: 12px;
+    padding: 8px;
+    min-width: 140px;
+    box-shadow:
+        0 0 0 1px var(--glass-border),
+        0 20px 60px rgba(0, 0, 0, 0.5),
+        0 0 40px var(--glass-glow);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    transition: all 0.3s ease;
+    z-index: 1000;
+}
+
+.language-toggle.active .language-toggle-dropdown {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.language-option {
+    display: block;
+    width: 100%;
+    padding: 8px 12px;
+    background: transparent;
+    border: none;
+    border-radius: 8px;
+    color: var(--text);
+    font-family: var(--font-sans);
+    font-size: 0.875rem;
+    text-align: left;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.language-option:hover {
+    background: var(--glass-bg);
+    color: var(--primary-color);
+}
+
+.language-option.active {
+    background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+    color: #ffffff;
+    font-weight: 600;
+}
+
+@media (max-width: 768px) {
+    .language-toggle {
+        padding: 6px 12px;
+        margin-right: 0.5rem;
+    }
+
+    .language-toggle-current {
+        font-size: 0.75rem;
+    }
+
+    .language-toggle-dropdown {
+        right: auto;
+        left: 0;
+    }
+}
+
 /* Status Badge */
 .status-badge {
     display: inline-block;
