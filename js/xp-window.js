@@ -217,8 +217,8 @@ export function initXPWindow() {
     // Create view toggle button
     createViewToggleButton();
 
-    // Update display based on mode
-    updateViewDisplay();
+    // Initial display setup (no animations on first load)
+    initializeViewDisplay();
 
     // Start typing animation if in XP mode
     if (currentViewMode === 'xp') {
@@ -226,6 +226,37 @@ export function initXPWindow() {
         setTimeout(() => {
             startXPTypingAnimation();
         }, 500);
+    }
+}
+
+function initializeViewDisplay() {
+    const xpWindow = document.querySelector('.xp-window');
+    let modernGrid = document.querySelector('.modern-projects-grid');
+
+    // Create modern grid if it doesn't exist
+    if (!modernGrid) {
+        modernGrid = createModernGrid();
+    }
+
+    // Set initial visibility without animations
+    if (currentViewMode === 'modern') {
+        // Show modern, hide XP
+        if (xpWindow) {
+            xpWindow.style.display = 'none';
+        }
+        if (modernGrid) {
+            modernGrid.style.display = '';
+            modernGrid.style.opacity = '1';
+        }
+    } else {
+        // Show XP, hide modern
+        if (xpWindow) {
+            xpWindow.style.display = '';
+            xpWindow.style.opacity = '1';
+        }
+        if (modernGrid) {
+            modernGrid.style.display = 'none';
+        }
     }
 }
 
