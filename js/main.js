@@ -9,6 +9,7 @@ import { initWordWindow } from './word-window.js';
 import { initContactForm } from './contact-form.js';
 import { initThreeBackground } from './three-background.js';
 import { initI18n } from './i18n.js';
+import { initProjectCards } from './project-cards.js';
 
 // Theme Management
 function initTheme() {
@@ -177,6 +178,7 @@ document.addEventListener('DOMContentLoaded', () => {
     initWordWindow();
     initContactForm();
     initThreeBackground();
+    initProjectCards();
     fetchGitHubStats();
     initConsoleMessage();
 });
