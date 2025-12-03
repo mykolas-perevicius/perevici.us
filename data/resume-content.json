@@ -1,0 +1,85 @@
+{
+  "header": {
+    "name": "MYKOLAS PEREVICIUS",
+    "contact": [
+      "Perevicius.Mykolas@gmail.com",
+      "linkedin.com/in/mykolasperevicius",
+      "github.com/mykolas-perevicius"
+    ]
+  },
+  "summary": "Full-stack software engineer with expertise in distributed systems, GPU computing, and production-grade application development. Proven track record delivering high-performance applications with comprehensive test coverage, optimizing database queries and infrastructure, and shipping features that directly impact user productivity. Passionate about building scalable systems that balance technical excellence with practical user needs.",
+  "experience": [
+    {
+      "title": "Software Engineer",
+      "company": "UserAuthGuard by Asan Digital",
+      "dates": "Oct 2025 - Present",
+      "bullets": [
+        "Develop and maintain full-stack Django REST API with PostgreSQL backend, achieving 90%+ test coverage through comprehensive unit and integration testing",
+        "Implement end-to-end testing infrastructure using Playwright for frontend validation, ensuring application reliability across all user workflows",
+        "Refactor legacy test suites from coverage-focused patterns to behavioral testing methodology, improving code maintainability and reducing false positives"
+      ]
+    },
+    {
+      "title": "Software Developer Intern",
+      "company": "Bessemer Trust",
+      "dates": "Jun 2023 - Aug 2023",
+      "bullets": [
+        "Architected and deployed securities management platform reducing analyst reconciliation time by 60% for 20+ users through automated data validation and workflow optimization",
+        "Optimized SQL Server query performance through strategic indexing and query plan analysis, decreasing complex report generation latency by 45%",
+        "Delivered technical presentation on AI/ML applications in financial services to 500+ company stakeholders, achieving top 5% feedback score"
+      ]
+    },
+    {
+      "title": "Curriculum Developer",
+      "company": "The Coding Place",
+      "dates": "Dec 2022 - Jun 2024",
+      "bullets": [
+        "Authored comprehensive Python certification curriculum (PCEP/PCAP) achieving 90% student pass rate across 120+ enrollments through structured learning modules and hands-on projects",
+        "Engineered automated grading pipeline using PyTest and GitHub Actions for continuous assessment, reducing manual grading time by 80%",
+        "Instructed 100+ students in object-oriented programming, data structures and algorithms, and web development fundamentals"
+      ]
+    },
+    {
+      "title": "Software Engineering Intern",
+      "company": "Project Innovate Newark",
+      "dates": "Dec 2021 - Dec 2022",
+      "bullets": [
+        "Designed and deployed event management application adopted by 9 organizational programs, reducing scheduling conflicts by 30% through intelligent conflict detection",
+        "Containerized full application stack using Docker and deployed to AWS ECS, reducing deployment time from days to hours and enabling rapid iteration",
+        "Implemented JWT authentication and role-based access control system, passing third-party security audit with zero critical vulnerabilities"
+      ]
+    }
+  ],
+  "skills": {
+    "Languages": ["Python", "Java", "C#", "JavaScript/TypeScript", "Go", "Rust", "SQL", "CUDA C/C++"],
+    "Frameworks & Libraries": ["Django REST Framework", "Spring Boot", ".NET Core", "React 18", "Node.js", "Express", "PyTorch", "TensorFlow"],
+    "Infrastructure & DevOps": ["Docker", "Kubernetes", "AWS (Lambda, ECS, RDS, S3)", "GitHub Actions", "Jenkins", "Linux/Unix", "Redis", "PostgreSQL", "SQL Server"],
+    "Specialized Technologies": ["CUDA Programming", "MPI", "GPU Computing", "Machine Learning", "Computer Vision", "Test-Driven Development", "Playwright"]
+  },
+  "education": {
+    "school": "New Jersey Institute of Technology",
+    "location": "Newark, NJ",
+    "degree": "Bachelor of Science in Computer Science",
+    "graduation": "Expected Dec 2025",
+    "gpa": "3.8/4.0, Dean's List",
+    "coursework": "GPU Cluster Programming, Advanced Algorithms, Machine Learning, Operating Systems, Compiler Design, Database Systems, Programming Language Principles"
+  },
+  "projects": [
+    {
+      "name": "Koala's Forge",
+      "description": "Visual Git workflow tool with intuitive rebase and conflict resolution UI, built with Rust and Tauri for cross-platform desktop performance"
+    },
+    {
+      "name": "Distributed AlexNet",
+      "description": "MPI-based distributed deep learning implementation across GPU cluster, achieving linear scaling for image classification tasks with custom data parallelism"
+    },
+    {
+      "name": "GPU Ray Tracer",
+      "description": "CUDA-accelerated path tracing renderer with BVH spatial optimization, achieving real-time performance for complex scenes with global illumination"
+    },
+    {
+      "name": "MykoSnips",
+      "description": "Code snippet management system with AI-powered semantic search and VSCode extension integration, built with Go backend and TypeScript frontend"
+    }
+  ]
+}

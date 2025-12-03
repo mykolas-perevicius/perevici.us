@@ -5,6 +5,7 @@ import { initHints } from './hints.js';
 import { initShortcuts } from './shortcuts.js';
 import { initMetrics } from './metrics.js';
 import { initXPWindow } from './xp-window.js';
+import { initWordWindow } from './word-window.js';
 
 // Theme Management
 function initTheme() {
@@ -162,6 +163,7 @@ document.addEventListener('DOMContentLoaded', () => {
     initScrollReveal();
     initMetrics();
     initXPWindow();
+    initWordWindow();
     fetchGitHubStats();
     initConsoleMessage();
 });

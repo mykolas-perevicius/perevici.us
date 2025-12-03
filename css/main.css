@@ -22,29 +22,51 @@
   letter-spacing: 0.02em;
   line-height: 1.1;
   margin-bottom: 1rem;
-  background: linear-gradient(135deg, var(--text), var(--primary-color));
+  background: linear-gradient(92deg,
+    var(--text) 0%,
+    var(--primary-color) 45%,
+    #ff00ff 55%,
+    var(--primary-color) 65%,
+    var(--text) 100%);
+  background-size: 200% 100%;
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
   text-shadow:
-    0 0 40px rgba(0, 212, 255, 0.4),
-    0 0 80px rgba(64, 224, 208, 0.3),
-    0 4px 8px rgba(0, 0, 0, 0.5),
-    0 8px 16px rgba(0, 0, 0, 0.3);
-  filter: drop-shadow(0 0 30px rgba(0, 212, 255, 0.4))
-          drop-shadow(0 4px 8px rgba(0, 212, 255, 0.2));
-  animation: heroGlow 5s ease-in-out infinite;
+    2px 2px 0 rgba(0, 212, 255, 0.3),
+    -1px -1px 0 rgba(255, 0, 255, 0.2),
+    0 3px 8px rgba(0, 0, 0, 0.6);
+  filter: drop-shadow(3px 0 0 rgba(0, 212, 255, 0.4))
+          drop-shadow(-2px 0 0 rgba(255, 0, 255, 0.3))
+          drop-shadow(0 4px 6px rgba(0, 0, 0, 0.4));
+  animation: heroShift 8s ease-in-out infinite, heroGlitch 4s linear infinite;
   position: relative;
 }
 
-@keyframes heroGlow {
+@keyframes heroShift {
   0%, 100% {
-    filter: drop-shadow(0 0 30px rgba(0, 212, 255, 0.4))
-            drop-shadow(0 4px 8px rgba(0, 212, 255, 0.2));
+    background-position: 0% 50%;
   }
   50% {
-    filter: drop-shadow(0 0 40px rgba(0, 212, 255, 0.5))
-            drop-shadow(0 6px 12px rgba(0, 212, 255, 0.3));
+    background-position: 100% 50%;
+  }
+}
+
+@keyframes heroGlitch {
+  0%, 90%, 100% {
+    filter: drop-shadow(3px 0 0 rgba(0, 212, 255, 0.4))
+            drop-shadow(-2px 0 0 rgba(255, 0, 255, 0.3))
+            drop-shadow(0 4px 6px rgba(0, 0, 0, 0.4));
+  }
+  91%, 93%, 95% {
+    filter: drop-shadow(5px 0 0 rgba(0, 212, 255, 0.6))
+            drop-shadow(-4px 0 0 rgba(255, 0, 255, 0.5))
+            drop-shadow(0 2px 4px rgba(0, 0, 0, 0.6));
+  }
+  92%, 94%, 96% {
+    filter: drop-shadow(-3px 0 0 rgba(255, 0, 255, 0.6))
+            drop-shadow(4px 0 0 rgba(0, 212, 255, 0.5))
+            drop-shadow(0 6px 8px rgba(0, 0, 0, 0.4));
   }
 }
 
@@ -297,38 +319,52 @@ section {
 
 .project-card {
     background: var(--glass-bg);
-    border: 1px solid var(--glass-border);
-    backdrop-filter: blur(var(--glass-blur)) saturate(120%);
-    -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(120%);
-    border-radius: 12px;
+    border: 2px solid transparent;
+    border-image: linear-gradient(135deg,
+        var(--glass-border) 0%,
+        var(--glass-border-alt) 50%,
+        var(--glass-border) 100%) 1;
+    backdrop-filter: blur(var(--glass-blur)) saturate(110%) contrast(105%);
+    -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(110%) contrast(105%);
+    border-radius: 4px;
     padding: 1.5rem;
-    transition: all 0.3s ease;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     position: relative;
     overflow: hidden;
-    box-shadow: 0 4px 12px var(--glass-glow);
+    box-shadow:
+        3px 0 12px var(--glass-glow),
+        -2px 0 8px var(--glass-glow-alt),
+        0 4px 16px rgba(0, 0, 0, 0.4);
 }
 
 .project-card::before {
     content: '';
     position: absolute;
     top: 0;
-    left: 0;
+    left: -100%;
     right: 0;
-    height: 3px;
-    background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
-    transform: scaleX(0);
-    transition: transform 0.3s ease;
+    height: 2px;
+    background: linear-gradient(90deg,
+        transparent 0%,
+        var(--primary-color) 30%,
+        #ff00ff 50%,
+        var(--primary-color) 70%,
+        transparent 100%);
+    transform: translateX(0);
+    transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .project-card:hover {
-    background: rgba(255, 255, 255, 0.08);
-    border-color: var(--primary-color);
-    box-shadow: 0 8px 24px rgba(0, 212, 255, 0.4);
-    transform: translateY(-4px);
+    background: rgba(255, 255, 255, 0.06);
+    box-shadow:
+        5px 0 16px var(--glass-glow),
+        -3px 0 12px var(--glass-glow-alt),
+        0 6px 20px rgba(0, 0, 0, 0.5);
+    transform: translateY(-2px) translateX(1px);
 }
 
 .project-card:hover::before {
-    transform: scaleX(1);
+    transform: translateX(100%);
 }
 
 /* Fallback for no backdrop-filter */
