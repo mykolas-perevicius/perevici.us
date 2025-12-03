@@ -25,9 +25,7 @@ jobs:
           node-version: '20'
 
       - name: Install dependencies
-        run: |
-          npm install -g ts-node typescript @types/node
-          mkdir -p public
+        run: npm install -g ts-node typescript @types/node
 
       - name: Build metrics
         env:
@@ -38,7 +36,7 @@ jobs:
         run: |
           git config user.name 'github-actions[bot]'
           git config user.email 'github-actions[bot]@users.noreply.github.com'
-          git add public/metrics.json
+          git add metrics.json
 
           # Only commit if there are changes
           if git diff --staged --quiet; then

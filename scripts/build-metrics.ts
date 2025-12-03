@@ -168,7 +168,7 @@ async function main() {
     try {
         const metrics = await buildMetrics();
 
-        const outputPath = join(__dirname, '..', 'public', 'metrics.json');
+        const outputPath = join(__dirname, '..', 'metrics.json');
         writeFileSync(outputPath, JSON.stringify(metrics, null, 2));
 
         console.log('\n✅ Metrics generated successfully!');
