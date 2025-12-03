@@ -1,9 +1,9 @@
 name: Update GitHub Metrics
 
 on:
-  # Run daily at 04:20 UTC
+  # Run every hour
   schedule:
-    - cron: '20 4 * * *'
+    - cron: '0 * * * *'
 
   # Allow manual triggering
   workflow_dispatch:
