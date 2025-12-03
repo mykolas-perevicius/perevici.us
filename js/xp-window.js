@@ -21,12 +21,7 @@ export function setViewMode(mode) {
 
 function updateViewDisplay() {
     const xpWindow = document.querySelector('.xp-window');
-    let modernGrid = document.querySelector('.modern-projects-grid');
-
-    // Create modern grid if it doesn't exist
-    if (!modernGrid) {
-        modernGrid = createModernGrid();
-    }
+    const modernGrid = document.querySelector('.modern-projects-grid');
 
     if (currentViewMode === 'xp') {
         // Fade out modern, fade in XP
@@ -56,58 +51,12 @@ function updateViewDisplay() {
         }
 
         if (modernGrid) {
-            modernGrid.style.display = '';
+            modernGrid.style.display = 'block';
             // Force reflow then fade in
             modernGrid.offsetHeight;
             modernGrid.style.opacity = '1';
         }
     }
-}
-
-function createModernGrid() {
-    const projectsSection = document.getElementById('projects');
-    if (!projectsSection) return null;
-
-    const sectionContent = projectsSection.querySelector('.section-content');
-    if (!sectionContent) return null;
-
-    // Clone the project cards from XP window
-    const xpGrid = document.querySelector('.xp-content .projects-grid');
-    if (!xpGrid) return null;
-
-    const modernContainer = document.createElement('div');
-    modernContainer.className = 'modern-projects-grid';
-    modernContainer.style.display = 'none'; // Hidden by default
-
-    // Clone the grid
-    const clonedGrid = xpGrid.cloneNode(true);
-
-    // Restore original HTML in cloned cards and remove XP styling
-    const cards = clonedGrid.querySelectorAll('.project-card');
-    cards.forEach((card, index) => {
-        // Get corresponding original card from XP window
-        const originalCard = xpGrid.querySelectorAll('.project-card')[index];
-        if (originalCard && originalCard.dataset.originalHtml) {
-            card.innerHTML = originalCard.dataset.originalHtml;
-        }
-
-        // Remove XP-specific classes and inline styles
-        card.classList.remove('xp-typing-card');
-        card.style.cssText = '';
-        delete card.dataset.originalHtml;
-    });
-
-    modernContainer.appendChild(clonedGrid);
-
-    // Insert after XP window
-    const xpWindow = projectsSection.querySelector('.xp-window');
-    if (xpWindow && xpWindow.parentNode) {
-        xpWindow.parentNode.insertBefore(modernContainer, xpWindow.nextSibling);
-    } else {
-        sectionContent.appendChild(modernContainer);
-    }
-
-    return modernContainer;
 }
 
 export function initXPWindow() {
@@ -231,12 +180,7 @@ export function initXPWindow() {
 
 function initializeViewDisplay() {
     const xpWindow = document.querySelector('.xp-window');
-    let modernGrid = document.querySelector('.modern-projects-grid');
-
-    // Create modern grid if it doesn't exist
-    if (!modernGrid) {
-        modernGrid = createModernGrid();
-    }
+    const modernGrid = document.querySelector('.modern-projects-grid');
 
     // Set initial visibility without animations
     if (currentViewMode === 'modern') {
@@ -245,14 +189,12 @@ function initializeViewDisplay() {
             xpWindow.style.display = 'none';
         }
         if (modernGrid) {
-            modernGrid.style.display = '';
-            modernGrid.style.opacity = '1';
+            modernGrid.style.display = 'block';
         }
     } else {
         // Show XP, hide modern
         if (xpWindow) {
             xpWindow.style.display = '';
-            xpWindow.style.opacity = '1';
         }
         if (modernGrid) {
             modernGrid.style.display = 'none';
@@ -303,15 +245,6 @@ function createViewToggleButton() {
 
     toggleBtn.addEventListener('click', () => {
         const newMode = currentViewMode === 'xp' ? 'modern' : 'xp';
-
-        // If switching to modern, recreate modern grid with original HTML
-        if (newMode === 'modern') {
-            const existingModern = document.querySelector('.modern-projects-grid');
-            if (existingModern) {
-                existingModern.remove();
-            }
-            createModernGrid();
-        }
 
         setViewMode(newMode);
         toggleBtn.textContent = newMode === 'xp' ? '📊 Modern View' : '🪟 XP View';
