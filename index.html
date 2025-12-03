@@ -669,11 +669,121 @@
     <section id="blog" class="blog">
         <div class="section-content">
             <h2 class="section-title">Technical Writing</h2>
-            <div class="blog-teaser scroll-reveal">
-                <h3>Blog Coming Soon</h3>
-                <p>I'm preparing a series of deep dives on GPU programming, distributed systems, and building production-ready applications. Stay tuned!</p>
-                <button class="blog-button" onclick="alert('Blog launching soon! Follow me on GitHub for updates.')">Notify Me</button>
-            </div>
+
+            <article class="blog-post scroll-reveal">
+                <div class="blog-post-header">
+                    <h3>Achieving 4.6× Speedup: Custom CUDA Kernels for AlexNet</h3>
+                    <div class="blog-meta">
+                        <span class="blog-date">December 2024</span>
+                        <span class="blog-tag">GPU Computing</span>
+                        <span class="blog-tag">CUDA</span>
+                    </div>
+                </div>
+                <p class="blog-excerpt">
+                    When PyTorch's default kernels aren't fast enough, you write your own. Here's how I optimized AlexNet training
+                    on an NVIDIA DGX-1 cluster using custom CUDA kernels and MPI orchestration, the architectural decisions that
+                    mattered most, and what I learned about memory coalescing the hard way.
+                </p>
+                <div class="blog-highlights">
+                    <div class="highlight-item">⚡ 4.6× faster than baseline PyTorch</div>
+                    <div class="highlight-item">🔧 Custom memory management patterns</div>
+                    <div class="highlight-item">📊 Multi-GPU orchestration with MPI</div>
+                </div>
+                <a href="https://github.com/mykolas-perevicius/CUDA-MPI-GPU-Cluster-Programming" class="blog-link" target="_blank">
+                    View Project →
+                </a>
+            </article>
+
+            <article class="blog-post scroll-reveal">
+                <div class="blog-post-header">
+                    <h3>Why I Built Yet Another System Installer (And Why You Might Need One Too)</h3>
+                    <div class="blog-meta">
+                        <span class="blog-date">November 2024</span>
+                        <span class="blog-tag">DevOps</span>
+                        <span class="blog-tag">Automation</span>
+                    </div>
+                </div>
+                <p class="blog-excerpt">
+                    Losing access to three machines in one weekend taught me something: your development environment should be
+                    reproducible in under an hour. Koala's Forge is my answer to Ninite's $30/year subscription, a free,
+                    cross-platform installer supporting 100+ apps with silent installations, dependency resolution, and rollback support.
+                </p>
+                <div class="blog-highlights">
+                    <div class="highlight-item">🐨 100+ applications supported</div>
+                    <div class="highlight-item">🔄 Automatic dependency resolution</div>
+                    <div class="highlight-item">⏪ Rollback failed installations</div>
+                </div>
+                <a href="https://github.com/mykolas-perevicius/koalas-forge" class="blog-link" target="_blank">
+                    View Project →
+                </a>
+            </article>
+
+            <article class="blog-post scroll-reveal">
+                <div class="blog-post-header">
+                    <h3>The Hidden Cost of Convenience: When Abstractions Leak Performance</h3>
+                    <div class="blog-meta">
+                        <span class="blog-date">October 2024</span>
+                        <span class="blog-tag">Performance</span>
+                        <span class="blog-tag">Systems</span>
+                    </div>
+                </div>
+                <p class="blog-excerpt">
+                    High-level frameworks are amazing, until they're not. A deep dive into when PyTorch's conveniences become
+                    bottlenecks, why dropping to CUDA gave me 4.6× speedup, and how to know when it's time to stop using
+                    abstractions and start writing assembly (or close to it). Plus: the mental model I use to decide when
+                    optimization is premature vs. necessary.
+                </p>
+                <div class="blog-highlights">
+                    <div class="highlight-item">🎯 When to optimize (and when not to)</div>
+                    <div class="highlight-item">⚙️ Understanding abstraction overhead</div>
+                    <div class="highlight-item">🔍 Profiling strategies that actually work</div>
+                </div>
+            </article>
+
+            <article class="blog-post scroll-reveal">
+                <div class="blog-post-header">
+                    <h3>Breaking Things to Understand Them: A Weekend with Distributed Consensus</h3>
+                    <div class="blog-meta">
+                        <span class="blog-date">September 2024</span>
+                        <span class="blog-tag">Distributed Systems</span>
+                        <span class="blog-tag">Learning</span>
+                    </div>
+                </div>
+                <p class="blog-excerpt">
+                    I spent a weekend intentionally breaking Raft consensus to understand how it works. What happens when you
+                    introduce network partitions? What if followers lie about their log indices? Can you make the cluster elect
+                    two leaders? Turns out, theoretical correctness and practical resilience are two very different things.
+                </p>
+                <div class="blog-highlights">
+                    <div class="highlight-item">🔨 Breaking Raft in creative ways</div>
+                    <div class="highlight-item">🧪 Network partition experiments</div>
+                    <div class="highlight-item">💡 What textbooks don't tell you</div>
+                </div>
+            </article>
+
+            <article class="blog-post scroll-reveal">
+                <div class="blog-post-header">
+                    <h3>Teaching Python by Building Games: Why Education Playground Works</h3>
+                    <div class="blog-meta">
+                        <span class="blog-date">August 2024</span>
+                        <span class="blog-tag">Education</span>
+                        <span class="blog-tag">Python</span>
+                    </div>
+                </div>
+                <p class="blog-excerpt">
+                    40+ interactive Jupyter notebooks covering beginner to expert Python topics. The secret? Every concept is taught
+                    through building something you can actually see and interact with. No "hello world" tutorials here, we're building
+                    games, visualizations, and tools from day one. Here's why learning by building beats learning by reading.
+                </p>
+                <div class="blog-highlights">
+                    <div class="highlight-item">🎮 Learn by building games</div>
+                    <div class="highlight-item">📚 40+ hands-on lessons</div>
+                    <div class="highlight-item">🚀 Beginner to expert curriculum</div>
+                </div>
+                <a href="https://mykolas-perevicius.github.io/Education_Playground/" class="blog-link" target="_blank">
+                    Try It Live →
+                </a>
+            </article>
         </div>
     </section>
 

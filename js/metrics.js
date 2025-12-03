@@ -81,7 +81,7 @@ function renderMetrics(container, data) {
 
     container.innerHTML = metrics.map(metric => {
         const formattedValue = formatNumber(metric.value);
-        const displayValue = metric.value === null ? '—' : formattedValue.display;
+        const displayValue = metric.value === null ? ', ' : formattedValue.display;
         const exactValue = metric.value === null ? 'GitHub is still generating this metric' : formattedValue.exact;
 
         const cardContent = `
@@ -111,19 +111,19 @@ function renderMetrics(container, data) {
 function renderError(container) {
     container.innerHTML = `
         <div class="metric-card">
-            <div class="metric-value">—</div>
+            <div class="metric-value">, </div>
             <div class="metric-label">Lines Added</div>
         </div>
         <div class="metric-card">
-            <div class="metric-value">—</div>
+            <div class="metric-value">, </div>
             <div class="metric-label">Commits (2025)</div>
         </div>
         <div class="metric-card">
-            <div class="metric-value">—</div>
+            <div class="metric-value">, </div>
             <div class="metric-label">PRs Merged</div>
         </div>
         <div class="metric-card">
-            <div class="metric-value">—</div>
+            <div class="metric-value">, </div>
             <div class="metric-label">Total Stars</div>
         </div>
     `;
@@ -131,7 +131,7 @@ function renderError(container) {
 
 function formatNumber(num) {
     if (num === null || num === undefined) {
-        return { display: '—', exact: 'Not available' };
+        return { display: ', ', exact: 'Not available' };
     }
 
     const exact = num.toLocaleString();
