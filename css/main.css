@@ -132,11 +132,12 @@
     .floating-code { animation: none; }
 }
 
-.code-keyword { color: #ff79c6; }
-.code-class { color: #50fa7b; }
-.code-function { color: #8be9fd; }
-.code-param { color: #ffb86c; }
-.code-string { color: #f1fa8c; }
+/* Colorblind-friendly syntax highlighting with good contrast */
+.code-keyword { color: #ff6ac6; } /* Bright pink */
+.code-class { color: #5dff5d; } /* Saturated green */
+.code-function { color: #00d4ff; } /* Strong cyan */
+.code-param { color: #ff9933; } /* Deep orange */
+.code-string { color: #d4b000; } /* Darker gold - much better contrast */
 
 /* Stats Bar */
 .stats-bar {
