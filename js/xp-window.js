@@ -210,8 +210,8 @@ export function initXPWindow() {
     // Initialize easter eggs
     initEasterEggs();
 
-    // Load saved view mode preference (default to 'xp')
-    const savedMode = localStorage.getItem('projectViewMode') || 'xp';
+    // Load saved view mode preference (default to 'modern')
+    const savedMode = localStorage.getItem('projectViewMode') || 'modern';
     currentViewMode = savedMode;
 
     // Create view toggle button

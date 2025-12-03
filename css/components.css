@@ -625,104 +625,104 @@
     margin-top: 0;
 }
 
-/* Dark mode improvements for XP window - better contrast */
+/* Keep XP window authentic regardless of theme - no modern dark mode */
 [data-theme="dark"] .xp-window {
-    background: #2a2d35;
-    border-color: #4a5060 #1a1d25 #1a1d25 #4a5060;
+    background: #ece9d8 !important;
+    border-color: #0054e3 #003d8a #003d8a #0054e3 !important;
     box-shadow:
         0 0 0 1px #0054e3,
-        0 4px 24px rgba(0, 0, 0, 0.7);
+        0 4px 24px rgba(0, 0, 0, 0.7) !important;
 }
 
 [data-theme="dark"] .xp-toolbar {
-    background: linear-gradient(180deg, #353942 0%, #2a2d35 100%);
-    border-bottom-color: #4a5060;
+    background: linear-gradient(180deg, #f5f4f2 0%, #e9e6de 100%) !important;
+    border-bottom-color: #919b9c !important;
 }
 
 [data-theme="dark"] .xp-address-label {
-    color: #e0e0e0;
+    color: #000000 !important;
 }
 
 [data-theme="dark"] .xp-address-input {
-    background: #1a1d25;
-    border-color: #0a0d15 #3a3f4a #3a3f4a #0a0d15;
-    color: #e0e0e0;
+    background: #ffffff !important;
+    border-color: #7f9db9 #ffffff #ffffff #7f9db9 !important;
+    color: #000000 !important;
 }
 
 [data-theme="dark"] .xp-content {
-    background: #1f2229;
-    color: #e0e0e0;
+    background: #ffffff !important;
+    color: #000000 !important;
 }
 
 [data-theme="dark"] .xp-btn {
-    background: linear-gradient(180deg, #3a3f4a 0%, #2a2d35 85%, #1a1d25 100%);
-    border-color: #4a5060 #1a1d25 #1a1d25 #4a5060;
-    color: #e0e0e0;
+    background: linear-gradient(180deg, #f1f0e9 0%, #dddad1 85%, #bdb8ae 100%) !important;
+    border-color: #ffffff #888888 #888888 #ffffff !important;
+    color: #000000 !important;
 }
 
 [data-theme="dark"] .xp-btn:hover {
-    background: linear-gradient(180deg, #4a5060 0%, #3a3f4a 85%, #2a2d35 100%);
+    background: linear-gradient(180deg, #fefffe 0%, #e9e6de 85%, #c9c5bd 100%) !important;
 }
 
 [data-theme="dark"] .xp-btn:active {
-    background: linear-gradient(180deg, #1a1d25 0%, #2a2d35 100%);
-    border-color: #1a1d25 #4a5060 #4a5060 #1a1d25;
+    background: linear-gradient(180deg, #c5c2b8 0%, #e4e1d8 100%) !important;
+    border-color: #888888 #ffffff #ffffff #888888 !important;
 }
 
 [data-theme="dark"] .xp-go-button {
-    background: linear-gradient(180deg, #3a3f4a 0%, #2a2d35 85%, #1a1d25 100%);
-    border-color: #4a5060 #1a1d25 #1a1d25 #4a5060;
-    color: #e0e0e0;
+    background: linear-gradient(180deg, #f1f0e9 0%, #dddad1 85%, #bdb8ae 100%) !important;
+    border-color: #ffffff #888888 #888888 #ffffff !important;
+    color: #000000 !important;
 }
 
-/* Light mode XP window - ensure proper contrast */
+/* Light mode XP window - keep authentic Windows XP look */
 [data-theme="light"] .xp-window {
-    background: #f5f5f5;
-    border-color: #0054e3 #003d8a #003d8a #0054e3;
+    background: #ece9d8 !important;
+    border-color: #0054e3 #003d8a #003d8a #0054e3 !important;
     box-shadow:
         0 0 0 1px #0054e3,
-        0 4px 24px rgba(0, 0, 0, 0.2);
+        0 4px 24px rgba(0, 0, 0, 0.2) !important;
 }
 
 [data-theme="light"] .xp-toolbar {
-    background: linear-gradient(180deg, #ffffff 0%, #f0f0f0 100%);
-    border-bottom-color: #c0c0c0;
+    background: linear-gradient(180deg, #f5f4f2 0%, #e9e6de 100%) !important;
+    border-bottom-color: #919b9c !important;
 }
 
 [data-theme="light"] .xp-address-label {
-    color: #000000;
+    color: #000000 !important;
 }
 
 [data-theme="light"] .xp-address-input {
-    background: #ffffff;
-    border-color: #7f9db9 #e0e0e0 #e0e0e0 #7f9db9;
-    color: #000000;
+    background: #ffffff !important;
+    border-color: #7f9db9 #ffffff #ffffff #7f9db9 !important;
+    color: #000000 !important;
 }
 
 [data-theme="light"] .xp-content {
-    background: #ffffff;
-    color: #000000;
+    background: #ffffff !important;
+    color: #000000 !important;
 }
 
 [data-theme="light"] .xp-btn {
-    background: linear-gradient(180deg, #f8f8f8 0%, #e0e0e0 85%, #c8c8c8 100%);
-    border-color: #ffffff #888888 #888888 #ffffff;
-    color: #000000;
+    background: linear-gradient(180deg, #f1f0e9 0%, #dddad1 85%, #bdb8ae 100%) !important;
+    border-color: #ffffff #888888 #888888 #ffffff !important;
+    color: #000000 !important;
 }
 
 [data-theme="light"] .xp-btn:hover {
-    background: linear-gradient(180deg, #ffffff 0%, #f0f0f0 85%, #d8d8d8 100%);
+    background: linear-gradient(180deg, #fefffe 0%, #e9e6de 85%, #c9c5bd 100%) !important;
 }
 
 [data-theme="light"] .xp-btn:active {
-    background: linear-gradient(180deg, #d0d0d0 0%, #e8e8e8 100%);
-    border-color: #888888 #ffffff #ffffff #888888;
+    background: linear-gradient(180deg, #c5c2b8 0%, #e4e1d8 100%) !important;
+    border-color: #888888 #ffffff #ffffff #888888 !important;
 }
 
 [data-theme="light"] .xp-go-button {
-    background: linear-gradient(180deg, #f8f8f8 0%, #e0e0e0 85%, #c8c8c8 100%);
-    border-color: #ffffff #888888 #888888 #ffffff;
-    color: #000000;
+    background: linear-gradient(180deg, #f1f0e9 0%, #dddad1 85%, #bdb8ae 100%) !important;
+    border-color: #ffffff #888888 #888888 #ffffff !important;
+    color: #000000 !important;
 }
 
 /* View toggle button light mode */
