@@ -3,7 +3,7 @@
 
 import { initContextMenus } from './xp-context-menu.js';
 import { initEasterEggs } from './xp-easter-eggs.js';
-import { startXPTypingAnimation } from './xp-typing.js';
+import { startXPTypingAnimation, restoreOriginalCards } from './xp-typing.js';
 
 let filterHistory = [];
 let historyIndex = -1;
@@ -58,17 +58,19 @@ function createModernGrid() {
     // Clone the grid
     const clonedGrid = xpGrid.cloneNode(true);
 
-    // Remove any XP-specific classes from cloned cards
+    // Restore original HTML in cloned cards and remove XP styling
     const cards = clonedGrid.querySelectorAll('.project-card');
-    cards.forEach(card => {
+    cards.forEach((card, index) => {
+        // Get corresponding original card from XP window
+        const originalCard = xpGrid.querySelectorAll('.project-card')[index];
+        if (originalCard && originalCard.dataset.originalHtml) {
+            card.innerHTML = originalCard.dataset.originalHtml;
+        }
+
+        // Remove XP-specific classes and inline styles
         card.classList.remove('xp-typing-card');
-        card.style.fontFamily = '';
-        card.style.fontSize = '';
-        card.style.lineHeight = '';
-        card.style.color = '';
-        card.style.background = '';
-        card.style.padding = '';
-        card.style.border = '';
+        card.style.cssText = '';
+        delete card.dataset.originalHtml;
     });
 
     modernContainer.appendChild(clonedGrid);
@@ -246,11 +248,23 @@ function createViewToggleButton() {
 
     toggleBtn.addEventListener('click', () => {
         const newMode = currentViewMode === 'xp' ? 'modern' : 'xp';
+
+        // If switching to modern, recreate modern grid with original HTML
+        if (newMode === 'modern') {
+            const existingModern = document.querySelector('.modern-projects-grid');
+            if (existingModern) {
+                existingModern.remove();
+            }
+            createModernGrid();
+        }
+
         setViewMode(newMode);
         toggleBtn.textContent = newMode === 'xp' ? '📊 Modern View' : '🪟 XP View';
 
         // Start typing animation when switching to XP mode
         if (newMode === 'xp') {
+            // First restore original cards
+            restoreOriginalCards();
             setTimeout(() => {
                 startXPTypingAnimation();
             }, 300);

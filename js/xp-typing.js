@@ -22,15 +22,37 @@ export async function startXPTypingAnimation() {
     typingInProgress = false;
 }
 
+// Restore original card HTML (for modern view)
+export function restoreOriginalCards() {
+    const projectCards = document.querySelectorAll('.xp-content .project-card');
+    projectCards.forEach(card => {
+        if (card.dataset.originalHtml) {
+            card.innerHTML = card.dataset.originalHtml;
+            card.classList.remove('xp-typing-card');
+            card.style.cssText = '';
+        }
+    });
+    typingInProgress = false;
+}
+
 async function typeOutProjectCard(card, initialDelay) {
     // Wait for stagger delay
     await sleep(initialDelay);
 
+    // Skip document cards (Resume.doc)
+    if (card.dataset.document) return;
+
+    // Store original HTML for potential restoration
+    if (!card.dataset.originalHtml) {
+        card.dataset.originalHtml = card.innerHTML;
+    }
+
     // Get all text content from the card
-    const header = card.querySelector('.project-header h3')?.textContent || '';
+    const headerEl = card.querySelector('.project-header h3') || card.querySelector('h3');
+    const header = headerEl?.textContent || '';
     const description = card.querySelector('.project-description')?.textContent?.trim() || '';
-    const stats = Array.from(card.querySelectorAll('.project-stats .stat-item')).map(el => el.textContent);
-    const tags = Array.from(card.querySelectorAll('.tech-tags .tag')).map(el => el.textContent);
+    const stats = Array.from(card.querySelectorAll('.project-stats .stat-item, .stat-item')).map(el => el.textContent.trim());
+    const tags = Array.from(card.querySelectorAll('.tech-tags .tag, .tag')).map(el => el.textContent.trim()).filter(t => !t.includes('Double-click'));
 
     // Build HTML structure with Word 2003 styling
     const content = buildProjectHTML(header, description, stats, tags);
