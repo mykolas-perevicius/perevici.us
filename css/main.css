@@ -949,7 +949,7 @@ section {
 
 /* Three.js Background Canvas */
 #threejsBackground {
-    display: none;
+    display: block;
     position: fixed;
     top: 0;
     left: 0;
@@ -957,11 +957,13 @@ section {
     height: 100%;
     z-index: -1;
     pointer-events: none;
-    opacity: 0.4;
+    opacity: 0.35;
+    mix-blend-mode: screen;
 }
 
 [data-theme="light"] #threejsBackground {
     opacity: 0.25;
+    mix-blend-mode: multiply;
 }
 
 @media (prefers-reduced-motion: reduce) {

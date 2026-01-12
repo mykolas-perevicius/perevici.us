@@ -190,7 +190,9 @@
     transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     overflow: hidden;
     box-shadow: 0 4px 12px rgb(var(--shadow-rgb) / 0.25);
-    --toggle-knob-x: 4px;
+    --toggle-track-padding: 4px;
+    --toggle-knob-size: 32px;
+    --toggle-knob-x: var(--toggle-track-padding);
 }
 
 .theme-toggle::before {
@@ -198,8 +200,8 @@
     position: absolute;
     top: 4px;
     left: var(--toggle-knob-x);
-    width: 32px;
-    height: 32px;
+    width: var(--toggle-knob-size);
+    height: var(--toggle-knob-size);
     background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
     border-radius: 50%;
     transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
@@ -210,15 +212,20 @@
     content: '🌙';
     position: absolute;
     top: 50%;
-    left: calc(var(--toggle-knob-x) + 16px);
+    left: calc(var(--toggle-knob-x) + (var(--toggle-knob-size) / 2));
+    width: var(--toggle-knob-size);
+    height: var(--toggle-knob-size);
+    display: grid;
+    place-items: center;
     transform: translate(-50%, -50%);
-    font-size: 1.25rem;
+    font-size: 1rem;
+    line-height: 1;
     transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     z-index: 1;
 }
 
 [data-theme="light"] .theme-toggle {
-    --toggle-knob-x: 44px;
+    --toggle-knob-x: calc(100% - var(--toggle-track-padding) - var(--toggle-knob-size));
 }
 
 [data-theme="light"] .theme-toggle::before {

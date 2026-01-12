@@ -197,7 +197,8 @@ document.addEventListener('DOMContentLoaded', async () => {
     // Low priority: Load when browser is truly idle
     requestIdleCallback(() => {
         Promise.all([
-            import('./konami.js').then(m => m.initKonami())
+            import('./konami.js').then(m => m.initKonami()),
+            import('./circuit-background.js').then(m => m.initCircuitBackground())
         ]);
     }, { timeout: 3000 });
 });
