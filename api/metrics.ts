@@ -34,7 +34,7 @@ export default function handler(req: VercelRequest, res: VercelResponse) {
             username: 'mykolas-perevicius',
             linesAddedLifetime: null,
             commitsLastYear: null,
-            weeklyCommitsLastYear: [],
+            monthlyCommitsLastYear: [],
             rollingYearStart: null,
             rollingYearEnd: null,
             prsMerged: null,

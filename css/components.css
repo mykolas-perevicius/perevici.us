@@ -751,6 +751,12 @@
     transition: transform 0.2s ease, filter 0.2s ease;
 }
 
+.metrics-activity-bar-estimated {
+    background: linear-gradient(180deg, rgb(var(--accent-rgb) / 0.45), rgb(var(--primary-rgb) / 0.35));
+    box-shadow: none;
+    opacity: 0.7;
+}
+
 .metrics-activity-bar:hover {
     transform: translateY(-4px) scaleX(1.05);
     filter: brightness(1.15);
@@ -760,6 +766,14 @@
     display: flex;
     justify-content: space-between;
     margin-top: 0.75rem;
+    font-size: 0.75rem;
+    color: var(--muted);
+    font-family: var(--font-mono);
+}
+
+.metrics-activity-note {
+    margin-top: 0.75rem;
+    text-align: center;
     font-size: 0.75rem;
     color: var(--muted);
     font-family: var(--font-mono);

@@ -1,85 +1,120 @@
 {
   "header": {
     "name": "MYKOLAS PEREVICIUS",
-    "contact": [
-      "Perevicius.Mykolas@gmail.com",
-      "linkedin.com/in/mykolasperevicius",
-      "github.com/mykolas-perevicius"
+    "contactLines": [
+      [
+        "perevici.us",
+        "github.com/mykolas-perevicius",
+        "linkedin.com/in/mykolasperevicius"
+      ],
+      [
+        "Perevicius.Mykolas@gmail.com",
+        "mp697@njit.edu",
+        "201-786-8519",
+        "NYC Metro Area"
+      ]
     ]
   },
-  "summary": "Full-stack software engineer with expertise in distributed systems, GPU computing, and production-grade application development. Proven track record delivering high-performance applications with comprehensive test coverage, optimizing database queries and infrastructure, and shipping features that directly impact user productivity. Passionate about building scalable systems that balance technical excellence with practical user needs.",
+  "education": {
+    "school": "New Jersey Institute of Technology",
+    "dates": "Sep 2021 -- Dec 2025",
+    "degree": "B.S. Computer Science | Dean's List",
+    "graduateCoursework": "Compiler Design, Machine Learning, GPU Cluster Programming",
+    "coreCoursework": "Operating Systems, Database Systems, Advanced Data Structures & Algorithms, Linux Programming"
+  },
   "experience": [
     {
       "title": "Software Engineer",
-      "company": "UserAuthGuard by Asan Digital",
-      "dates": "Oct 2025 - Present",
+      "company": "UserAuthGuard by Asan Digital LLC",
+      "dates": "Oct 2025 -- Present",
       "bullets": [
-        "Develop and maintain full-stack Django REST API with PostgreSQL backend, achieving 90%+ test coverage through comprehensive unit and integration testing",
-        "Implement end-to-end testing infrastructure using Playwright for frontend validation, ensuring application reliability across all user workflows",
-        "Refactor legacy test suites from coverage-focused patterns to behavioral testing methodology, improving code maintainability and reducing false positives"
+        "Leading test-driven development for production Django SaaS serving 17,000+ students across multiple school districts",
+        "Achieved 90% test coverage (from 51%) across 840+ Python files with pytest-django behavioral test suites",
+        "Architected multi-tenant Chromebook management system with Google Workspace, Stripe, and Dell Warranty API integrations",
+        "Implemented real-time features using Django Channels (WebSockets) with Redis/Celery for async task processing"
       ]
     },
     {
-      "title": "Software Developer Intern",
-      "company": "Bessemer Trust",
-      "dates": "Jun 2023 - Aug 2023",
+      "title": "Software Engineer",
+      "company": "Bessemer Trust (Internship)",
+      "dates": "Jun 2023 -- Aug 2023",
       "bullets": [
-        "Architected and deployed securities management platform reducing analyst reconciliation time by 60% for 20+ users through automated data validation and workflow optimization",
-        "Optimized SQL Server query performance through strategic indexing and query plan analysis, decreasing complex report generation latency by 45%",
-        "Delivered technical presentation on AI/ML applications in financial services to 500+ company stakeholders, achieving top 5% feedback score"
+        "Built securities analysis platform that reduced reconciliation time by 60% for 20+ wealth advisors",
+        "Optimized SQL Server queries and indexes, cutting report generation latency by 45%",
+        "Delivered AI Tech Talk to 100+ employees on practical ML applications",
+        "Tech: C#/.NET Core, ASP.NET Web API, React 18, SQL Server, Redis"
       ]
     },
     {
-      "title": "Curriculum Developer",
+      "title": "Curriculum Developer & Instructor",
       "company": "The Coding Place",
-      "dates": "Dec 2022 - Jun 2024",
+      "dates": "Dec 2022 -- Present",
       "bullets": [
-        "Authored comprehensive Python certification curriculum (PCEP/PCAP) achieving 90% student pass rate across 120+ enrollments through structured learning modules and hands-on projects",
-        "Engineered automated grading pipeline using PyTest and GitHub Actions for continuous assessment, reducing manual grading time by 80%",
-        "Instructed 100+ students in object-oriented programming, data structures and algorithms, and web development fundamentals"
+        "Created 117 Jupyter notebooks covering Python from basics to GPU programming; 90% certification rate (120+ students)",
+        "Built automated testing pipeline with GitHub Actions for student code evaluation"
       ]
     },
     {
-      "title": "Software Engineering Intern",
+      "title": "Software Engineer",
       "company": "Project Innovate Newark",
-      "dates": "Dec 2021 - Dec 2022",
+      "dates": "Dec 2021 -- Present",
       "bullets": [
-        "Designed and deployed event management application adopted by 9 organizational programs, reducing scheduling conflicts by 30% through intelligent conflict detection",
-        "Containerized full application stack using Docker and deployed to AWS ECS, reducing deployment time from days to hours and enabling rapid iteration",
-        "Implemented JWT authentication and role-based access control system, passing third-party security audit with zero critical vulnerabilities"
+        "Shipped event-planning suite (React, Node.js, PostgreSQL) reducing scheduling conflicts by 30% across 9+ programs",
+        "Containerized with Docker, cut deployment from days to hours; zero critical findings in penetration testing"
+      ]
+    },
+    {
+      "title": "Research Intern",
+      "company": "Bergen Community College",
+      "dates": "Sep 2021 -- Sep 2022",
+      "bullets": [
+        "Engineered CNN-powered recycling-bin prototype attaining 95% material-detection accuracy",
+        "Built Arduino-based EV GUI that improved converted pickup truck range by ~20%"
+      ]
+    }
+  ],
+  "projects": [
+    {
+      "name": "Rosetta Multi-Language Compiler",
+      "tech": "C++, Rust, Python, Java, Kotlin, Haskell, OCaml, Assembly",
+      "link": "github.com/mykolas-perevicius/Building-A-Compiler",
+      "bullets": [
+        "Implemented complete compiler with code generation for 10+ programming languages",
+        "Built comprehensive testing infrastructure with automated cross-language validation"
+      ]
+    },
+    {
+      "name": "Distributed AlexNet",
+      "tech": "CUDA, MPI, C++",
+      "link": "github.com/mykolas-perevicius/CUDA-MPI-GPU-Cluster-Programming",
+      "bullets": [
+        "Achieved 4.6x speedup over PyTorch baseline through custom CUDA kernels and MPI orchestration",
+        "Optimized memory management and multi-GPU scheduling on DGX-1 cluster"
+      ]
+    },
+    {
+      "name": "Koala's Forge",
+      "tech": "Python, PowerShell, Bash",
+      "link": "github.com/mykolas-perevicius/koalas-forge",
+      "bullets": [
+        "Built cross-platform system installer (Ninite alternative) supporting 100+ applications with parallel downloads"
+      ]
+    },
+    {
+      "name": "Additional Projects",
+      "tech": "Go, React, AWS, TensorFlow, D3.js",
+      "link": "",
+      "bullets": [
+        "Strive Digital Fitness (ML workout tracker), EEG Signal Classification (85%+ accuracy), Static C++ Code Analyzer, Interactive Network Visualization Dashboard"
       ]
     }
   ],
   "skills": {
-    "Languages": ["Python", "Java", "C#", "JavaScript/TypeScript", "Go", "Rust", "SQL", "CUDA C/C++"],
-    "Frameworks & Libraries": ["Django REST Framework", "Spring Boot", ".NET Core", "React 18", "Node.js", "Express", "PyTorch", "TensorFlow"],
-    "Infrastructure & DevOps": ["Docker", "Kubernetes", "AWS (Lambda, ECS, RDS, S3)", "GitHub Actions", "Jenkins", "Linux/Unix", "Redis", "PostgreSQL", "SQL Server"],
-    "Specialized Technologies": ["CUDA Programming", "MPI", "GPU Computing", "Machine Learning", "Computer Vision", "Test-Driven Development", "Playwright"]
-  },
-  "education": {
-    "school": "New Jersey Institute of Technology",
-    "location": "Newark, NJ",
-    "degree": "Bachelor of Science in Computer Science",
-    "graduation": "Expected Dec 2025",
-    "gpa": "3.8/4.0, Dean's List",
-    "coursework": "GPU Cluster Programming, Advanced Algorithms, Machine Learning, Operating Systems, Compiler Design, Database Systems, Programming Language Principles"
-  },
-  "projects": [
-    {
-      "name": "Koala's Forge",
-      "description": "Visual Git workflow tool with intuitive rebase and conflict resolution UI, built with Rust and Tauri for cross-platform desktop performance"
-    },
-    {
-      "name": "Distributed AlexNet",
-      "description": "MPI-based distributed deep learning implementation across GPU cluster, achieving linear scaling for image classification tasks with custom data parallelism"
-    },
-    {
-      "name": "GPU Ray Tracer",
-      "description": "CUDA-accelerated path tracing renderer with BVH spatial optimization, achieving real-time performance for complex scenes with global illumination"
-    },
-    {
-      "name": "MykoSnips",
-      "description": "Code snippet management system with AI-powered semantic search and VSCode extension integration, built with Go backend and TypeScript frontend"
-    }
-  ]
+    "Languages": ["Python", "C/C++", "Java", "C#", "TypeScript/JavaScript", "Rust", "Go", "SQL", "Assembly", "Bash"],
+    "Backend": ["Django REST Framework", ".NET Core", "ASP.NET Web API", "Spring Boot", "Node.js", "FastAPI"],
+    "Frontend": ["React 18", "TypeScript", "Next.js", "Tailwind CSS", "Redux", "D3.js"],
+    "Infrastructure": ["Docker", "Kubernetes", "AWS (ECS, Lambda, RDS)", "PostgreSQL", "Redis", "MongoDB", "SQL Server"],
+    "Testing": ["pytest-django", "Jest", "JUnit", "Selenium", "GitHub Actions CI/CD"],
+    "Specialized": ["CUDA/GPU Programming", "MPI", "Compiler Design", "PyTorch", "TensorFlow", "scikit-learn"]
+  }
 }

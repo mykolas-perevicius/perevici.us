@@ -26,13 +26,18 @@ function openWordWindow() {
     if (wordWindowOpen || !resumeData) return;
 
     wordWindowOpen = true;
+    const isMobile = window.matchMedia('(max-width: 768px)').matches;
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     const overlay = createWordOverlay();
+    if (isMobile) {
+        overlay.classList.add('word-mobile');
+    }
     document.body.appendChild(overlay);
 
     // Small delay then start typing
     setTimeout(() => {
         const contentArea = overlay.querySelector('.word-document-content');
-        startTypingAnimation(resumeData, contentArea);
+        startTypingAnimation(resumeData, contentArea, { instant: isMobile || prefersReducedMotion });
     }, 500);
 
     // Initialize easter eggs

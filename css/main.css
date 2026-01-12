@@ -205,6 +205,58 @@ section {
     background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
 }
 
+/* Section Toggle (Dropdown) */
+.section-toggle {
+    border: none;
+    background: transparent;
+}
+
+.section-toggle-summary {
+    list-style: none;
+    cursor: pointer;
+    position: relative;
+    padding-right: 3.5rem;
+}
+
+.section-toggle-summary::-webkit-details-marker {
+    display: none;
+}
+
+.section-toggle-summary .section-title {
+    margin-bottom: 0;
+}
+
+.section-toggle-body {
+    padding-top: 2rem;
+}
+
+.section-toggle-indicator {
+    position: absolute;
+    right: 0;
+    top: 50%;
+    width: 36px;
+    height: 36px;
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--border);
+    background: var(--glass-bg);
+    backdrop-filter: blur(8px);
+    display: grid;
+    place-items: center;
+    transform: translateY(-50%);
+    transition: transform 0.3s ease, border-color 0.3s ease;
+}
+
+.section-toggle-indicator::before {
+    content: '⌄';
+    font-size: 1.1rem;
+    color: var(--primary-color);
+}
+
+.section-toggle[open] .section-toggle-indicator {
+    transform: translateY(-50%) rotate(180deg);
+    border-color: var(--primary-color);
+}
+
 /* GitHub Stats */
 .github-stats {
     display: grid;

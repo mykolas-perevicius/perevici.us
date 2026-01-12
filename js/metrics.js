@@ -83,7 +83,7 @@ function renderMetrics(container, data) {
     container.innerHTML = metrics.map(metric => {
         const formattedValue = formatNumber(metric.value);
         const displayValue = metric.value === null ? '—' : formattedValue.display;
-        const exactValue = metric.value === null ? 'GitHub is still generating this metric' : formattedValue.exact;
+        const exactValue = metric.value === null ? 'Data not available yet' : formattedValue.exact;
 
         const cardContent = `
             <div class="metric-value" title="${exactValue}">${displayValue}</div>
@@ -165,45 +165,71 @@ function renderActivityChart(parent, data) {
     const activityContainer = document.getElementById('metricsActivity');
     if (!activityContainer || !parent) return;
 
-    const weekly = Array.isArray(data.weeklyCommitsLastYear) ? data.weeklyCommitsLastYear : [];
-    if (weekly.length < 10) {
+    const monthly = Array.isArray(data.monthlyCommitsLastYear) ? data.monthlyCommitsLastYear : [];
+    const totalCommits = data.commitsLastYear ?? data.commits2025 ?? null;
+    if (monthly.length < 6) {
+        if (totalCommits !== null && totalCommits !== undefined) {
+            const average = totalCommits > 0 ? Math.max(1, Math.round(totalCommits / 12)) : 0;
+            const estimated = Array.from({ length: 12 }, () => average);
+            const { start, end } = getRollingRange(data, estimated.length);
+            const bars = buildBars(estimated, start, true);
+            const axisLabels = buildAxisLabels(start, estimated.length);
+
+            activityContainer.innerHTML = `
+                <div class="metrics-activity-header">
+                    <div class="metrics-activity-title">Rolling 12-Month Activity</div>
+                    <div class="metrics-activity-range">${formatRange(start, end)}</div>
+                </div>
+                <div class="metrics-activity-grid" role="img" aria-label="Estimated monthly commit activity over the last 12 months">
+                    ${bars}
+                </div>
+                <div class="metrics-activity-axis">${axisLabels}</div>
+                <div class="metrics-activity-note">Showing average monthly commits. Detailed breakdown updates hourly.</div>
+            `;
+            return;
+        }
+
         activityContainer.innerHTML = `
-            <div class="metrics-activity-empty">Weekly activity is generating. Check back soon.</div>
+            <div class="metrics-activity-empty">Activity data updates hourly. Check back soon.</div>
         `;
         return;
     }
 
-    const { start, end } = getRollingRange(data, weekly.length);
-    const maxValue = Math.max(...weekly, 1);
-    const bars = weekly.map((value, index) => {
-        const height = maxValue === 0 ? 6 : Math.max(6, Math.round((value / maxValue) * 80));
-        const startDate = new Date(start);
-        startDate.setDate(startDate.getDate() + index * 7);
-        const endDate = new Date(startDate);
-        endDate.setDate(endDate.getDate() + 6);
-        const label = `${formatShortDate(startDate)} - ${formatShortDate(endDate)}: ${value} commits`;
-        return `<span class="metrics-activity-bar" style="height: ${height}px" title="${label}"></span>`;
-    }).join('');
+    const { start, end } = getRollingRange(data, monthly.length);
+    const bars = buildBars(monthly, start, false);
 
-    const axisLabels = buildAxisLabels(start, weekly.length);
+    const axisLabels = buildAxisLabels(start, monthly.length);
 
     activityContainer.innerHTML = `
         <div class="metrics-activity-header">
             <div class="metrics-activity-title">Rolling 12-Month Activity</div>
             <div class="metrics-activity-range">${formatRange(start, end)}</div>
         </div>
-        <div class="metrics-activity-grid" role="img" aria-label="Weekly commit activity over the last 12 months">
+        <div class="metrics-activity-grid" role="img" aria-label="Monthly commit activity over the last 12 months">
             ${bars}
         </div>
         <div class="metrics-activity-axis">${axisLabels}</div>
     `;
 }
 
-function getRollingRange(data, weeksLength) {
+function buildBars(values, start, estimated) {
+    const maxValue = Math.max(...values, 1);
+    return values.map((value, index) => {
+        const height = maxValue === 0 ? 6 : Math.max(6, Math.round((value / maxValue) * 80));
+        const startDate = new Date(start);
+        startDate.setMonth(startDate.getMonth() + index);
+        const label = `${formatMonth(startDate)}: ${value} commits`;
+        const classes = estimated ? 'metrics-activity-bar metrics-activity-bar-estimated' : 'metrics-activity-bar';
+        return `<span class="${classes}" style="height: ${height}px" title="${label}"></span>`;
+    }).join('');
+}
+
+function getRollingRange(data, monthsLength) {
     const end = data.rollingYearEnd ? new Date(data.rollingYearEnd) : new Date();
     const start = data.rollingYearStart ? new Date(data.rollingYearStart) : new Date(end);
     if (!data.rollingYearStart) {
-        start.setDate(end.getDate() - (weeksLength * 7 - 1));
+        start.setMonth(end.getMonth() - (monthsLength - 1));
+        start.setDate(1);
     }
     return { start, end };
 }
@@ -213,18 +239,18 @@ function formatRange(start, end) {
     return `${formatter.format(start)} — ${formatter.format(end)}`;
 }
 
-function formatShortDate(date) {
-    return date.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+function formatMonth(date) {
+    return date.toLocaleDateString('en-US', { month: 'short', year: 'numeric' });
 }
 
-function buildAxisLabels(start, weeksLength) {
+function buildAxisLabels(start, monthsLength) {
     const labelCount = 6;
     const formatter = new Intl.DateTimeFormat('en-US', { month: 'short' });
     const labels = [];
     for (let i = 0; i < labelCount; i++) {
-        const index = Math.round((weeksLength - 1) * (i / (labelCount - 1)));
+        const index = Math.round((monthsLength - 1) * (i / (labelCount - 1)));
         const date = new Date(start);
-        date.setDate(date.getDate() + index * 7);
+        date.setMonth(date.getMonth() + index);
         labels.push(`<span>${formatter.format(date)}</span>`);
     }
     return labels.join('');

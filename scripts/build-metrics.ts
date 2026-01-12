@@ -18,7 +18,7 @@ interface MetricsData {
     username: string;
     linesAddedLifetime: number | null;
     commitsLastYear: number | null;
-    weeklyCommitsLastYear: number[];
+    monthlyCommitsLastYear: number[];
     rollingYearStart: string | null;
     rollingYearEnd: string | null;
     prsMerged: number | null;
@@ -132,11 +132,11 @@ async function fetchCommitActivity(repoName: string): Promise<any[] | null> {
 }
 
 async function calculateCommitActivity(repos: any[]): Promise<{
-    weeklyTotals: number[];
+    monthlyTotals: number[];
     rollingYearStart: string | null;
     rollingYearEnd: string | null;
 }> {
-    const weeklyTotals = Array(52).fill(0);
+    const monthlyMap = new Map<string, number>();
     let sampleWeeks: any[] | null = null;
 
     for (const repo of repos) {
@@ -145,8 +145,12 @@ async function calculateCommitActivity(repos: any[]): Promise<{
             if (!sampleWeeks) {
                 sampleWeeks = activity;
             }
-            for (let i = 0; i < 52; i++) {
-                weeklyTotals[i] += activity[i]?.total || 0;
+            for (let i = 0; i < activity.length; i++) {
+                const week = activity[i];
+                if (!week) continue;
+                const date = new Date(week.week * 1000);
+                const key = `${date.getUTCFullYear()}-${String(date.getUTCMonth() + 1).padStart(2, '0')}`;
+                monthlyMap.set(key, (monthlyMap.get(key) || 0) + (week.total || 0));
             }
         }
 
@@ -155,16 +159,25 @@ async function calculateCommitActivity(repos: any[]): Promise<{
 
     let rollingYearStart: string | null = null;
     let rollingYearEnd: string | null = null;
+    const monthlyTotals: number[] = [];
 
     if (sampleWeeks && sampleWeeks.length) {
-        const start = new Date(sampleWeeks[0].week * 1000);
         const end = new Date(sampleWeeks[sampleWeeks.length - 1].week * 1000);
-        end.setDate(end.getDate() + 6);
+        end.setUTCDate(end.getUTCDate() + 6);
+        const start = new Date(Date.UTC(end.getUTCFullYear(), end.getUTCMonth(), 1));
+        start.setUTCMonth(start.getUTCMonth() - 11);
+
         rollingYearStart = start.toISOString();
         rollingYearEnd = end.toISOString();
+
+        for (let i = 0; i < 12; i++) {
+            const month = new Date(Date.UTC(start.getUTCFullYear(), start.getUTCMonth() + i, 1));
+            const key = `${month.getUTCFullYear()}-${String(month.getUTCMonth() + 1).padStart(2, '0')}`;
+            monthlyTotals.push(monthlyMap.get(key) || 0);
+        }
     }
 
-    return { weeklyTotals, rollingYearStart, rollingYearEnd };
+    return { monthlyTotals, rollingYearStart, rollingYearEnd };
 }
 
 async function calculatePRsMerged(): Promise<number> {
@@ -193,7 +206,7 @@ async function buildMetrics(): Promise<MetricsData> {
 
     console.log('Calculating rolling 12-month commit activity...');
     const activity = await calculateCommitActivity(repos);
-    const commitsLastYear = activity.weeklyTotals.reduce((sum, value) => sum + value, 0);
+    const commitsLastYear = activity.monthlyTotals.reduce((sum, value) => sum + value, 0);
     console.log(`Commits (last 12 months): ${commitsLastYear.toLocaleString()}`);
 
     console.log('Calculating merged PRs...');
@@ -208,7 +221,7 @@ async function buildMetrics(): Promise<MetricsData> {
         username: GITHUB_USERNAME,
         linesAddedLifetime,
         commitsLastYear,
-        weeklyCommitsLastYear: activity.weeklyTotals,
+        monthlyCommitsLastYear: activity.monthlyTotals,
         rollingYearStart: activity.rollingYearStart,
         rollingYearEnd: activity.rollingYearEnd,
         prsMerged,

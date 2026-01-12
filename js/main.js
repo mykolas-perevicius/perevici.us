@@ -3,6 +3,7 @@ import { initI18n } from './i18n.js';
 import { initMetrics } from './metrics.js';
 import { initImageOptimization } from './image-optimizer.js';
 import { initBlogModal } from './blog-modal.js';
+import { initSectionToggles } from './section-toggles.js';
 
 // Theme Management
 function initTheme() {
@@ -167,6 +168,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     initI18n();
     initTheme();
     initTypingAnimation();
+    initSectionToggles();
     initScrollReveal();
     initMetrics();
     initImageOptimization();

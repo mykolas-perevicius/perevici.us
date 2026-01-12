@@ -1,4 +1,4 @@
-// Circuit grid background with moving data calls
+// Hybrid CPU/GPU/RAM architecture grid with moving data calls
 export function initCircuitBackground() {
     const canvas = document.getElementById('threejsBackground');
     if (!canvas) return;
@@ -24,13 +24,14 @@ export function initCircuitBackground() {
         const isLight = document.documentElement.getAttribute('data-theme') === 'light';
         return {
             primary: styles.getPropertyValue('--primary-color').trim() || '#ff8a3d',
+            secondary: styles.getPropertyValue('--secondary-color').trim() || '#f5b66d',
             accent: styles.getPropertyValue('--accent-color').trim() || '#33d6c8',
             muted: styles.getPropertyValue('--muted').trim() || '#a7b0a5',
             border: styles.getPropertyValue('--border').trim() || '#273231',
             isLight,
-            gridAlpha: isLight ? 0.2 : 0.3,
-            busAlpha: isLight ? 0.32 : 0.45,
-            nodeAlpha: isLight ? 0.35 : 0.55
+            gridAlpha: isLight ? 0.18 : 0.28,
+            busAlpha: isLight ? 0.3 : 0.48,
+            nodeAlpha: isLight ? 0.32 : 0.55
         };
     }
 
@@ -55,9 +56,9 @@ export function initCircuitBackground() {
         pulses = [];
 
         const minDim = Math.min(width, height);
-        const spacing = Math.max(70, Math.min(110, Math.round(minDim / 8)));
-        const cols = Math.max(6, Math.floor(width / spacing));
-        const rows = Math.max(5, Math.floor(height / spacing));
+        const spacing = Math.max(64, Math.min(110, Math.round(minDim / 8)));
+        const cols = Math.max(8, Math.floor(width / spacing));
+        const rows = Math.max(7, Math.floor(height / spacing));
         const offsetX = (width - (cols - 1) * spacing) / 2;
         const offsetY = (height - (rows - 1) * spacing) / 2;
 
@@ -70,23 +71,17 @@ export function initCircuitBackground() {
             }))
         );
 
-        const busRows = new Set();
-        const busCols = new Set();
-        for (let row = 0; row < rows; row += 3) {
-            busRows.add(row);
-        }
-        for (let col = 0; col < cols; col += 3) {
-            busCols.add(col);
-        }
-        busRows.add(Math.floor(rows / 2));
-        busCols.add(Math.floor(cols / 2));
+        const centerRow = Math.floor(rows / 2);
+        const centerCol = Math.floor(cols / 2);
+        const busRows = [centerRow, Math.max(1, centerRow - 2), Math.min(rows - 2, centerRow + 2)];
+        const busCols = [centerCol, Math.max(1, centerCol - 3), Math.min(cols - 2, centerCol + 3)];
 
         for (let row = 0; row < rows; row++) {
             for (let col = 0; col < cols - 1; col++) {
                 const start = nodes[row][col];
                 const end = nodes[row][col + 1];
                 const segment = { x1: start.x, y1: start.y, x2: end.x, y2: end.y };
-                (busRows.has(row) ? busLines : gridLines).push(segment);
+                (busRows.includes(row) ? busLines : gridLines).push(segment);
             }
         }
 
@@ -95,81 +90,104 @@ export function initCircuitBackground() {
                 const start = nodes[row][col];
                 const end = nodes[row + 1][col];
                 const segment = { x1: start.x, y1: start.y, x2: end.x, y2: end.y };
-                (busCols.has(col) ? busLines : gridLines).push(segment);
+                (busCols.includes(col) ? busLines : gridLines).push(segment);
             }
         }
 
-        banks = buildBanks(nodes, spacing);
-        grid = { nodes, rows, cols, spacing, busRows: [...busRows], busCols: [...busCols] };
+        const cpuZone = collectZone(nodes, centerRow - 1, centerRow + 1, centerCol - 1, centerCol + 1);
+        const gpuZone = collectZone(nodes, Math.max(1, centerRow - 2), Math.min(rows - 2, centerRow + 2), Math.max(0, cols - 3), cols - 1);
+        const ramTop = collectZone(nodes, 0, 0, 0, cols - 1);
+        const ramBottom = collectZone(nodes, rows - 1, rows - 1, 0, cols - 1);
 
-        const pulseCount = Math.max(8, Math.round((width * height) / 180000));
+        banks = buildMemoryBanks(nodes, spacing, cols, rows);
+
+        grid = {
+            nodes,
+            rows,
+            cols,
+            spacing,
+            busRows,
+            busCols,
+            zones: {
+                cpu: cpuZone,
+                gpu: gpuZone,
+                ramTop,
+                ramBottom
+            },
+            bounds: {
+                cpu: zoneBounds(cpuZone, spacing * 0.5),
+                gpu: zoneBounds(gpuZone, spacing * 0.5)
+            }
+        };
+
+        const pulseCount = Math.max(10, Math.round((width * height) / 160000));
         for (let i = 0; i < pulseCount; i++) {
             pulses.push(createPulse());
         }
     }
 
-    function buildBanks(nodes, spacing) {
-        const rows = nodes.length;
-        const cols = nodes[0]?.length || 0;
-        const bankCount = Math.min(8, Math.max(3, Math.floor((rows * cols) / 18)));
-        const bankSizes = [
-            { w: 3, h: 2 },
-            { w: 2, h: 3 },
-            { w: 2, h: 2 }
-        ];
-        const taken = new Set();
-        const result = [];
-
-        function mark(row, col) {
-            taken.add(`${row},${col}`);
-        }
-
-        function isFree(row, col, w, h) {
-            for (let r = row; r < row + h; r++) {
-                for (let c = col; c < col + w; c++) {
-                    if (taken.has(`${r},${c}`)) return false;
-                }
+    function collectZone(nodes, rowStart, rowEnd, colStart, colEnd) {
+        const zone = [];
+        for (let row = rowStart; row <= rowEnd; row++) {
+            for (let col = colStart; col <= colEnd; col++) {
+                const node = nodes[row]?.[col];
+                if (node) zone.push(node);
             }
-            return true;
         }
+        return zone;
+    }
+
+    function zoneBounds(zone, padding) {
+        if (!zone.length) return null;
+        const xs = zone.map(node => node.x);
+        const ys = zone.map(node => node.y);
+        return {
+            x: Math.min(...xs) - padding,
+            y: Math.min(...ys) - padding,
+            w: Math.max(...xs) - Math.min(...xs) + padding * 2,
+            h: Math.max(...ys) - Math.min(...ys) + padding * 2
+        };
+    }
+
+    function buildMemoryBanks(nodes, spacing, cols, rows) {
+        const bankCount = Math.max(3, Math.floor(cols / 3));
+        const banks = [];
+        const topRow = 0;
+        const bottomRow = rows - 1;
 
         for (let i = 0; i < bankCount; i++) {
-            const size = bankSizes[Math.floor(Math.random() * bankSizes.length)];
-            let placed = false;
+            const colStart = i * 3;
+            const colEnd = Math.min(cols - 1, colStart + 1);
+            const padding = spacing * 0.35;
+            const topLeft = nodes[topRow][colStart];
+            const bottomRight = nodes[topRow][colEnd];
 
-            for (let attempt = 0; attempt < 30 && !placed; attempt++) {
-                const row = Math.floor(Math.random() * (rows - size.h - 1)) + 1;
-                const col = Math.floor(Math.random() * (cols - size.w - 1)) + 1;
-                if (!isFree(row, col, size.w, size.h)) continue;
+            banks.push({
+                x: topLeft.x - padding,
+                y: topLeft.y - spacing * 0.6,
+                w: (bottomRight.x - topLeft.x) + padding * 2,
+                h: spacing * 0.8
+            });
 
-                for (let r = row; r < row + size.h; r++) {
-                    for (let c = col; c < col + size.w; c++) {
-                        mark(r, c);
-                    }
-                }
-
-                const topLeft = nodes[row][col];
-                const bottomRight = nodes[row + size.h - 1][col + size.w - 1];
-                const padding = spacing * 0.35;
-
-                result.push({
-                    x: topLeft.x - padding,
-                    y: topLeft.y - padding,
-                    w: (bottomRight.x - topLeft.x) + padding * 2,
-                    h: (bottomRight.y - topLeft.y) + padding * 2
-                });
-                placed = true;
-            }
+            const bottomLeft = nodes[bottomRow][colStart];
+            const bottomRightNode = nodes[bottomRow][colEnd];
+            banks.push({
+                x: bottomLeft.x - padding,
+                y: bottomLeft.y - spacing * 0.2,
+                w: (bottomRightNode.x - bottomLeft.x) + padding * 2,
+                h: spacing * 0.8
+            });
         }
 
-        return result;
+        return banks;
     }
 
     function createPulse() {
         if (!grid) return null;
 
-        const start = randomNode();
-        const end = randomNode();
+        const callType = pickCallType();
+        const start = randomNode(grid.zones[callType.from]);
+        const end = randomNode(grid.zones[callType.to]);
         const busRow = grid.busRows[Math.floor(Math.random() * grid.busRows.length)];
         const busCol = grid.busCols[Math.floor(Math.random() * grid.busCols.length)];
 
@@ -180,15 +198,39 @@ export function initCircuitBackground() {
             path,
             length,
             offset: Math.random() * length,
-            speed: 20 + Math.random() * 28,
-            size: 1.6 + Math.random() * 1.4
+            speed: 18 + Math.random() * 26,
+            size: 1.4 + Math.random() * 1.6,
+            color: callType.color,
+            glow: callType.glow
         };
     }
 
-    function randomNode() {
-        const row = Math.floor(Math.random() * grid.rows);
-        const col = Math.floor(Math.random() * grid.cols);
-        return grid.nodes[row][col];
+    function pickCallType() {
+        const calls = [
+            { from: 'cpu', to: 'ramTop', weight: 3, color: colors.accent, glow: colors.accent },
+            { from: 'cpu', to: 'ramBottom', weight: 3, color: colors.accent, glow: colors.accent },
+            { from: 'cpu', to: 'gpu', weight: 4, color: colors.primary, glow: colors.primary },
+            { from: 'gpu', to: 'ramTop', weight: 2, color: colors.secondary, glow: colors.secondary },
+            { from: 'gpu', to: 'ramBottom', weight: 2, color: colors.secondary, glow: colors.secondary },
+            { from: 'cpu', to: 'cpu', weight: 1, color: colors.muted, glow: colors.accent }
+        ];
+
+        const totalWeight = calls.reduce((sum, call) => sum + call.weight, 0);
+        let pick = Math.random() * totalWeight;
+        for (const call of calls) {
+            pick -= call.weight;
+            if (pick <= 0) return call;
+        }
+        return calls[0];
+    }
+
+    function randomNode(zone) {
+        if (!zone || zone.length === 0) {
+            const row = Math.floor(Math.random() * grid.rows);
+            const col = Math.floor(Math.random() * grid.cols);
+            return grid.nodes[row][col];
+        }
+        return zone[Math.floor(Math.random() * zone.length)];
     }
 
     function buildPath(start, end, busRow, busCol) {
@@ -196,7 +238,6 @@ export function initCircuitBackground() {
         const pivot1 = grid.nodes[start.row][busCol] || start;
         const pivot2 = grid.nodes[busRow][busCol] || pivot1;
         const pivot3 = grid.nodes[busRow][end.col] || pivot2;
-
         points.push(pivot1, pivot2, pivot3, end);
         return dedupePoints(points);
     }
@@ -276,31 +317,48 @@ export function initCircuitBackground() {
         });
 
         if (banks.length) {
-            ctx.globalAlpha = colors.isLight ? 0.25 : 0.2;
-            ctx.strokeStyle = colors.primary;
+            ctx.globalAlpha = colors.isLight ? 0.26 : 0.22;
+            ctx.strokeStyle = colors.secondary;
             ctx.lineWidth = 1.2;
             banks.forEach(bank => {
                 ctx.strokeRect(bank.x, bank.y, bank.w, bank.h);
             });
         }
 
-        ctx.globalAlpha = 0.9;
-        ctx.shadowColor = colors.accent;
-        ctx.shadowBlur = colors.isLight ? 10 : 14;
+        if (grid.bounds.cpu) {
+            ctx.globalAlpha = colors.isLight ? 0.3 : 0.35;
+            ctx.strokeStyle = colors.primary;
+            ctx.lineWidth = 1.4;
+            ctx.setLineDash([6, 6]);
+            ctx.strokeRect(grid.bounds.cpu.x, grid.bounds.cpu.y, grid.bounds.cpu.w, grid.bounds.cpu.h);
+            ctx.setLineDash([]);
+        }
 
+        if (grid.bounds.gpu) {
+            ctx.globalAlpha = colors.isLight ? 0.26 : 0.3;
+            ctx.strokeStyle = colors.accent;
+            ctx.lineWidth = 1.4;
+            ctx.setLineDash([4, 8]);
+            ctx.strokeRect(grid.bounds.gpu.x, grid.bounds.gpu.y, grid.bounds.gpu.w, grid.bounds.gpu.h);
+            ctx.setLineDash([]);
+        }
+
+        ctx.globalAlpha = 0.9;
         pulses.forEach(pulse => {
             if (!pulse) return;
             const point = pointAlong(pulse.path, pulse.offset);
             const beamLength = pulse.size * 6;
 
-            ctx.strokeStyle = colors.accent;
+            ctx.shadowColor = pulse.glow;
+            ctx.shadowBlur = colors.isLight ? 10 : 16;
+            ctx.strokeStyle = pulse.color;
             ctx.lineWidth = 1.4;
             ctx.beginPath();
             ctx.moveTo(point.x - point.dx * beamLength, point.y - point.dy * beamLength);
             ctx.lineTo(point.x + point.dx * beamLength, point.y + point.dy * beamLength);
             ctx.stroke();
 
-            ctx.fillStyle = colors.accent;
+            ctx.fillStyle = pulse.color;
             ctx.beginPath();
             ctx.arc(point.x, point.y, pulse.size, 0, Math.PI * 2);
             ctx.fill();
@@ -310,7 +368,6 @@ export function initCircuitBackground() {
             ctx.beginPath();
             ctx.arc(point.x, point.y, pulse.size * 0.6, 0, Math.PI * 2);
             ctx.fill();
-            ctx.shadowBlur = colors.isLight ? 10 : 14;
         });
 
         ctx.shadowBlur = 0;
