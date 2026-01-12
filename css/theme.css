@@ -37,12 +37,12 @@
     --glass-blur: 16px;
 
     /* Radii */
-    --radius-xs: 6px;
-    --radius-sm: 10px;
-    --radius-md: 16px;
-    --radius-lg: 24px;
-    --radius-xl: 32px;
-    --radius-card: 18px 18px 8px 18px;
+    --radius-xs: 6px 4px 6px 3px;
+    --radius-sm: 12px 8px 12px 6px;
+    --radius-md: 18px 12px 18px 8px;
+    --radius-lg: 24px 16px 24px 12px;
+    --radius-xl: 32px 20px 32px 16px;
+    --radius-card: 22px 14px 18px 10px;
     --radius-pill: 999px;
 
     /* Shadows & glows */
