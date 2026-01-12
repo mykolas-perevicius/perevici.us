@@ -4,6 +4,8 @@ import { initWordEasterEggs } from './word-easter-eggs.js';
 
 let wordWindowOpen = false;
 let resumeData = null;
+let viewportHandler = null;
+let viewportTarget = null;
 
 export async function initWordWindow() {
     // Load resume data
@@ -18,7 +20,6 @@ export async function initWordWindow() {
     const resumeWidget = document.querySelector('.resume-widget');
     if (resumeWidget) {
         resumeWidget.addEventListener('click', openWordWindow);
-        resumeWidget.addEventListener('dblclick', openWordWindow);
     }
 }
 
@@ -31,6 +32,17 @@ function openWordWindow() {
     const overlay = createWordOverlay();
     if (isMobile) {
         overlay.classList.add('word-mobile');
+        const updateViewport = () => {
+            const height = window.visualViewport ? window.visualViewport.height : window.innerHeight;
+            overlay.style.setProperty('--word-vh', `${height * 0.01}px`);
+        };
+        updateViewport();
+        viewportHandler = updateViewport;
+        viewportTarget = overlay;
+        window.addEventListener('resize', viewportHandler);
+        if (window.visualViewport) {
+            window.visualViewport.addEventListener('resize', viewportHandler);
+        }
     }
     document.body.appendChild(overlay);
 
@@ -53,7 +65,7 @@ function createWordOverlay() {
             <div class="word-titlebar">
                 <div class="word-title">
                     <img class="word-icon" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath fill='%232b579a' d='M2 2h12v12H2z'/%3E%3Cpath fill='white' d='M4 4l1.5 8h1.2l1.3-5 1.3 5h1.2L12 4h-1.5l-1 5.5L8.2 4H7.3L6 9.5 5 4z'/%3E%3C/svg%3E" alt="Word">
-                    <span>Resume.doc - Microsoft Word</span>
+                    <span>Resume.doc - Microsoft Word 2003</span>
                 </div>
                 <div class="word-controls">
                     <button class="word-btn word-minimize" title="Minimize">
@@ -152,6 +164,14 @@ function createWordOverlay() {
 }
 
 function closeWordWindow(overlay) {
+    if (viewportHandler && viewportTarget === overlay) {
+        window.removeEventListener('resize', viewportHandler);
+        if (window.visualViewport) {
+            window.visualViewport.removeEventListener('resize', viewportHandler);
+        }
+        viewportHandler = null;
+        viewportTarget = null;
+    }
     overlay.classList.add('closing');
     setTimeout(() => {
         overlay.remove();
