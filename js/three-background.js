@@ -3,6 +3,16 @@ export function initThreeBackground() {
     const canvas = document.getElementById('threejsBackground');
     if (!canvas) return;
 
+    const getThemeColors = () => {
+        const styles = getComputedStyle(document.documentElement);
+        const primary = styles.getPropertyValue('--primary-color').trim() || '#ff8a3d';
+        const accent = styles.getPropertyValue('--accent-color').trim() || '#33d6c8';
+        return {
+            primary: new THREE.Color(primary),
+            accent: new THREE.Color(accent)
+        };
+    };
+
     // Scene setup
     const scene = new THREE.Scene();
     const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
@@ -24,9 +34,7 @@ export function initThreeBackground() {
     const colors = new Float32Array(particleCount * 3);
 
     // Get theme colors
-    const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
-    const primaryColor = new THREE.Color(isDark ? 0x00d4ff : 0x0078d4);
-    const accentColor = new THREE.Color(isDark ? 0x40e0d0 : 0x00c9ff);
+    const { primary: primaryColor, accent: accentColor } = getThemeColors();
 
     for (let i = 0; i < particleCount; i++) {
         // Random positions
@@ -64,7 +72,7 @@ export function initThreeBackground() {
     // Create connecting lines between nearby particles
     const lineGeometry = new THREE.BufferGeometry();
     const lineMaterial = new THREE.LineBasicMaterial({
-        color: isDark ? 0x00d4ff : 0x0078d4,
+        color: primaryColor,
         transparent: true,
         opacity: 0.15
     });
@@ -148,9 +156,7 @@ export function initThreeBackground() {
 
     // Handle theme changes
     function updateTheme() {
-        const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
-        const primaryColor = new THREE.Color(isDark ? 0x00d4ff : 0x0078d4);
-        const accentColor = new THREE.Color(isDark ? 0x40e0d0 : 0x00c9ff);
+        const { primary: primaryColor, accent: accentColor } = getThemeColors();
 
         const colors = particleSystem.geometry.attributes.color.array;
         for (let i = 0; i < particleCount; i++) {
@@ -162,7 +168,7 @@ export function initThreeBackground() {
         }
         particleSystem.geometry.attributes.color.needsUpdate = true;
 
-        lineMaterial.color.set(isDark ? 0x00d4ff : 0x0078d4);
+        lineMaterial.color.set(primaryColor);
     }
 
     // Watch for theme changes

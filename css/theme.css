@@ -1,33 +1,83 @@
 /* Theme CSS Variables */
 :root {
     /* Core theme tokens - Dark (default) */
-    --bg: #0A0A0A;
-    --bg-elev: #111318;
-    --text: #F3F4F6;
-    --muted: #9CA3AF;
-    --border: #1F2937;
-    --chip-bg: #111827;
-    --chip-text: #E5E7EB;
-    --link: #93C5FD;
+    --bg: #0b1211;
+    --bg-elev: #141d1b;
+    --text: #f4f1ea;
+    --muted: #a7b0a5;
+    --border: #273231;
+    --chip-bg: #1a2421;
+    --chip-text: #efe7dc;
+    --link: #78d2c6;
 
-    /* Accent colors (theme-independent) */
-    --primary-color: #00d4ff;
-    --secondary-color: #00a6cc;
-    --accent-color: #40e0d0;
-    --success: #10b981;
+    /* Brand accents */
+    --primary-color: #ff8a3d;
+    --secondary-color: #f5b66d;
+    --accent-color: #33d6c8;
+    --success: #3ad19f;
+    --success-bg: rgb(58 209 159 / 0.14);
+    --danger: #f06a6a;
+    --danger-bg: rgb(240 106 106 / 0.16);
+    --on-primary: #1a120d;
+    --on-accent: #082624;
 
-    /* Glass effect system - angular/fragmented aesthetic */
-    --glass-bg: rgba(255, 255, 255, 0.03);
-    --glass-border: rgba(0, 212, 255, 0.15);
-    --glass-border-alt: rgba(255, 0, 255, 0.1);
-    --glass-glow: rgba(0, 212, 255, 0.25);
-    --glass-glow-alt: rgba(255, 0, 255, 0.15);
-    --glass-blur: 12px;
+    /* RGB helpers */
+    --primary-rgb: 255 138 61;
+    --secondary-rgb: 245 182 109;
+    --accent-rgb: 51 214 200;
+    --shadow-rgb: 7 10 9;
+
+    /* Glass system - warmer + aqueous */
+    --glass-bg: rgb(255 255 255 / 0.04);
+    --glass-bg-strong: rgb(255 255 255 / 0.08);
+    --glass-border: rgb(var(--accent-rgb) / 0.25);
+    --glass-border-alt: rgb(var(--primary-rgb) / 0.2);
+    --glass-glow: rgb(var(--accent-rgb) / 0.28);
+    --glass-glow-alt: rgb(var(--primary-rgb) / 0.25);
+    --glass-blur: 16px;
+
+    /* Radii */
+    --radius-xs: 6px;
+    --radius-sm: 10px;
+    --radius-md: 16px;
+    --radius-lg: 24px;
+    --radius-xl: 32px;
+    --radius-card: 18px 18px 8px 18px;
+    --radius-pill: 999px;
+
+    /* Shadows & glows */
+    --shadow-soft: 0 10px 30px rgb(var(--shadow-rgb) / 0.25);
+    --shadow-medium: 0 18px 40px rgb(var(--shadow-rgb) / 0.35);
+    --shadow-strong: 0 24px 60px rgb(var(--shadow-rgb) / 0.45);
+    --glow-primary: 0 12px 28px rgb(var(--primary-rgb) / 0.28);
+    --glow-accent: 0 12px 28px rgb(var(--accent-rgb) / 0.22);
+
+    /* Code accents */
+    --code-keyword: #ff8fb3;
+    --code-class: #7be6b4;
+    --code-function: #67d5ff;
+    --code-param: #f2a85f;
+    --code-string: #f5cf6d;
+
+    /* Terminal */
+    --terminal-overlay: rgb(6 9 8 / 0.92);
+    --terminal-bg: #101716;
+    --terminal-header: #1f2a28;
+    --terminal-text: #b9f3d9;
+    --terminal-prompt: #ffb57c;
+    --terminal-accent: #78d2c6;
+    --terminal-dot-red: #ff6b5a;
+    --terminal-dot-yellow: #f5c06c;
+    --terminal-dot-green: #44d08c;
+
+    /* Overlays */
+    --overlay: rgb(6 9 8 / 0.86);
+    --nav-fallback-bg: rgb(11 18 17 / 0.95);
 
     /* Typography */
     --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
-    --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-    --font-display: 'Space Grotesk', 'Inter', sans-serif;
+    --font-sans: 'Sora', 'Inter', sans-serif;
+    --font-display: 'Fraunces', 'Sora', serif;
 
     /* Layout */
     --max-width: 1200px;
@@ -36,21 +86,29 @@
 
 /* Light theme overrides */
 [data-theme="light"] {
-    --bg: #FAFAFA;
-    --bg-elev: #FFFFFF;
-    --text: #0A0A0A;
-    --muted: #4B5563;
-    --border: #E5E7EB;
-    --chip-bg: #F3F4F6;
-    --chip-text: #111827;
-    --link: #1D4ED8;
+    --bg: #f7f3ea;
+    --bg-elev: #ffffff;
+    --text: #171c1b;
+    --muted: #5f6c68;
+    --border: #d9d0c2;
+    --chip-bg: #efe7db;
+    --chip-text: #242a28;
+    --link: #0f766e;
 
-    /* Glass effect adjustments for light mode - stronger contrast */
-    --glass-bg: rgba(0, 0, 0, 0.04);
-    --glass-border: rgba(0, 0, 0, 0.15);
-    --glass-border-alt: rgba(0, 100, 200, 0.2);
-    --glass-glow: rgba(0, 100, 200, 0.12);
-    --glass-glow-alt: rgba(150, 0, 200, 0.08);
+    --success-bg: rgb(58 209 159 / 0.18);
+    --danger-bg: rgb(240 106 106 / 0.18);
+    --shadow-rgb: 22 25 24;
+
+    /* Glass effect adjustments for light mode */
+    --glass-bg: rgb(255 255 255 / 0.7);
+    --glass-bg-strong: rgb(255 255 255 / 0.92);
+    --glass-border: rgb(var(--accent-rgb) / 0.2);
+    --glass-border-alt: rgb(var(--primary-rgb) / 0.16);
+    --glass-glow: rgb(var(--accent-rgb) / 0.18);
+    --glass-glow-alt: rgb(var(--primary-rgb) / 0.18);
+
+    --overlay: rgb(20 24 23 / 0.6);
+    --nav-fallback-bg: rgb(247 243 234 / 0.92);
 }
 
 /* Base styles */
@@ -66,7 +124,13 @@ html {
 
 body {
     font-family: var(--font-sans);
-    background: var(--bg);
+    background:
+        radial-gradient(700px circle at 12% -10%, rgb(var(--primary-rgb) / 0.18), transparent 60%),
+        radial-gradient(600px circle at 90% -15%, rgb(var(--accent-rgb) / 0.16), transparent 55%),
+        radial-gradient(480px circle at 70% 20%, rgb(var(--secondary-rgb) / 0.12), transparent 50%),
+        repeating-linear-gradient(90deg, rgb(var(--accent-rgb) / 0.05) 0 1px, transparent 1px 140px),
+        repeating-linear-gradient(0deg, rgb(var(--accent-rgb) / 0.04) 0 1px, transparent 1px 140px),
+        var(--bg);
     color: var(--text);
     line-height: 1.6;
     transition: background-color 0.3s ease, color 0.3s ease;
@@ -74,10 +138,12 @@ body {
 }
 
 h1, h2, h3 {
-    font-weight: 700;
-    line-height: 1.2;
+    font-family: var(--font-display);
+    font-weight: 600;
+    line-height: 1.15;
     margin-bottom: 1rem;
     color: var(--text);
+    letter-spacing: -0.01em;
 }
 
 h1 { font-size: clamp(2rem, 5vw, 3.5rem); }

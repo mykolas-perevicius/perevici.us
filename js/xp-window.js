@@ -226,20 +226,23 @@ function createViewToggleButton() {
         border: 2px solid var(--glass-border);
         backdrop-filter: blur(10px);
         padding: 8px 16px;
-        border-radius: 6px;
+        border-radius: var(--radius-sm);
         color: var(--text);
         font-size: 0.9rem;
         cursor: pointer;
         transition: all 0.3s ease;
+        box-shadow: 0 6px 16px rgb(var(--shadow-rgb) / 0.2);
     `;
 
     toggleBtn.addEventListener('mouseenter', () => {
-        toggleBtn.style.background = 'rgba(255, 255, 255, 0.1)';
+        toggleBtn.style.background = 'var(--glass-bg-strong)';
+        toggleBtn.style.boxShadow = 'var(--glow-accent)';
         toggleBtn.style.transform = 'translateY(-2px)';
     });
 
     toggleBtn.addEventListener('mouseleave', () => {
         toggleBtn.style.background = 'var(--glass-bg)';
+        toggleBtn.style.boxShadow = '0 6px 16px rgb(var(--shadow-rgb) / 0.2)';
         toggleBtn.style.transform = 'translateY(0)';
     });
 

@@ -21,6 +21,14 @@ function activateMatrixRain() {
     if (!canvas) return;
 
     const ctx = canvas.getContext('2d');
+    const styles = getComputedStyle(document.documentElement);
+    const accentColor = styles.getPropertyValue('--accent-color').trim() || '#33d6c8';
+    const monoFont = styles.getPropertyValue('--font-mono').trim() || 'monospace';
+    const shadowRgb = styles.getPropertyValue('--shadow-rgb').trim() || '0 0 0';
+    const [sr, sg, sb] = shadowRgb.split(/\s+/).map(Number);
+    const fadeColor = Number.isFinite(sr)
+        ? `rgba(${sr}, ${sg}, ${sb}, 0.08)`
+        : 'rgba(0, 0, 0, 0.08)';
 
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
@@ -33,11 +41,11 @@ function activateMatrixRain() {
 
     let animationId;
     const draw = () => {
-        ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
+        ctx.fillStyle = fadeColor;
         ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-        ctx.fillStyle = '#00d4ff';
-        ctx.font = fontSize + 'px monospace';
+        ctx.fillStyle = accentColor;
+        ctx.font = `${fontSize}px ${monoFont}`;
 
         for (let i = 0; i < drops.length; i++) {
             const text = chars[Math.floor(Math.random() * chars.length)];

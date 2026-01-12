@@ -14,7 +14,7 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=JetBrains+Mono:wght@400;600;700&family=Sora:wght@400;500;600;700&display=swap" rel="stylesheet">
 
     <!-- Stylesheets -->
     <link rel="stylesheet" href="/css/theme.css">
@@ -112,6 +112,24 @@
         </div>
     </section>
 
+    <section id="about">
+        <div class="section-content">
+            <h2 class="section-title">About Me</h2>
+            <div class="about-content">
+                <p><strong>🎓 Graduate Computer Science @ NJIT</strong> specializing in Compiler Design (CS485), Machine Learning (CS482), and GPU Cluster Programming. Built a multi-language compiler supporting C++, Rust, Python, Java, Kotlin, Haskell, OCaml, Assembly, and more.</p>
+
+                <p><strong>🚀 Currently:</strong> Software Engineer at UserAuthGuard, shipping production Django for 17,000+ students across multiple school districts. Achieved 90% test coverage (from 51%) across 840+ Python files with comprehensive pytest-django behavioral test suites.</p>
+
+                <p><strong>⚡ Performance Engineering:</strong> Custom CUDA kernels achieving 4.6× speedup over PyTorch. Graduate coursework in GPU cluster programming with MPI orchestration. Running local RTX 3090 setup for AI/ML development.</p>
+
+                <p><strong>💼 Previous Impact:</strong> Saved Bessemer Trust analysts 60% of their time with custom securities platform. Optimized SQL queries cutting latency by 45%. Delivered AI Tech Talk to 500+ employees.</p>
+
+                <p><strong>🛠️ Production Stack:</strong> Django REST Framework, PostgreSQL, Redis, Docker, Kubernetes, AWS (ECS, Lambda, RDS). Integrated Stripe, Google Workspace, Dell APIs. Real-time WebSockets with Django Channels.</p>
+
+                <p><strong>📚 Teaching:</strong> Created 117 Jupyter notebooks covering Python from basics to GPU programming. 90% student certification rate. Mentored 100+ students through hands-on projects.</p>
+            </div>
+        </div>
+    </section>
 
     <section id="live-stats" class="stats-section">
         <div class="container">
@@ -449,6 +467,49 @@
                 <div class="projects-grid">
                 <div class="project-card scroll-reveal">
                     <div class="project-header">
+                        <h3>🎓 Rosetta Multi-Language Compiler</h3>
+                        <div class="project-links">
+                            <a href="https://github.com/mykolas-perevicius/Building-A-Compiler" target="_blank">GitHub →</a>
+                        </div>
+                    </div>
+                    <p class="project-description">
+                        <strong>Graduate CS485 Project</strong> | Built complete compiler with code generation for 10+ programming languages: C++, Rust, Python, Java, Kotlin, Haskell, OCaml, Assembly, TypeScript, Scala. Comprehensive testing infrastructure with cross-language validation.
+                    </p>
+                    <div class="project-stats">
+                        <span class="stat-item">10+ Languages</span>
+                        <span class="stat-item">Full Compiler</span>
+                    </div>
+                    <div class="tech-tags">
+                        <span class="tag">Compiler Design</span>
+                        <span class="tag">C++</span>
+                        <span class="tag">Code Gen</span>
+                    </div>
+                </div>
+
+                <div class="project-card scroll-reveal">
+                    <div class="project-header">
+                        <h3>⚡ Distributed AlexNet</h3>
+                        <div class="project-links">
+                            <a href="https://github.com/mykolas-perevicius/CUDA-MPI-GPU-Cluster-Programming" target="_blank">GitHub →</a>
+                        </div>
+                    </div>
+                    <p class="project-description">
+                        <strong>4.6× Speedup</strong> | Custom CUDA kernels and MPI orchestration beating PyTorch baseline on DGX-1 cluster. Graduate CS485 GPU programming.
+                    </p>
+                    <div class="project-stats">
+                        <span class="stat-item">4.6× Faster</span>
+                        <span class="stat-item">Multi-GPU</span>
+                    </div>
+                    <div class="tech-tags">
+                        <span class="tag">CUDA</span>
+                        <span class="tag">C++</span>
+                        <span class="tag">MPI</span>
+                        <span class="tag">PyTorch</span>
+                    </div>
+                </div>
+
+                <div class="project-card scroll-reveal">
+                    <div class="project-header">
                         <h3>🐨 Koala's Forge</h3>
                         <div class="project-links">
                             <a href="https://github.com/mykolas-perevicius/koalas-forge" target="_blank">GitHub →</a>
@@ -466,28 +527,6 @@
                         <span class="tag">PowerShell</span>
                         <span class="tag">Bash</span>
                         <span class="tag">Python</span>
-                    </div>
-                </div>
-
-                <div class="project-card scroll-reveal">
-                    <div class="project-header">
-                        <h3>⚡ Distributed AlexNet</h3>
-                        <div class="project-links">
-                            <a href="https://github.com/mykolas-perevicius/CUDA-MPI-GPU-Cluster-Programming" target="_blank">GitHub →</a>
-                        </div>
-                    </div>
-                    <p class="project-description">
-                        Custom CUDA kernels and MPI orchestration for AlexNet. Achieved 4.6× speedup over baseline PyTorch on DGX-1 cluster.
-                    </p>
-                    <div class="project-stats">
-                        <span class="stat-item">4.6× Faster</span>
-                        <span class="stat-item">Multi-GPU</span>
-                    </div>
-                    <div class="tech-tags">
-                        <span class="tag">CUDA</span>
-                        <span class="tag">C++</span>
-                        <span class="tag">MPI</span>
-                        <span class="tag">PyTorch</span>
                     </div>
                 </div>
 
@@ -2143,7 +2182,7 @@ console.log(`  - By WATCHING it work, not just reading about it`);
                 <div class="terminal-line">&gt; GitHub: github.com/mykolas-perevicius</div>
                 <div class="terminal-line">&gt; LinkedIn: linkedin.com/in/mykolasperevicius</div>
                 <div class="terminal-line"></div>
-                <div class="terminal-line" style="color: #00d4ff;">&gt; Press ESC or click outside to close</div>
+                <div class="terminal-line terminal-hint">&gt; Press ESC or click outside to close</div>
             </div>
         </div>
     </div>

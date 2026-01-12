@@ -136,6 +136,11 @@ function initScrollReveal() {
 
 // Console Easter Egg
 function initConsoleMessage() {
+    const styles = getComputedStyle(document.documentElement);
+    const primary = styles.getPropertyValue('--primary-color').trim() || '#ff8a3d';
+    const accent = styles.getPropertyValue('--accent-color').trim() || '#33d6c8';
+    const muted = styles.getPropertyValue('--muted').trim() || '#a7b0a5';
+
     console.log(`
 %c🚀 Welcome to Mykolas's Portfolio! 🚀
 
@@ -148,11 +153,11 @@ function initConsoleMessage() {
 %c🔗 GitHub: github.com/mykolas-perevicius
 
 `,
-        'color: #00d4ff; font-size: 20px; font-weight: bold;',
-        'color: #40e0d0; font-size: 14px;',
-        'color: #8b92b9; font-size: 12px;',
-        'color: #8b92b9; font-size: 12px;',
-        'color: #8b92b9; font-size: 12px;'
+        `color: ${primary}; font-size: 20px; font-weight: bold;`,
+        `color: ${accent}; font-size: 14px;`,
+        `color: ${muted}; font-size: 12px;`,
+        `color: ${muted}; font-size: 12px;`,
+        `color: ${muted}; font-size: 12px;`
     );
 }
 
