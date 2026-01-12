@@ -5,6 +5,15 @@ import { initImageOptimization } from './image-optimizer.js';
 import { initBlogModal } from './blog-modal.js';
 import { initSectionToggles } from './section-toggles.js';
 
+function scheduleIdle(callback, options = {}) {
+    if (typeof window.requestIdleCallback === 'function') {
+        window.requestIdleCallback(callback, options);
+        return;
+    }
+    const timeout = typeof options.timeout === 'number' ? options.timeout : 1000;
+    window.setTimeout(callback, timeout);
+}
+
 // Theme Management
 function initTheme() {
     // Auto-detect system preference if no saved preference
@@ -176,17 +185,17 @@ document.addEventListener('DOMContentLoaded', async () => {
     initConsoleMessage();
 
     // High priority: Load after critical content
-    requestIdleCallback(() => {
+    scheduleIdle(() => {
         Promise.all([
             import('./terminal.js').then(m => m.initTerminal()),
             import('./shortcuts.js').then(m => m.initShortcuts()),
             import('./swipe-gestures.js').then(m => m.initSwipeGestures()),
             import('./project-cards.js').then(m => m.initProjectCards())
         ]);
-    });
+    }, { timeout: 1200 });
 
     // Medium priority: Load when user might need them
-    requestIdleCallback(() => {
+    scheduleIdle(() => {
         Promise.all([
             import('./xp-window.js').then(m => m.initXPWindow()),
             import('./word-window.js').then(m => m.initWordWindow()),
@@ -197,7 +206,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     }, { timeout: 2000 });
 
     // Low priority: Load when browser is truly idle
-    requestIdleCallback(() => {
+    scheduleIdle(() => {
         Promise.all([
             import('./konami.js').then(m => m.initKonami()),
             import('./circuit-background.js').then(m => m.initCircuitBackground())

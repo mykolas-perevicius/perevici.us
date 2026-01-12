@@ -3,18 +3,15 @@ import { startTypingAnimation } from './word-typing.js';
 import { initWordEasterEggs } from './word-easter-eggs.js';
 
 let wordWindowOpen = false;
+let wordWindowOpening = false;
 let resumeData = null;
+let resumeLoadPromise = null;
 let viewportHandler = null;
 let viewportTarget = null;
 
 export async function initWordWindow() {
-    // Load resume data
-    try {
-        const response = await fetch('/data/resume-content.json');
-        resumeData = await response.json();
-    } catch (error) {
-        console.error('Failed to load resume data:', error);
-    }
+    // Warm the cache but don't block the UI
+    loadResumeData();
 
     // Add click handler to Resume widget
     const resumeWidget = document.querySelector('.resume-widget');
@@ -23,10 +20,35 @@ export async function initWordWindow() {
     }
 }
 
-function openWordWindow() {
-    if (wordWindowOpen || !resumeData) return;
+async function loadResumeData() {
+    if (resumeData) return resumeData;
+    if (!resumeLoadPromise) {
+        resumeLoadPromise = fetch('/data/resume-content.json')
+            .then(response => response.json())
+            .then((data) => {
+                resumeData = data;
+                return data;
+            })
+            .catch((error) => {
+                console.error('Failed to load resume data:', error);
+                resumeLoadPromise = null;
+                return null;
+            });
+    }
+    return resumeLoadPromise;
+}
+
+async function openWordWindow() {
+    if (wordWindowOpen || wordWindowOpening) return;
+    wordWindowOpening = true;
+    const data = await loadResumeData();
+    if (!data) {
+        wordWindowOpening = false;
+        return;
+    }
 
     wordWindowOpen = true;
+    wordWindowOpening = false;
     const isMobile = window.matchMedia('(max-width: 768px)').matches;
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     const overlay = createWordOverlay();
