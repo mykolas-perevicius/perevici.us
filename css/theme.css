@@ -125,16 +125,60 @@ html {
 body {
     font-family: var(--font-sans);
     background:
-        radial-gradient(700px circle at 12% -10%, rgb(var(--primary-rgb) / 0.18), transparent 60%),
-        radial-gradient(600px circle at 90% -15%, rgb(var(--accent-rgb) / 0.16), transparent 55%),
-        radial-gradient(480px circle at 70% 20%, rgb(var(--secondary-rgb) / 0.12), transparent 50%),
-        repeating-linear-gradient(90deg, rgb(var(--accent-rgb) / 0.05) 0 1px, transparent 1px 140px),
-        repeating-linear-gradient(0deg, rgb(var(--accent-rgb) / 0.04) 0 1px, transparent 1px 140px),
+        radial-gradient(800px circle at 12% -10%, rgb(var(--primary-rgb) / 0.14), transparent 60%),
+        radial-gradient(700px circle at 88% -15%, rgb(var(--accent-rgb) / 0.18), transparent 58%),
+        radial-gradient(520px circle at 70% 15%, rgb(var(--secondary-rgb) / 0.12), transparent 55%),
         var(--bg);
     color: var(--text);
     line-height: 1.6;
     transition: background-color 0.3s ease, color 0.3s ease;
     overflow-x: hidden;
+    position: relative;
+}
+
+body::before,
+body::after {
+    content: '';
+    position: fixed;
+    inset: -20%;
+    z-index: -2;
+    pointer-events: none;
+    opacity: 0.6;
+    animation: ambientDrift 80s ease-in-out infinite;
+}
+
+body::before {
+    background:
+        radial-gradient(600px circle at 20% 20%, rgb(var(--accent-rgb) / 0.2), transparent 60%),
+        radial-gradient(500px circle at 80% 30%, rgb(var(--primary-rgb) / 0.18), transparent 55%);
+}
+
+body::after {
+    background:
+        radial-gradient(700px circle at 30% 70%, rgb(var(--secondary-rgb) / 0.18), transparent 60%),
+        radial-gradient(520px circle at 75% 80%, rgb(var(--accent-rgb) / 0.12), transparent 55%);
+    opacity: 0.45;
+    animation-duration: 110s;
+    animation-direction: alternate;
+}
+
+@keyframes ambientDrift {
+    0% {
+        transform: translate3d(0, 0, 0) scale(1);
+    }
+    50% {
+        transform: translate3d(2%, -2%, 0) scale(1.03);
+    }
+    100% {
+        transform: translate3d(-2%, 2%, 0) scale(1);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    body::before,
+    body::after {
+        animation: none;
+    }
 }
 
 h1, h2, h3 {
