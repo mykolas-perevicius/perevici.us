@@ -6,13 +6,16 @@
  */
 
 import type { VercelRequest, VercelResponse } from '@vercel/node';
-import { readFileSync } from 'fs';
+import { readFileSync, existsSync } from 'fs';
 import { join } from 'path';
 
 export default function handler(req: VercelRequest, res: VercelResponse) {
     try {
         // Read the pre-generated metrics.json
-        const metricsPath = join(process.cwd(), 'public', 'metrics.json');
+        const publicPath = join(process.cwd(), 'public', 'metrics.json');
+        const metricsPath = existsSync(publicPath)
+            ? publicPath
+            : join(process.cwd(), 'metrics.json');
         const metrics = JSON.parse(readFileSync(metricsPath, 'utf-8'));
 
         // Set cache headers (cache for 1 hour)
@@ -30,7 +33,10 @@ export default function handler(req: VercelRequest, res: VercelResponse) {
             generatedAt: null,
             username: 'mykolas-perevicius',
             linesAddedLifetime: null,
-            commits12mo: null,
+            commitsLastYear: null,
+            weeklyCommitsLastYear: [],
+            rollingYearStart: null,
+            rollingYearEnd: null,
             prsMerged: null,
             starsTotal: null,
             error: 'Failed to load metrics'

@@ -17,7 +17,10 @@ interface MetricsData {
     generatedAt: string;
     username: string;
     linesAddedLifetime: number | null;
-    commits2025: number | null;
+    commitsLastYear: number | null;
+    weeklyCommitsLastYear: number[];
+    rollingYearStart: string | null;
+    rollingYearEnd: string | null;
     prsMerged: number | null;
     starsTotal: number | null;
 }
@@ -107,16 +110,61 @@ async function calculateLinesAdded(repos: any[]): Promise<number> {
     return totalLines;
 }
 
-async function calculateCommits2025(): Promise<number> {
-    try {
-        // Use search API which is more reliable than stats/commit_activity
-        // Search for all commits by this author in 2025
-        const search = await fetchGitHub(`/search/commits?q=author:${GITHUB_USERNAME}+author-date:2025-01-01..2025-12-31`);
-        return search.total_count || 0;
-    } catch (error) {
-        console.warn('Warning: Could not fetch commit count for 2025:', error);
-        return 0;
+async function fetchCommitActivity(repoName: string): Promise<any[] | null> {
+    for (let attempt = 0; attempt < 3; attempt++) {
+        try {
+            const stats = await fetchGitHub(`/repos/${GITHUB_USERNAME}/${repoName}/stats/commit_activity`);
+            if (Array.isArray(stats)) {
+                return stats;
+            }
+        } catch (error: any) {
+            const message = String(error?.message || error);
+            if (message.includes('202') && attempt < 2) {
+                await new Promise(resolve => setTimeout(resolve, 1200 + attempt * 800));
+                continue;
+            }
+            console.warn(`Warning: Could not fetch commit activity for ${repoName}:`, error);
+            return null;
+        }
     }
+
+    return null;
+}
+
+async function calculateCommitActivity(repos: any[]): Promise<{
+    weeklyTotals: number[];
+    rollingYearStart: string | null;
+    rollingYearEnd: string | null;
+}> {
+    const weeklyTotals = Array(52).fill(0);
+    let sampleWeeks: any[] | null = null;
+
+    for (const repo of repos) {
+        const activity = await fetchCommitActivity(repo.name);
+        if (Array.isArray(activity) && activity.length === 52) {
+            if (!sampleWeeks) {
+                sampleWeeks = activity;
+            }
+            for (let i = 0; i < 52; i++) {
+                weeklyTotals[i] += activity[i]?.total || 0;
+            }
+        }
+
+        await new Promise(resolve => setTimeout(resolve, 120));
+    }
+
+    let rollingYearStart: string | null = null;
+    let rollingYearEnd: string | null = null;
+
+    if (sampleWeeks && sampleWeeks.length) {
+        const start = new Date(sampleWeeks[0].week * 1000);
+        const end = new Date(sampleWeeks[sampleWeeks.length - 1].week * 1000);
+        end.setDate(end.getDate() + 6);
+        rollingYearStart = start.toISOString();
+        rollingYearEnd = end.toISOString();
+    }
+
+    return { weeklyTotals, rollingYearStart, rollingYearEnd };
 }
 
 async function calculatePRsMerged(): Promise<number> {
@@ -143,9 +191,10 @@ async function buildMetrics(): Promise<MetricsData> {
     const linesAddedLifetime = await calculateLinesAdded(repos);
     console.log(`Lines added: ${linesAddedLifetime.toLocaleString()}`);
 
-    console.log('Calculating commits in 2025...');
-    const commits2025 = await calculateCommits2025();
-    console.log(`Commits (2025): ${commits2025.toLocaleString()}`);
+    console.log('Calculating rolling 12-month commit activity...');
+    const activity = await calculateCommitActivity(repos);
+    const commitsLastYear = activity.weeklyTotals.reduce((sum, value) => sum + value, 0);
+    console.log(`Commits (last 12 months): ${commitsLastYear.toLocaleString()}`);
 
     console.log('Calculating merged PRs...');
     const prsMerged = await calculatePRsMerged();
@@ -158,7 +207,10 @@ async function buildMetrics(): Promise<MetricsData> {
         generatedAt: new Date().toISOString(),
         username: GITHUB_USERNAME,
         linesAddedLifetime,
-        commits2025,
+        commitsLastYear,
+        weeklyCommitsLastYear: activity.weeklyTotals,
+        rollingYearStart: activity.rollingYearStart,
+        rollingYearEnd: activity.rollingYearEnd,
         prsMerged,
         starsTotal
     };
@@ -175,7 +227,7 @@ async function main() {
         console.log(`📁 Output: ${outputPath}`);
         console.log('\nMetrics summary:');
         console.log(`  Lines Added (lifetime): ${metrics.linesAddedLifetime?.toLocaleString() || 'N/A'}`);
-        console.log(`  Commits (2025): ${metrics.commits2025?.toLocaleString() || 'N/A'}`);
+        console.log(`  Commits (last 12 months): ${metrics.commitsLastYear?.toLocaleString() || 'N/A'}`);
         console.log(`  PRs Merged: ${metrics.prsMerged?.toLocaleString() || 'N/A'}`);
         console.log(`  Total Stars: ${metrics.starsTotal?.toLocaleString() || 'N/A'}`);
     } catch (error) {

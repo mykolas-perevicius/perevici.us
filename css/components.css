@@ -192,8 +192,8 @@
     overflow: hidden;
     box-shadow: 0 4px 12px rgb(var(--shadow-rgb) / 0.25);
     appearance: none;
-    --toggle-track-padding: 4px;
-    --toggle-knob-size: 32px;
+    --toggle-track-padding: 5px;
+    --toggle-knob-size: calc(100% - (var(--toggle-track-padding) * 2));
     --toggle-knob-x: var(--toggle-track-padding);
 }
 
@@ -220,7 +220,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 0.95rem;
+    font-size: 0.9rem;
     line-height: 1;
     transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     z-index: 1;
@@ -704,6 +704,81 @@
     color: var(--muted);
     margin-top: 1rem;
     font-family: var(--font-mono);
+}
+
+.metrics-activity {
+    margin-top: 2rem;
+    padding: 1.5rem;
+    border-radius: var(--radius-card);
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    backdrop-filter: blur(var(--glass-blur)) saturate(120%);
+    -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(120%);
+    box-shadow: var(--shadow-soft);
+}
+
+.metrics-activity-header {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 0.5rem 1rem;
+    margin-bottom: 1rem;
+}
+
+.metrics-activity-title {
+    font-family: var(--font-mono);
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--muted);
+}
+
+.metrics-activity-range {
+    font-size: 0.85rem;
+    color: var(--text);
+    font-weight: 600;
+}
+
+.metrics-activity-grid {
+    display: flex;
+    align-items: flex-end;
+    gap: 4px;
+    height: 96px;
+    padding: 0.75rem 0.25rem 0.25rem;
+    border-radius: var(--radius-sm);
+    background: linear-gradient(180deg, rgb(var(--accent-rgb) / 0.08), transparent);
+    border: 1px solid var(--border);
+}
+
+.metrics-activity-bar {
+    flex: 1 1 0;
+    min-width: 3px;
+    border-radius: 999px;
+    background: linear-gradient(180deg, rgb(var(--accent-rgb) / 0.9), rgb(var(--primary-rgb) / 0.85));
+    box-shadow: 0 0 12px rgb(var(--accent-rgb) / 0.25);
+    transition: transform 0.2s ease, filter 0.2s ease;
+}
+
+.metrics-activity-bar:hover {
+    transform: translateY(-4px) scaleX(1.05);
+    filter: brightness(1.15);
+}
+
+.metrics-activity-axis {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 0.75rem;
+    font-size: 0.75rem;
+    color: var(--muted);
+    font-family: var(--font-mono);
+}
+
+.metrics-activity-empty {
+    padding: 1.25rem;
+    text-align: center;
+    font-size: 0.9rem;
+    color: var(--muted);
 }
 
 @media (max-width: 768px) {
