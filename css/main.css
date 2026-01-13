@@ -876,8 +876,7 @@ section {
 
 /* Contact Section */
 .contact {
-    background: var(--bg-elev);
-    border-top: 1px solid var(--border);
+    /* No special background - flows naturally with other sections */
 }
 
 .contact-intro {
