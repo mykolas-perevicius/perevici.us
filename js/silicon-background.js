@@ -5,7 +5,7 @@ export function initSiliconBackground() {
     const canvas = document.getElementById('threejsBackground');
     if (!canvas) return;
 
-    const ctx = canvas.getContext('2d');
+    let ctx = canvas.getContext('2d');
     if (!ctx) return;
 
     let width = 0;
