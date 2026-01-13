@@ -260,11 +260,12 @@ export function initSiliconBackground() {
         const seed = chunkIndex * 10000;
         const rng = seededRandom(seed);
 
-        // Create offscreen canvas for this chunk (at logical dimensions for crisp rendering)
+        // Create offscreen canvas at PHYSICAL pixel dimensions (matching main canvas DPR)
         const chunkCanvas = document.createElement('canvas');
-        chunkCanvas.width = width;
-        chunkCanvas.height = config.chunkHeight;
+        chunkCanvas.width = width * dpr;
+        chunkCanvas.height = config.chunkHeight * dpr;
         const chunkCtx = chunkCanvas.getContext('2d');
+        chunkCtx.setTransform(dpr, 0, 0, dpr, 0, 0);  // Apply same DPR transform as main canvas
 
         // Fill base silicon
         chunkCtx.fillStyle = colors.silicon;
@@ -372,17 +373,21 @@ export function initSiliconBackground() {
 
     // Render the background
     function render() {
-        ctx.clearRect(0, 0, width, height);
+        // Clear at physical pixel dimensions
+        ctx.save();
+        ctx.setTransform(1, 0, 0, 1, 0, 0);
+        ctx.clearRect(0, 0, width * dpr, height * dpr);
 
         const parallaxY = scrollY * config.parallaxSpeed;
 
-        // Draw chunks (direct 1:1 copy, no scaling)
+        // Draw chunks at 1:1 physical pixels
         for (const chunk of chunks.values()) {
-            const screenY = chunk.y - parallaxY;
-            if (screenY > height || screenY + config.chunkHeight < 0) continue;
+            const screenY = (chunk.y - parallaxY) * dpr;  // Scale position by DPR
+            if (screenY > height * dpr || screenY + config.chunkHeight * dpr < 0) continue;
 
             ctx.drawImage(chunk.canvas, 0, screenY);
         }
+        ctx.restore();  // Restore DPR transform for pulse drawing
 
         // Draw animated pulses
         if (!reducedMotionQuery.matches && pulses.length > 0) {
