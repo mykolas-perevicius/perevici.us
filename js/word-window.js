@@ -8,6 +8,11 @@ let resumeData = null;
 let resumeLoadPromise = null;
 let viewportHandler = null;
 let viewportTarget = null;
+let scrollPositionY = 0;
+
+// Detect iOS Safari
+const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) ||
+    (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
 
 export async function initWordWindow() {
     // Warm the cache but don't block the UI
@@ -16,8 +21,29 @@ export async function initWordWindow() {
     // Add click handler to Resume widget
     const resumeWidget = document.querySelector('.resume-widget');
     if (resumeWidget) {
-        resumeWidget.addEventListener('click', openWordWindow);
+        // Use both click and touchend for iOS Safari reliability
+        resumeWidget.addEventListener('click', handleResumeClick);
+        // For iOS Safari: touchend fires more reliably than click on some devices
+        resumeWidget.addEventListener('touchend', handleResumeTouchEnd, { passive: false });
     }
+}
+
+function handleResumeClick(e) {
+    // Prevent double-firing from touch + click
+    if (e.target.dataset.touchHandled) {
+        delete e.target.dataset.touchHandled;
+        return;
+    }
+    openWordWindow();
+}
+
+function handleResumeTouchEnd(e) {
+    // Mark as touch-handled to prevent click from also firing
+    e.target.dataset.touchHandled = 'true';
+    e.preventDefault();
+    openWordWindow();
+    // Clear the flag after a short delay
+    setTimeout(() => delete e.target.dataset.touchHandled, 300);
 }
 
 async function loadResumeData() {
@@ -52,10 +78,15 @@ async function openWordWindow() {
     const isMobile = window.matchMedia('(max-width: 768px)').matches;
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     const overlay = createWordOverlay();
+
+    // Lock body scroll (especially important for iOS Safari)
+    lockBodyScroll();
+
     if (isMobile) {
         overlay.classList.add('word-mobile');
         const updateViewport = () => {
             const height = window.visualViewport ? window.visualViewport.height : window.innerHeight;
+            document.documentElement.style.setProperty('--word-vh', `${height * 0.01}px`);
             overlay.style.setProperty('--word-vh', `${height * 0.01}px`);
         };
         updateViewport();
@@ -65,6 +96,9 @@ async function openWordWindow() {
         if (window.visualViewport) {
             window.visualViewport.addEventListener('resize', viewportHandler);
         }
+
+        // Prevent touchmove on overlay background (iOS Safari scroll lock)
+        overlay.addEventListener('touchmove', handleOverlayTouchMove, { passive: false });
     }
     document.body.appendChild(overlay);
 
@@ -76,6 +110,31 @@ async function openWordWindow() {
 
     // Initialize easter eggs
     initWordEasterEggs(overlay);
+}
+
+// iOS Safari scroll lock helpers
+function lockBodyScroll() {
+    scrollPositionY = window.scrollY;
+    document.documentElement.style.setProperty('--window-inner-height', `${window.innerHeight}px`);
+    document.documentElement.classList.add('word-modal-open');
+    document.body.classList.add('word-modal-open');
+}
+
+function unlockBodyScroll() {
+    document.documentElement.classList.remove('word-modal-open');
+    document.body.classList.remove('word-modal-open');
+    window.scrollTo(0, scrollPositionY);
+}
+
+function handleOverlayTouchMove(e) {
+    // Allow scrolling inside the document content area
+    const wordDocument = e.target.closest('.word-document');
+    if (wordDocument) {
+        // Allow scroll inside document
+        return;
+    }
+    // Prevent scroll on overlay background
+    e.preventDefault();
 }
 
 function createWordOverlay() {
@@ -165,15 +224,34 @@ function createWordOverlay() {
         </div>
     `;
 
-    // Close handlers
+    // Close handlers with iOS Safari touch support
     const closeBtn = overlay.querySelector('.word-close');
-    closeBtn.addEventListener('click', () => closeWordWindow(overlay));
+    closeBtn.addEventListener('click', (e) => {
+        if (!e.target.dataset.touchHandled) {
+            closeWordWindow(overlay);
+        }
+        delete e.target.dataset.touchHandled;
+    });
+    closeBtn.addEventListener('touchend', (e) => {
+        e.target.dataset.touchHandled = 'true';
+        e.preventDefault();
+        closeWordWindow(overlay);
+        setTimeout(() => delete e.target.dataset.touchHandled, 300);
+    }, { passive: false });
 
-    overlay.addEventListener('click', (e) => {
+    // Close on overlay background tap/click
+    const handleOverlayClose = (e) => {
         if (e.target === overlay) {
             closeWordWindow(overlay);
         }
-    });
+    };
+    overlay.addEventListener('click', handleOverlayClose);
+    overlay.addEventListener('touchend', (e) => {
+        if (e.target === overlay) {
+            e.preventDefault();
+            closeWordWindow(overlay);
+        }
+    }, { passive: false });
 
     document.addEventListener('keydown', function escHandler(e) {
         if (e.key === 'Escape' && wordWindowOpen) {
@@ -194,6 +272,10 @@ function closeWordWindow(overlay) {
         viewportHandler = null;
         viewportTarget = null;
     }
+    // Remove touchmove handler
+    overlay.removeEventListener('touchmove', handleOverlayTouchMove);
+    // Unlock body scroll
+    unlockBodyScroll();
     overlay.classList.add('closing');
     setTimeout(() => {
         overlay.remove();

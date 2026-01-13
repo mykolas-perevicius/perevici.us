@@ -1,5 +1,16 @@
 /* Windows XP Word Window */
 
+/* iOS Safari Body Scroll Lock */
+html.word-modal-open,
+html.word-modal-open body {
+    height: calc(var(--window-inner-height, 100vh) - 1px);
+    overflow: hidden;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    left: 0;
+}
+
 /* Modal Overlay */
 .word-modal-overlay {
     position: fixed;
@@ -60,6 +71,18 @@
     position: sticky;
     top: 0;
     z-index: 2;
+    padding: 8px 10px;
+}
+
+/* Larger tap target for mobile close button */
+.word-modal-overlay.word-mobile .word-btn {
+    width: 36px;
+    height: 32px;
+    font-size: 20px;
+}
+
+.word-modal-overlay.word-mobile .word-controls {
+    gap: 4px;
 }
 
 .word-modal-overlay.word-mobile .word-menubar,
@@ -71,6 +94,9 @@
 .word-modal-overlay.word-mobile .word-document {
     padding: 12px;
     -webkit-overflow-scrolling: touch;
+    overscroll-behavior: contain;
+    overflow-y: auto;
+    overflow-x: hidden;
 }
 
 .word-modal-overlay.word-mobile .word-page {
@@ -133,6 +159,8 @@
     align-items: center;
     justify-content: center;
     padding: 0;
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
 }
 
 .word-btn:hover {
