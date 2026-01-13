@@ -1011,9 +1011,10 @@ section {
     opacity: 0.7;
 }
 
+/* Reduced motion: still show background, animations disabled in JS */
 @media (prefers-reduced-motion: reduce) {
     #threejsBackground {
-        display: none;
+        /* Keep visible - JS handles disabling animations */
     }
 }
 
