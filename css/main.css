@@ -20,7 +20,6 @@
     position: absolute;
     z-index: -1;
     border-radius: 45% 55% 60% 40%;
-    filter: blur(2px);
 }
 
 .hero::before {
@@ -770,7 +769,7 @@ section {
     border-radius: var(--radius-card);
     padding: 2rem;
     margin-bottom: 2rem;
-    backdrop-filter: blur(10px);
+    backdrop-filter: blur(2px);
     transition: all 0.3s ease;
     box-shadow: var(--shadow-soft);
 }

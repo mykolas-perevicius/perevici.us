@@ -3,6 +3,16 @@
 ## Visual Direction
 A warm, humanist tech aesthetic: ember copper + tidal teal over paper/ink neutrals. The goal is to feel engineered, calm, and distinct without neon or generic gradients.
 
+## Background
+The site features a procedurally-generated **GPU silicon die background** (`js/silicon-background.js`) inspired by NVIDIA's GA102 architecture. The canvas renders:
+- SM (Streaming Multiprocessor) tile patterns
+- GPC columns with shader cores
+- Memory controller regions on edges
+- L2 cache bands with SRAM cell patterns
+- Metal interconnect traces with animated data pulses
+
+The background uses chunk-based infinite scroll with 0.3x parallax and theme-aware colors.
+
 ## Source of Truth
 All core tokens live in `css/theme.css`. Update tokens there and reference them via CSS variables everywhere else. Avoid hardcoded colors in CSS/JS.
 
@@ -29,7 +39,7 @@ All core tokens live in `css/theme.css`. Update tokens there and reference them 
 - `--glass-bg-strong` (hover/active)
 - `--glass-border`, `--glass-border-alt`
 - `--glass-glow`, `--glass-glow-alt`
-- `--glass-blur`
+- `--glass-blur` (2px - kept minimal to preserve silicon die background visibility)
 
 ### RGB Helpers
 Use for transparent glows and gradients:

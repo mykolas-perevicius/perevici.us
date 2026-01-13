@@ -34,7 +34,7 @@
     --glass-border-alt: rgb(var(--primary-rgb) / 0.2);
     --glass-glow: rgb(var(--accent-rgb) / 0.28);
     --glass-glow-alt: rgb(var(--primary-rgb) / 0.25);
-    --glass-blur: 16px;
+    --glass-blur: 2px;
 
     /* Radii */
     --radius-xs: 6px 4px 6px 3px;
@@ -120,7 +120,7 @@
 
 html {
     scroll-behavior: smooth;
-    background: var(--bg);  /* Base fallback before canvas loads */
+    /* Background handled by #threejsBackground canvas */
 }
 
 body {

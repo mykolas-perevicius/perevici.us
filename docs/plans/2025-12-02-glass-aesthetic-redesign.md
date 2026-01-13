@@ -1,8 +1,10 @@
 # Portfolio Glass Aesthetic Redesign
 
 **Date:** 2025-12-02
-**Status:** Design Complete, Ready for Implementation
+**Status:** Implemented
 **Aesthetic:** Subtle Luxury + Minimal Glass Touches (A+C Hybrid)
+
+> **Update (2026-01):** Background is now a procedurally-generated GPU silicon die canvas. Blur values reduced significantly (2-4px) to preserve background visibility while maintaining glass aesthetic through transparency, borders, and glows.
 
 ---
 
@@ -26,16 +28,16 @@ Transform the portfolio into a cohesive glass-themed experience with **intention
 ### Glass Treatment Layers
 
 **Tier 1: Navigation (Permanent Glass)**
-- Frosted backdrop-filter with 30px blur
+- Light backdrop-filter with 4px blur (reduced to show silicon die background)
 - Sticky positioning with smooth opacity fade on scroll
 - Bottom border glow that intensifies when scrolled
-- `backdrop-filter: blur(30px) saturate(150%)`
+- `backdrop-filter: blur(4px) saturate(120%)`
 
 **Tier 2: Content Sections & Cards (Subtle at Rest)**
 - Very soft glass borders (barely visible)
 - Gentle glow around edges (4px radius, low opacity)
-- Minimal blur (10-20px), relies on subtle opacity/gradients
-- Creates quiet separation without heavy lines
+- Minimal blur (2px via `--glass-blur`), relies on transparency + borders
+- Silicon die background visible through all glass elements
 
 **Tier 3: Interactive States (Enhanced)**
 - Hover: Glass intensifies (more blur, brighter glow, translateY lift)
@@ -52,10 +54,10 @@ Projects section wrapped in fully-functional Windows XP IE window - intentional 
 --glass-bg: rgba(255, 255, 255, 0.05);
 --glass-border: rgba(255, 255, 255, 0.1);
 --glass-glow: rgba(0, 212, 255, 0.2);
---glass-blur: 20px;
+--glass-blur: 2px;  /* Reduced from 20px to preserve silicon die background */
 ```
 
-Light theme adjusts opacity/colors accordingly.
+Light theme adjusts opacity/colors accordingly. Background visibility is prioritized over heavy frosting.
 
 ---
 
