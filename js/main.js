@@ -184,6 +184,9 @@ document.addEventListener('DOMContentLoaded', async () => {
     fetchGitHubStats();
     initConsoleMessage();
 
+    // Background: Load immediately so it's visible right away
+    import('./silicon-background.js').then(m => m.initSiliconBackground()).catch(e => console.error('Silicon background failed:', e));
+
     // High priority: Load after critical content
     scheduleIdle(() => {
         Promise.all([
@@ -207,9 +210,6 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     // Low priority: Load when browser is truly idle
     scheduleIdle(() => {
-        Promise.all([
-            import('./konami.js').then(m => m.initKonami()),
-            import('./silicon-background.js').then(m => m.initSiliconBackground())
-        ]);
+        import('./konami.js').then(m => m.initKonami());
     }, { timeout: 3000 });
 });
