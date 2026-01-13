@@ -995,7 +995,7 @@ section {
     }
 }
 
-/* Three.js Background Canvas */
+/* Silicon Die Background Canvas */
 #threejsBackground {
     display: block;
     position: fixed;
@@ -1005,13 +1005,11 @@ section {
     height: 100%;
     z-index: -1;
     pointer-events: none;
-    opacity: 0.35;
-    mix-blend-mode: screen;
+    opacity: 0.85;
 }
 
 [data-theme="light"] #threejsBackground {
-    opacity: 0.25;
-    mix-blend-mode: multiply;
+    opacity: 0.7;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -1020,10 +1018,10 @@ section {
     }
 }
 
-/* Reduce complexity on mobile for performance */
+/* Slightly reduce on mobile for performance */
 @media (max-width: 768px) {
     #threejsBackground {
-        opacity: 0.2;
+        opacity: 0.6;
     }
 }
 
