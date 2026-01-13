@@ -105,7 +105,7 @@ async function openWordWindow() {
     // Small delay then start typing
     setTimeout(() => {
         const contentArea = overlay.querySelector('.word-document-content');
-        startTypingAnimation(resumeData, contentArea, { instant: isMobile || prefersReducedMotion });
+        startTypingAnimation(resumeData, contentArea, { instant: prefersReducedMotion });
     }, 500);
 
     // Initialize easter eggs

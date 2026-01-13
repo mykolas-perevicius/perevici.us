@@ -102,13 +102,40 @@ html.word-modal-open body {
 .word-modal-overlay.word-mobile .word-page {
     width: 100%;
     min-height: auto;
-    padding: 32px 18px;
+    padding: 24px 16px;
     box-shadow: none;
 }
 
 .word-modal-overlay.word-mobile .word-document-content {
-    font-size: 11pt;
-    line-height: 1.45;
+    font-size: 12pt;
+    line-height: 1.5;
+}
+
+/* Title bar - truncate long text on mobile */
+.word-modal-overlay.word-mobile .word-title span {
+    max-width: 200px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+/* Larger icon on mobile */
+.word-modal-overlay.word-mobile .word-icon {
+    width: 20px;
+    height: 20px;
+}
+
+/* Extra small screen adjustments */
+@media (max-width: 380px) {
+    .word-modal-overlay.word-mobile .word-document-content {
+        font-size: 10pt;
+    }
+    .word-modal-overlay.word-mobile .word-page {
+        padding: 16px 12px;
+    }
+    .word-modal-overlay.word-mobile .word-title span {
+        max-width: 140px;
+    }
 }
 
 @keyframes wordSlideIn {
