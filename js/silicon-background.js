@@ -260,12 +260,11 @@ export function initSiliconBackground() {
         const seed = chunkIndex * 10000;
         const rng = seededRandom(seed);
 
-        // Create offscreen canvas for this chunk
+        // Create offscreen canvas for this chunk (at logical dimensions for crisp rendering)
         const chunkCanvas = document.createElement('canvas');
-        chunkCanvas.width = width * dpr;
-        chunkCanvas.height = config.chunkHeight * dpr;
+        chunkCanvas.width = width;
+        chunkCanvas.height = config.chunkHeight;
         const chunkCtx = chunkCanvas.getContext('2d');
-        chunkCtx.setTransform(dpr, 0, 0, dpr, 0, 0);
 
         // Fill base silicon
         chunkCtx.fillStyle = colors.silicon;
@@ -377,16 +376,12 @@ export function initSiliconBackground() {
 
         const parallaxY = scrollY * config.parallaxSpeed;
 
-        // Draw chunks
+        // Draw chunks (direct 1:1 copy, no scaling)
         for (const chunk of chunks.values()) {
             const screenY = chunk.y - parallaxY;
             if (screenY > height || screenY + config.chunkHeight < 0) continue;
 
-            ctx.drawImage(
-                chunk.canvas,
-                0, 0, chunk.canvas.width, chunk.canvas.height,
-                0, screenY, width, config.chunkHeight
-            );
+            ctx.drawImage(chunk.canvas, 0, screenY);
         }
 
         // Draw animated pulses
