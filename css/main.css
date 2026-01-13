@@ -143,9 +143,7 @@
 
 /* Stats Bar */
 .stats-bar {
-    background: var(--bg-elev);
-    border-top: 1px solid var(--border);
-    border-bottom: 1px solid var(--border);
+    background: transparent;
     padding: 2rem;
     display: flex;
     justify-content: space-around;
@@ -919,8 +917,7 @@ section {
 .footer {
     padding: 2rem;
     text-align: center;
-    border-top: 1px solid var(--border);
-    background: var(--bg);
+    background: transparent;
 }
 
 .footer-content {

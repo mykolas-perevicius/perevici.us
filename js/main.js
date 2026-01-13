@@ -209,7 +209,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     scheduleIdle(() => {
         Promise.all([
             import('./konami.js').then(m => m.initKonami()),
-            import('./circuit-background.js').then(m => m.initCircuitBackground())
+            import('./silicon-background.js').then(m => m.initSiliconBackground())
         ]);
     }, { timeout: 3000 });
 });
