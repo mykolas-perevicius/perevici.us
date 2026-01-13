@@ -358,6 +358,8 @@
     font-size: 0.875rem;
     margin-bottom: 2rem;
     animation: pulse 2s infinite;
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
 }
 
 @keyframes pulse {

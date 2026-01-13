@@ -115,13 +115,15 @@
 
 .floating-code {
     padding: 2rem;
-    background: linear-gradient(160deg, rgb(var(--accent-rgb) / 0.08), var(--bg-elev));
-    border: 1px solid var(--border);
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    backdrop-filter: blur(var(--glass-blur));
+    -webkit-backdrop-filter: blur(var(--glass-blur));
     border-radius: var(--radius-card);
     font-family: var(--font-mono);
     font-size: 0.875rem;
     animation: float 6s ease-in-out infinite;
-    box-shadow: var(--shadow-medium);
+    box-shadow: var(--shadow-medium), 0 0 20px var(--glass-glow);
 }
 
 @keyframes float {
@@ -263,15 +265,19 @@ section {
 }
 
 .github-stat-card {
-    background: var(--bg-elev);
-    border: 1px solid var(--border);
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    backdrop-filter: blur(var(--glass-blur));
+    -webkit-backdrop-filter: blur(var(--glass-blur));
     border-radius: var(--radius-md);
     padding: 1.5rem;
     transition: var(--transition);
+    box-shadow: var(--shadow-soft);
 }
 
 .github-stat-card:hover {
     transform: translateY(-5px);
+    border-color: var(--accent-color);
     box-shadow: var(--glow-accent);
 }
 
@@ -306,6 +312,22 @@ section {
 .timeline-item {
     position: relative;
     padding-bottom: 3rem;
+}
+
+.timeline-content {
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    backdrop-filter: blur(var(--glass-blur));
+    -webkit-backdrop-filter: blur(var(--glass-blur));
+    border-radius: var(--radius-card);
+    padding: 1.5rem;
+    box-shadow: var(--shadow-soft);
+    transition: all 0.3s ease;
+}
+
+.timeline-content:hover {
+    border-color: var(--primary-color);
+    box-shadow: var(--glow-primary);
 }
 
 .timeline-item::before {
@@ -893,12 +915,14 @@ section {
 
 .contact-button {
     padding: 1rem 2rem;
-    background: var(--bg);
-    border: 2px solid var(--border);
+    background: var(--glass-bg);
+    border: 2px solid var(--glass-border);
     border-radius: var(--radius-pill);
     color: var(--text);
     font-weight: 600;
     transition: var(--transition);
+    backdrop-filter: blur(var(--glass-blur));
+    -webkit-backdrop-filter: blur(var(--glass-blur));
 }
 
 .contact-button.primary {
