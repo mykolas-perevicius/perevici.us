@@ -86,6 +86,19 @@
         </div>
     </section>
 
+    <!-- Live GitHub Metrics -->
+    <section id="live-stats" class="stats-section">
+        <div class="container">
+            <h2 class="section-title">Live GitHub Metrics</h2>
+            <div id="liveMetricsContainer" class="live-metrics-container">
+                <!-- Metrics will be dynamically loaded here -->
+            </div>
+            <div id="metricsActivity" class="metrics-activity">
+                <!-- Activity chart will be dynamically loaded here -->
+            </div>
+        </div>
+    </section>
+
     <section id="experience" class="experience">
         <div class="section-content">
             <h2 class="section-title">Experience</h2>
@@ -433,6 +446,37 @@
             </form>
         </div>
     </div>
+
+    <!-- Terminal Overlay (Easter Egg: press ` to open) -->
+    <div class="terminal-overlay" id="terminalOverlay">
+        <div class="terminal">
+            <div class="terminal-header">
+                <div class="terminal-dot red"></div>
+                <div class="terminal-dot yellow"></div>
+                <div class="terminal-dot green"></div>
+            </div>
+            <div class="terminal-body" id="terminalBody">
+                <div class="terminal-line"><span class="terminal-prompt">mykolas@perevici.us:~$</span> whoami</div>
+                <div class="terminal-line">&gt; Full-stack engineer shipping code that matters</div>
+                <div class="terminal-line"></div>
+                <div class="terminal-line"><span class="terminal-prompt">mykolas@perevici.us:~$</span> ls projects/</div>
+                <div class="terminal-line">&gt; distributed-alexnet/ koalas-forge/ education-playground/ piano-trainer/</div>
+                <div class="terminal-line"></div>
+                <div class="terminal-line"><span class="terminal-prompt">mykolas@perevici.us:~$</span> cat philosophy.txt</div>
+                <div class="terminal-line">&gt; "Ship fast. Test everything. Impact users."</div>
+                <div class="terminal-line"></div>
+                <div class="terminal-line" style="color: #00d4ff;">&gt; Press ESC or click outside to close</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Matrix Rain Canvas (Konami Code Easter Egg) -->
+    <canvas class="matrix-rain" id="matrixCanvas"></canvas>
+
+    <!-- MS-DOS Mode Button -->
+    <button class="dos-mode-toggle" id="dosModeToggle" title="Enter MS-DOS Mode">
+        C:\&gt;_
+    </button>
 
     <canvas id="threejsBackground"></canvas>
 

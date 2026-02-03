@@ -144,11 +144,20 @@ function initConsoleMessage() {
     console.log(`
 %c🚀 Welcome to Mykolas's Portfolio! 🚀
 
+%cLooking for something interesting? Try these:
+%c  • Press \` (backtick) for terminal mode
+%c  • Konami Code: ↑ ↑ ↓ ↓ ← → ← → B A
+%c  • Click C:\\>_ for MS-DOS mode
+
 %c📧 Email: Perevicius.Mykolas@gmail.com
 %c🔗 GitHub: github.com/mykolas-perevicius
 
 `,
         'color: #00d4ff; font-size: 20px; font-weight: bold;',
+        'color: #40e0d0; font-size: 14px;',
+        'color: #8b92b9; font-size: 12px;',
+        'color: #8b92b9; font-size: 12px;',
+        'color: #8b92b9; font-size: 12px;',
         'color: #8b92b9; font-size: 12px;',
         'color: #8b92b9; font-size: 12px;'
     );
@@ -183,6 +192,11 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     // Low priority: Load when browser is truly idle
     requestIdleCallback(() => {
-        import('./three-background.js').then(m => m.initThreeBackground());
+        Promise.all([
+            import('./three-background.js').then(m => m.initThreeBackground()),
+            import('./terminal.js').then(m => m.initTerminal()),
+            import('./konami.js').then(m => m.initKonami()),
+            import('./dos-mode.js').then(m => m.initDosMode())
+        ]);
     }, { timeout: 3000 });
 });
