@@ -804,10 +804,10 @@ section {
     opacity: 0.4;
 }
 
-/* Light mode - slightly more visible background works with glass reflections */
+/* Light mode - more contrast for visibility against bright background */
 [data-theme="light"] #threejsBackground {
-    opacity: 0.35;
-    filter: saturate(0.8) brightness(1.1);
+    opacity: 0.5;
+    filter: saturate(1.2) contrast(1.1) brightness(0.85);
 }
 
 @media (prefers-reduced-motion: reduce) {

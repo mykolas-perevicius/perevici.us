@@ -191,59 +191,65 @@
     position: relative;
     background: var(--glass-bg);
     backdrop-filter: blur(10px);
-    border: 2px solid var(--glass-border);
-    border-radius: 24px;
-    width: 80px;
-    height: 40px;
+    border: 1px solid var(--glass-border);
+    border-radius: 20px;
+    width: 64px;
+    height: 32px;
     cursor: pointer;
-    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     overflow: hidden;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    display: flex;
+    align-items: center;
+    padding: 0 3px;
 }
 
 .theme-toggle::before {
     content: '';
     position: absolute;
-    top: 4px;
-    left: 4px;
-    width: 32px;
-    height: 32px;
+    top: 3px;
+    left: 3px;
+    width: 26px;
+    height: 26px;
     background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
     border-radius: 50%;
-    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-    box-shadow: 0 2px 8px rgba(0, 212, 255, 0.4);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 2px 6px rgba(0, 212, 255, 0.4);
+    z-index: 2;
 }
 
 .theme-toggle::after {
     content: '🌙';
     position: absolute;
     top: 50%;
-    left: 12px;
+    left: 7px;
     transform: translateY(-50%);
-    font-size: 1.25rem;
-    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    font-size: 0.875rem;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     z-index: 1;
+    line-height: 1;
 }
 
 [data-theme="light"] .theme-toggle::before {
-    left: 44px;
+    left: calc(100% - 29px);
     background: linear-gradient(135deg, #fbbf24, #f59e0b);
-    box-shadow: 0 2px 8px rgba(251, 191, 36, 0.4);
+    box-shadow: 0 2px 6px rgba(251, 191, 36, 0.4);
 }
 
 [data-theme="light"] .theme-toggle::after {
     content: '☀️';
-    left: 52px;
+    left: calc(100% - 23px);
 }
 
 .theme-toggle:hover {
     border-color: var(--primary-color);
-    box-shadow: 0 4px 16px rgba(0, 212, 255, 0.3);
-    transform: scale(1.05);
+    box-shadow: 0 4px 12px rgba(0, 212, 255, 0.25);
+    transform: scale(1.02);
 }
 
 [data-theme="light"] .theme-toggle:hover {
-    box-shadow: 0 4px 16px rgba(251, 191, 36, 0.3);
+    border-color: rgba(251, 191, 36, 0.6);
+    box-shadow: 0 4px 12px rgba(251, 191, 36, 0.25);
 }
 
 
