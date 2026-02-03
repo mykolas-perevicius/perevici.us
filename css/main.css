@@ -189,20 +189,21 @@ section {
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-/* Top specular highlight */
+/* Top specular highlight - simulates light from above */
 .glass-card::before {
     content: '';
     position: absolute;
     top: 0;
-    left: 10%;
-    right: 10%;
-    height: 1px;
+    left: 5%;
+    right: 5%;
+    height: 2px;
     background: var(--glass-highlight-top);
     border-radius: 20px 20px 0 0;
     pointer-events: none;
+    z-index: 1;
 }
 
-/* Edge refraction effect */
+/* Edge refraction effect - light catching edges */
 .glass-card::after {
     content: '';
     position: absolute;
@@ -214,7 +215,37 @@ section {
     background: var(--glass-highlight-edge);
     opacity: 0.5;
     pointer-events: none;
-    z-index: -1;
+    z-index: 0;
+}
+
+/* Light mode enhanced glass - brighter reflections */
+[data-theme="light"] .glass-card {
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    box-shadow: var(--glass-shadow);
+}
+
+[data-theme="light"] .glass-card::before {
+    height: 3px;
+    background: linear-gradient(180deg,
+        rgba(255, 255, 255, 1) 0%,
+        rgba(255, 255, 255, 0.6) 50%,
+        transparent 100%);
+}
+
+[data-theme="light"] .glass-card::after {
+    background: linear-gradient(135deg,
+        rgba(255, 255, 255, 0.8) 0%,
+        rgba(200, 220, 255, 0.2) 30%,
+        transparent 70%);
+    opacity: 1;
+}
+
+[data-theme="light"] .glass-card:hover {
+    box-shadow:
+        0 8px 32px rgba(0, 0, 0, 0.12),
+        0 2px 8px rgba(0, 0, 0, 0.08),
+        inset 0 1px 0 rgba(255, 255, 255, 1);
 }
 
 .glass-card:hover {
@@ -463,21 +494,69 @@ section {
     }
 }
 
-/* Light mode project cards - glass aesthetic */
+/* Light mode project cards - enhanced glass with proper light simulation */
 [data-theme="light"] .project-card {
     background: var(--glass-bg);
     border: 1px solid var(--glass-border);
     box-shadow: var(--glass-shadow);
 }
 
+[data-theme="light"] .project-card::before {
+    height: 3px;
+    background: linear-gradient(180deg,
+        rgba(255, 255, 255, 1) 0%,
+        rgba(255, 255, 255, 0.5) 60%,
+        transparent 100%);
+}
+
 [data-theme="light"] .project-card:hover {
-    box-shadow: var(--glass-shadow), 0 16px 48px rgba(0, 0, 0, 0.1);
+    box-shadow:
+        0 12px 40px rgba(0, 0, 0, 0.12),
+        0 4px 12px rgba(0, 0, 0, 0.06),
+        inset 0 1px 0 rgba(255, 255, 255, 1);
+    border-color: rgba(0, 180, 220, 0.4);
+}
+
+/* Light mode timeline - bright reflective glass */
+[data-theme="light"] .timeline::before {
+    background: linear-gradient(180deg,
+        var(--primary-color) 0%,
+        var(--accent-color) 50%,
+        var(--primary-color) 100%);
+    box-shadow: 0 0 12px rgba(0, 180, 220, 0.3);
+}
+
+[data-theme="light"] .timeline-content {
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    box-shadow: var(--glass-shadow);
+}
+
+[data-theme="light"] .timeline-content:hover {
+    box-shadow:
+        0 8px 32px rgba(0, 0, 0, 0.1),
+        inset 0 1px 0 rgba(255, 255, 255, 1);
+}
+
+[data-theme="light"] .timeline-item::before {
+    background: rgba(255, 255, 255, 0.9);
+    border-color: var(--glass-border);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+[data-theme="light"] .timeline-item.active::before {
+    background: var(--primary-color);
+    box-shadow: 0 0 16px rgba(0, 180, 220, 0.4);
 }
 
 @supports not (backdrop-filter: blur(24px)) {
     [data-theme="light"] .project-card {
-        background: #ffffff;
-        border: 1px solid var(--glass-border);
+        background: rgba(255, 255, 255, 0.95);
+        border: 1px solid rgba(0, 0, 0, 0.1);
+    }
+
+    [data-theme="light"] .timeline-content {
+        background: rgba(255, 255, 255, 0.95);
     }
 }
 
@@ -589,6 +668,14 @@ section {
     background: var(--glass-bg);
     backdrop-filter: blur(var(--glass-blur)) saturate(150%);
     -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(150%);
+}
+
+/* Light mode footer - enhanced glass reflection */
+[data-theme="light"] .footer.glass-panel {
+    background: var(--glass-bg);
+    box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.9),
+        0 -4px 20px rgba(0, 0, 0, 0.05);
 }
 
 .footer-content {
@@ -717,8 +804,10 @@ section {
     opacity: 0.4;
 }
 
+/* Light mode - slightly more visible background works with glass reflections */
 [data-theme="light"] #threejsBackground {
-    opacity: 0.25;
+    opacity: 0.35;
+    filter: saturate(0.8) brightness(1.1);
 }
 
 @media (prefers-reduced-motion: reduce) {

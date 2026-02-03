@@ -16,14 +16,23 @@
     --accent-color: #40e0d0;
     --success: #10b981;
 
-    /* Apple Liquid Glass System */
+    /* Apple Liquid Glass System - Dark Mode
+       In dark environments, glass catches subtle ambient light.
+       Highlights are softer, shadows are deeper. */
     --glass-blur: 24px;
     --glass-bg: rgba(255, 255, 255, 0.08);
+    --glass-bg-strong: rgba(255, 255, 255, 0.12);
     --glass-border: rgba(255, 255, 255, 0.18);
-    --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.4),
+                    0 2px 8px rgba(0, 0, 0, 0.2);
     --glass-highlight-top: linear-gradient(180deg, rgba(255,255,255,0.25) 0%, transparent 100%);
     --glass-highlight-edge: linear-gradient(135deg, rgba(255,255,255,0.3) 0%, transparent 50%);
     --glass-refraction: 0 0 0 1px rgba(255, 255, 255, 0.15);
+
+    /* Glow effects for dark mode */
+    --glow-primary: 0 0 30px rgba(0, 212, 255, 0.4);
+    --glow-accent: 0 4px 20px rgba(0, 212, 255, 0.3);
+    --shadow-rgb: 0, 0, 0;
 
     /* Typography */
     --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
@@ -46,14 +55,35 @@
     --chip-text: #111827;
     --link: #1D4ED8;
 
-    /* Apple Liquid Glass System - Light */
-    --glass-blur: 24px;
-    --glass-bg: rgba(0, 0, 0, 0.04);
-    --glass-border: rgba(0, 0, 0, 0.12);
-    --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
-    --glass-highlight-top: linear-gradient(180deg, rgba(255,255,255,0.8) 0%, transparent 100%);
-    --glass-highlight-edge: linear-gradient(135deg, rgba(255,255,255,0.6) 0%, transparent 50%);
-    --glass-refraction: 0 0 0 1px rgba(0, 0, 0, 0.08);
+    /* Apple Liquid Glass System - Light Mode
+       In bright environments, glass reflects MORE ambient light from above.
+       Specular highlights are stronger, shadows are softer/diffuse. */
+    --glass-blur: 20px;
+    --glass-bg: rgba(255, 255, 255, 0.6);
+    --glass-bg-strong: rgba(255, 255, 255, 0.75);
+    --glass-border: rgba(255, 255, 255, 0.8);
+    --glass-shadow:
+        0 4px 24px rgba(0, 0, 0, 0.08),
+        0 1px 3px rgba(0, 0, 0, 0.06),
+        inset 0 1px 0 rgba(255, 255, 255, 0.9);
+    /* Bright specular highlight at top edge (light from above) */
+    --glass-highlight-top: linear-gradient(180deg,
+        rgba(255, 255, 255, 1) 0%,
+        rgba(255, 255, 255, 0.5) 20%,
+        transparent 100%);
+    /* Edge catches light - subtle caustic effect */
+    --glass-highlight-edge: linear-gradient(135deg,
+        rgba(255, 255, 255, 0.9) 0%,
+        rgba(200, 230, 255, 0.3) 25%,
+        transparent 60%);
+    /* Subtle inner refraction ring */
+    --glass-refraction: 0 0 0 1px rgba(255, 255, 255, 0.7),
+                        inset 0 0 0 1px rgba(0, 0, 0, 0.04);
+
+    /* Glow effects adapt to light mode */
+    --glow-primary: 0 0 20px rgba(0, 180, 220, 0.25);
+    --glow-accent: 0 4px 16px rgba(0, 180, 220, 0.15);
+    --shadow-rgb: 0, 0, 0;
 }
 
 /* Base styles */
