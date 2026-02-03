@@ -1079,6 +1079,7 @@
     overflow: hidden;
     border: 1px solid var(--glass-border);
     transition: var(--transition);
+    aspect-ratio: 16 / 10;
 }
 
 .project-preview a {
@@ -1088,7 +1089,7 @@
 
 .project-preview img {
     width: 100%;
-    height: auto;
+    height: 100%;
     object-fit: cover;
     transition: transform 0.3s ease;
 }
