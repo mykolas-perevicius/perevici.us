@@ -1,18 +1,6 @@
 // Main initialization - Critical modules only
-import { initI18n } from './i18n.js';
 import { initMetrics } from './metrics.js';
 import { initImageOptimization } from './image-optimizer.js';
-import { initBlogModal } from './blog-modal.js';
-import { initSectionToggles } from './section-toggles.js';
-
-function scheduleIdle(callback, options = {}) {
-    if (typeof window.requestIdleCallback === 'function') {
-        window.requestIdleCallback(callback, options);
-        return;
-    }
-    const timeout = typeof options.timeout === 'number' ? options.timeout : 1000;
-    window.setTimeout(callback, timeout);
-}
 
 // Theme Management
 function initTheme() {
@@ -96,33 +84,40 @@ function initTypingAnimation() {
     setTimeout(typeRole, 1000);
 }
 
-// GitHub Stats Integration (for old stats section)
+// GitHub Stats Integration (for footer metrics)
 async function fetchGitHubStats() {
     try {
         const response = await fetch('https://api.github.com/users/mykolas-perevicius');
         const data = await response.json();
 
-        const repoCountEl = document.getElementById('repoCount');
-        const followerCountEl = document.getElementById('followerCount');
-        const totalStarsEl = document.getElementById('totalStars');
+        // Update footer metrics
+        const commitsEl = document.getElementById('totalCommits');
+        const reposEl = document.getElementById('totalRepos');
+        const starsEl = document.getElementById('totalStars');
 
-        if (repoCountEl) repoCountEl.textContent = data.public_repos || '20+';
-        if (followerCountEl) followerCountEl.textContent = data.followers || '0';
+        if (reposEl) reposEl.textContent = data.public_repos || '20+';
 
         // Fetch repositories to count stars
         const reposResponse = await fetch('https://api.github.com/users/mykolas-perevicius/repos?per_page=100');
         const repos = await reposResponse.json();
         const totalStars = repos.reduce((acc, repo) => acc + (repo.stargazers_count || 0), 0);
-        if (totalStarsEl) totalStarsEl.textContent = totalStars;
+        if (starsEl) starsEl.textContent = totalStars;
+
+        // Fetch commit count (events API - approximation)
+        const eventsResponse = await fetch('https://api.github.com/users/mykolas-perevicius/events/public?per_page=100');
+        const events = await eventsResponse.json();
+        const pushEvents = events.filter(e => e.type === 'PushEvent');
+        const commitCount = pushEvents.reduce((acc, e) => acc + (e.payload?.commits?.length || 0), 0);
+        if (commitsEl) commitsEl.textContent = commitCount > 0 ? `${commitCount}+` : '500+';
     } catch (error) {
         console.error('Error fetching GitHub stats:', error);
-        const repoCountEl = document.getElementById('repoCount');
-        const followerCountEl = document.getElementById('followerCount');
-        const totalStarsEl = document.getElementById('totalStars');
+        const commitsEl = document.getElementById('totalCommits');
+        const reposEl = document.getElementById('totalRepos');
+        const starsEl = document.getElementById('totalStars');
 
-        if (repoCountEl) repoCountEl.textContent = '20+';
-        if (followerCountEl) followerCountEl.textContent = '--';
-        if (totalStarsEl) totalStarsEl.textContent = '--';
+        if (commitsEl) commitsEl.textContent = '500+';
+        if (reposEl) reposEl.textContent = '20+';
+        if (starsEl) starsEl.textContent = '--';
     }
 }
 
@@ -146,70 +141,48 @@ function initScrollReveal() {
 
 // Console Easter Egg
 function initConsoleMessage() {
-    const styles = getComputedStyle(document.documentElement);
-    const primary = styles.getPropertyValue('--primary-color').trim() || '#ff8a3d';
-    const accent = styles.getPropertyValue('--accent-color').trim() || '#33d6c8';
-    const muted = styles.getPropertyValue('--muted').trim() || '#a7b0a5';
-
     console.log(`
 %c🚀 Welcome to Mykolas's Portfolio! 🚀
-
-%cLooking for something interesting? Try the Konami Code!
-↑ ↑ ↓ ↓ ← → ← → B A
-
-%cOr press \` for a terminal experience
 
 %c📧 Email: Perevicius.Mykolas@gmail.com
 %c🔗 GitHub: github.com/mykolas-perevicius
 
 `,
-        `color: ${primary}; font-size: 20px; font-weight: bold;`,
-        `color: ${accent}; font-size: 14px;`,
-        `color: ${muted}; font-size: 12px;`,
-        `color: ${muted}; font-size: 12px;`,
-        `color: ${muted}; font-size: 12px;`
+        'color: #00d4ff; font-size: 20px; font-weight: bold;',
+        'color: #8b92b9; font-size: 12px;',
+        'color: #8b92b9; font-size: 12px;'
     );
 }
 
 // Initialize everything with lazy loading
 document.addEventListener('DOMContentLoaded', async () => {
     // Critical: Initialize immediately
-    initI18n();
     initTheme();
     initTypingAnimation();
-    initSectionToggles();
     initScrollReveal();
     initMetrics();
     initImageOptimization();
     fetchGitHubStats();
     initConsoleMessage();
 
-    // Background: Load immediately so it's visible right away
-    import('./silicon-background.js').then(m => m.initSiliconBackground()).catch(e => console.error('Silicon background failed:', e));
-
     // High priority: Load after critical content
-    scheduleIdle(() => {
+    requestIdleCallback(() => {
         Promise.all([
-            import('./terminal.js').then(m => m.initTerminal()),
             import('./shortcuts.js').then(m => m.initShortcuts()),
             import('./swipe-gestures.js').then(m => m.initSwipeGestures()),
             import('./project-cards.js').then(m => m.initProjectCards())
         ]);
-    }, { timeout: 1200 });
+    });
 
     // Medium priority: Load when user might need them
-    scheduleIdle(() => {
+    requestIdleCallback(() => {
         Promise.all([
-            import('./xp-window.js').then(m => m.initXPWindow()),
-            import('./word-window.js').then(m => m.initWordWindow()),
-            import('./contact-form.js').then(m => m.initContactForm()),
-            import('./hints.js').then(m => m.initHints())
+            import('./contact-form.js').then(m => m.initContactForm())
         ]);
-        initBlogModal();
     }, { timeout: 2000 });
 
     // Low priority: Load when browser is truly idle
-    scheduleIdle(() => {
-        import('./konami.js').then(m => m.initKonami());
+    requestIdleCallback(() => {
+        import('./three-background.js').then(m => m.initThreeBackground());
     }, { timeout: 3000 });
 });

@@ -11,31 +11,16 @@
     <meta property="og:description" content="Software engineer shipping production code that matters. 90% test coverage advocate, GPU acceleration enthusiast.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://perevici.us">
-    <meta property="og:image" content="https://perevici.us/og-image.png">
-    <meta property="og:image:width" content="1200">
-    <meta property="og:image:height" content="630">
-    <meta property="og:image:alt" content="Mykolas Perevicius — Full-Stack Engineer">
-    <meta property="og:site_name" content="perevici.us">
-
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Mykolas Perevicius — Full-Stack Engineer">
-    <meta name="twitter:description" content="Full-stack software engineer shipping production code that matters. GPU acceleration, distributed systems, and user-focused delivery.">
-    <meta name="twitter:image" content="https://perevici.us/og-image.png">
-
-    <!-- Favicon - Lithuanian Flag -->
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 5 3'><rect fill='%23FDB913' width='5' height='1'/><rect fill='%23006A44' y='1' width='5' height='1'/><rect fill='%23C1272D' y='2' width='5' height='1'/></svg>">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=JetBrains+Mono:wght@400;600;700&family=Sora:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet">
 
     <!-- Stylesheets -->
     <link rel="stylesheet" href="/css/theme.css">
     <link rel="stylesheet" href="/css/components.css">
     <link rel="stylesheet" href="/css/main.css">
-    <link rel="stylesheet" href="/css/word-window.css">
     <link rel="stylesheet" href="/css/contact-form.css">
-    <link rel="stylesheet" href="/css/blog-modal.css">
     
     <script type="application/ld+json">
     {
@@ -58,13 +43,11 @@
         <div class="nav-content">
             <div class="nav-logo">MP</div>
             <div class="nav-links">
-                <a href="#experience" data-i18n="nav.experience">Experience</a>
-                <a href="#projects" data-i18n="nav.projects">Projects</a>
-                <a href="#skills" data-i18n="nav.skills">Skills</a>
-                <a href="#blog" data-i18n="nav.blog">Blog</a>
-                <a href="#contact" data-i18n="nav.contact">Contact</a>
+                <a href="#experience">Experience</a>
+                <a href="#projects">Projects</a>
+                <a href="#contact">Contact</a>
+                <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme"></button>
             </div>
-            <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme"></button>
         </div>
     </nav>
 
@@ -100,439 +83,10 @@
                     Email
                 </a>
             </div>
-
-            <!-- Resume Widget (separate from social links) -->
-            <button class="resume-widget" data-document="resume" type="button" aria-label="Open resume in Microsoft Word 2003">
-                <div class="resume-widget-icon">
-                    <svg viewBox="0 0 24 24" fill="currentColor">
-                        <path d="M14 2H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V8l-6-6zM6 20V4h7v5h5v11H6z"/>
-                        <path d="M8 12h8v2H8v-2zm0 4h8v2H8v-2z"/>
-                    </svg>
-                </div>
-                <div class="resume-widget-content">
-                    <h4>Resume.doc</h4>
-                    <p>Microsoft Word 2003</p>
-                </div>
-            </button>
-        </div>
-        <div class="hero-decoration">
-            <div class="floating-code">
-                <span class="code-keyword">class</span> <span class="code-class">Engineer</span>:<br>
-                &nbsp;&nbsp;<span class="code-keyword">def</span> <span class="code-function">__init__</span>(<span class="code-param">self</span>):<br>
-                &nbsp;&nbsp;&nbsp;&nbsp;<span class="code-param">self</span>.mode = <span class="code-string">"ship"</span><br>
-                &nbsp;&nbsp;&nbsp;&nbsp;<span class="code-param">self</span>.focus = <span class="code-string">"impact"</span>
-            </div>
         </div>
     </section>
 
-    <section id="projects" class="projects" data-hint-anchor="projects">
-        <div class="section-content">
-            <h2 class="section-title">Featured Projects</h2>
-
-            <!-- XP Window Wrapper -->
-            <div class="xp-window">
-                <div class="xp-titlebar">
-                    <div class="xp-title">
-                        <img class="xp-icon" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath fill='%230054e3' d='M2 2v12h12V2H2zm1 3h10v8H3V5zm1-2h8v1H4V3z'/%3E%3C/svg%3E" alt="Internet Explorer">
-                        <span>Internet Explorer - Projects Portfolio</span>
-                    </div>
-                    <div class="xp-controls">
-                        <button class="xp-btn xp-minimize" aria-label="Minimize">
-                            <span>_</span>
-                        </button>
-                        <button class="xp-btn xp-maximize" aria-label="Maximize">
-                            <span>□</span>
-                        </button>
-                        <button class="xp-btn xp-close" aria-label="Close">
-                            <span>×</span>
-                        </button>
-                    </div>
-                </div>
-                <div class="xp-toolbar">
-                    <div class="xp-address-bar">
-                        <label class="xp-address-label">Address</label>
-                        <div class="xp-address-input">
-                            <span contenteditable="false">https://perevici.us/projects/all</span>
-                        </div>
-                        <button class="xp-go-button">Go</button>
-                    </div>
-                    <div class="xp-toolbar-buttons">
-                        <button class="xp-btn-back" aria-label="Back">◄</button>
-                        <button class="xp-btn-forward" aria-label="Forward">►</button>
-                        <button class="xp-btn-refresh" aria-label="Refresh">↻</button>
-                        <button class="xp-btn-stop" aria-label="Stop">✕</button>
-                        <button class="xp-btn-home" aria-label="Home">⌂</button>
-                    </div>
-                </div>
-                <div class="xp-content">
-                    <div class="projects-grid">
-                <div class="project-card scroll-reveal">
-                    <div class="project-card-inner">
-                        <div class="card-front">
-                            <div class="project-header">
-                                <h3>🐨 Koala's Forge</h3>
-                                <div class="project-links">
-                                    <a href="https://github.com/mykolas-perevicius/koalas-forge" target="_blank">GitHub →</a>
-                                </div>
-                            </div>
-                            <p class="project-description">
-                                The free, powerful alternative to Ninite for 2025. Cross-platform system installer supporting 100+ applications.
-                                Born from losing access to all three machines in one weekend.
-                            </p>
-                            <div class="project-stats">
-                                <span class="stat-item">100+ Apps</span>
-                                <span class="stat-item">Cross-platform</span>
-                            </div>
-                            <div class="tech-tags">
-                                <span class="tag">PowerShell</span>
-                                <span class="tag">Bash</span>
-                                <span class="tag">Python</span>
-                            </div>
-                        </div>
-                        <div class="card-back">
-                            <h4>📊 GitHub Stats</h4>
-                            <div class="card-back-stats">
-                                <div class="github-stat">
-                                    <span class="stat-icon">⭐</span>
-                                    <span class="stat-value">--</span>
-                                    <span class="stat-label">Stars</span>
-                                </div>
-                                <div class="github-stat">
-                                    <span class="stat-icon">🔱</span>
-                                    <span class="stat-value">--</span>
-                                    <span class="stat-label">Forks</span>
-                                </div>
-                                <div class="github-stat">
-                                    <span class="stat-icon">👁️</span>
-                                    <span class="stat-value">--</span>
-                                    <span class="stat-label">Watchers</span>
-                                </div>
-                            </div>
-                            <h4>✨ Key Features</h4>
-                            <div class="card-back-features">
-                                <div class="feature-item">Automated package management across Windows, Mac, and Linux</div>
-                                <div class="feature-item">Silent installations with customizable configurations</div>
-                                <div class="feature-item">Dependency resolution and conflict detection</div>
-                                <div class="feature-item">Rollback support for failed installations</div>
-                            </div>
-                            <div class="card-back-updated">Checking updates...</div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="project-card scroll-reveal">
-                    <div class="project-header">
-                        <h3>⚡ Distributed AlexNet</h3>
-                        <div class="project-links">
-                            <a href="https://github.com/mykolas-perevicius/CUDA-MPI-GPU-Cluster-Programming" target="_blank">GitHub →</a>
-                        </div>
-                    </div>
-                    <p class="project-description">
-                        Custom CUDA kernels and MPI orchestration for AlexNet. Achieved 4.6× speedup over baseline PyTorch on DGX-1 cluster.
-                    </p>
-                    <div class="project-stats">
-                        <span class="stat-item">4.6× Faster</span>
-                        <span class="stat-item">Multi-GPU</span>
-                    </div>
-                    <div class="tech-tags">
-                        <span class="tag">CUDA</span>
-                        <span class="tag">C++</span>
-                        <span class="tag">MPI</span>
-                        <span class="tag">PyTorch</span>
-                    </div>
-                </div>
-
-                <div class="project-card scroll-reveal">
-                    <div class="project-header">
-                        <h3>🚀 Ultimate System Setup</h3>
-                        <div class="project-links">
-                            <a href="https://github.com/mykolas-perevicius/ultimate-system-setup" target="_blank">GitHub →</a>
-                        </div>
-                    </div>
-                    <p class="project-description">
-                        AI Lab + Complete Dev Environment automation. Hardware detection, system optimizations, and 100+ app installations.
-                    </p>
-                    <div class="project-stats">
-                        <span class="stat-item">100+ Tools</span>
-                        <span class="stat-item">Auto-config</span>
-                    </div>
-                    <div class="tech-tags">
-                        <span class="tag">Shell</span>
-                        <span class="tag">Docker</span>
-                        <span class="tag">Linux</span>
-                    </div>
-                </div>
-
-                <div class="project-card scroll-reveal">
-                    <div class="project-header">
-                        <h3>🎓 Education Playground</h3>
-                        <div class="project-links">
-                            <a href="https://mykolas-perevicius.github.io/Education_Playground/" target="_blank">Live →</a>
-                            <a href="https://github.com/mykolas-perevicius/Education_Playground" target="_blank">GitHub →</a>
-                        </div>
-                    </div>
-                    <p class="project-description">
-                        Interactive Python learning platform with 117 Jupyter notebooks covering basics to GPU programming. Live learning platform with 90% student pass rate.
-                    </p>
-                    <div class="project-stats">
-                        <span class="stat-item">117 Notebooks</span>
-                        <span class="stat-item">🚀 LIVE</span>
-                    </div>
-                    <div class="tech-tags">
-                        <span class="tag">Python</span>
-                        <span class="tag">Jupyter</span>
-                        <span class="tag">Education</span>
-                    </div>
-                </div>
-
-                <div class="project-card scroll-reveal">
-                    <div class="project-header">
-                        <h3>🎵 Melody Matcher</h3>
-                        <div class="project-links">
-                            <a href="https://delicate-torte-2cafb0.netlify.app" target="_blank">Play →</a>
-                            <a href="https://github.com/mykolas-perevicius/girlhacks-24" target="_blank">GitHub →</a>
-                        </div>
-                    </div>
-                    <p class="project-description">
-                        Interactive music puzzle game built for GirlHacks 2024. Listen to song snippets, group them together, and find the right song!
-                    </p>
-                    <div class="project-stats">
-                        <span class="stat-item">Canvas Game</span>
-                        <span class="stat-item">🚀 LIVE</span>
-                    </div>
-                    <div class="tech-tags">
-                        <span class="tag">Paper.js</span>
-                        <span class="tag">Howler.js</span>
-                        <span class="tag">Game Dev</span>
-                    </div>
-                </div>
-
-                <div class="project-card scroll-reveal">
-                    <div class="project-header">
-                        <h3>♻️ Smart Recycling Bin</h3>
-                        <div class="project-links">
-                            <a href="#" target="_blank">Research</a>
-                        </div>
-                    </div>
-                    <p class="project-description">
-                        CNN-powered recycling bin prototype with 95% material detection accuracy. Integrated Arduino-based sorting mechanism.
-                    </p>
-                    <div class="project-stats">
-                        <span class="stat-item">95% Accuracy</span>
-                        <span class="stat-item">Real-time</span>
-                    </div>
-                    <div class="tech-tags">
-                        <span class="tag">TensorFlow</span>
-                        <span class="tag">Arduino</span>
-                        <span class="tag">Computer Vision</span>
-                    </div>
-                </div>
-                    </div> <!-- End projects-grid -->
-                </div> <!-- End xp-content -->
-                <div class="xp-status">
-                    <span class="xp-status-text">Ready</span>
-                </div>
-            </div> <!-- End xp-window -->
-
-            <!-- Modern Projects Grid (default view) -->
-            <div class="modern-projects-grid">
-                <div class="projects-grid">
-                <div class="project-card scroll-reveal">
-                    <div class="project-header">
-                        <h3>🎓 Rosetta Multi-Language Compiler</h3>
-                        <div class="project-links">
-                            <a href="https://github.com/mykolas-perevicius/Building-A-Compiler" target="_blank">GitHub →</a>
-                        </div>
-                    </div>
-                    <p class="project-description">
-                        <strong>Graduate CS485 Project</strong> | Built complete compiler with code generation for 10+ programming languages: C++, Rust, Python, Java, Kotlin, Haskell, OCaml, Assembly, TypeScript, Scala. Comprehensive testing infrastructure with cross-language validation.
-                    </p>
-                    <div class="project-stats">
-                        <span class="stat-item">10+ Languages</span>
-                        <span class="stat-item">Full Compiler</span>
-                    </div>
-                    <div class="tech-tags">
-                        <span class="tag">Compiler Design</span>
-                        <span class="tag">C++</span>
-                        <span class="tag">Code Gen</span>
-                    </div>
-                </div>
-
-                <div class="project-card scroll-reveal">
-                    <div class="project-header">
-                        <h3>⚡ Distributed AlexNet</h3>
-                        <div class="project-links">
-                            <a href="https://github.com/mykolas-perevicius/CUDA-MPI-GPU-Cluster-Programming" target="_blank">GitHub →</a>
-                        </div>
-                    </div>
-                    <p class="project-description">
-                        <strong>4.6× Speedup</strong> | Custom CUDA kernels and MPI orchestration beating PyTorch baseline on DGX-1 cluster. Graduate CS485 GPU programming.
-                    </p>
-                    <div class="project-stats">
-                        <span class="stat-item">4.6× Faster</span>
-                        <span class="stat-item">Multi-GPU</span>
-                    </div>
-                    <div class="tech-tags">
-                        <span class="tag">CUDA</span>
-                        <span class="tag">C++</span>
-                        <span class="tag">MPI</span>
-                        <span class="tag">PyTorch</span>
-                    </div>
-                </div>
-
-                <div class="project-card scroll-reveal">
-                    <div class="project-header">
-                        <h3>🐨 Koala's Forge</h3>
-                        <div class="project-links">
-                            <a href="https://github.com/mykolas-perevicius/koalas-forge" target="_blank">GitHub →</a>
-                        </div>
-                    </div>
-                    <p class="project-description">
-                        The free, powerful alternative to Ninite for 2025. Cross-platform system installer supporting 100+ applications.
-                        Born from losing access to all three machines in one weekend.
-                    </p>
-                    <div class="project-stats">
-                        <span class="stat-item">100+ Apps</span>
-                        <span class="stat-item">Cross-platform</span>
-                    </div>
-                    <div class="tech-tags">
-                        <span class="tag">PowerShell</span>
-                        <span class="tag">Bash</span>
-                        <span class="tag">Python</span>
-                    </div>
-                </div>
-
-                <div class="project-card scroll-reveal">
-                    <div class="project-header">
-                        <h3>🚀 Ultimate System Setup</h3>
-                        <div class="project-links">
-                            <a href="https://github.com/mykolas-perevicius/ultimate-system-setup" target="_blank">GitHub →</a>
-                        </div>
-                    </div>
-                    <p class="project-description">
-                        AI Lab + Complete Dev Environment automation. Hardware detection, system optimizations, and 100+ app installations.
-                    </p>
-                    <div class="project-stats">
-                        <span class="stat-item">100+ Tools</span>
-                        <span class="stat-item">Auto-config</span>
-                    </div>
-                    <div class="tech-tags">
-                        <span class="tag">Shell</span>
-                        <span class="tag">Docker</span>
-                        <span class="tag">Linux</span>
-                    </div>
-                </div>
-
-                <div class="project-card scroll-reveal">
-                    <div class="project-header">
-                        <h3>🎓 Education Playground</h3>
-                        <div class="project-links">
-                            <a href="https://mykolas-perevicius.github.io/Education_Playground/" target="_blank">Live →</a>
-                            <a href="https://github.com/mykolas-perevicius/Education_Playground" target="_blank">GitHub →</a>
-                        </div>
-                    </div>
-                    <p class="project-description">
-                        Interactive Python learning platform with 117 Jupyter notebooks covering basics to GPU programming. Live learning platform with 90% student pass rate.
-                    </p>
-                    <div class="project-stats">
-                        <span class="stat-item">117 Notebooks</span>
-                        <span class="stat-item">🚀 LIVE</span>
-                    </div>
-                    <div class="tech-tags">
-                        <span class="tag">Python</span>
-                        <span class="tag">Jupyter</span>
-                        <span class="tag">Education</span>
-                    </div>
-                </div>
-
-                <div class="project-card scroll-reveal">
-                    <div class="project-header">
-                        <h3>🎵 Melody Matcher</h3>
-                        <div class="project-links">
-                            <a href="https://delicate-torte-2cafb0.netlify.app" target="_blank">Play →</a>
-                            <a href="https://github.com/mykolas-perevicius/girlhacks-24" target="_blank">GitHub →</a>
-                        </div>
-                    </div>
-                    <p class="project-description">
-                        Interactive music puzzle game built for GirlHacks 2024. Listen to song snippets, group them together, and find the right song!
-                    </p>
-                    <div class="project-stats">
-                        <span class="stat-item">Canvas Game</span>
-                        <span class="stat-item">🚀 LIVE</span>
-                    </div>
-                    <div class="tech-tags">
-                        <span class="tag">Paper.js</span>
-                        <span class="tag">Howler.js</span>
-                        <span class="tag">Game Dev</span>
-                    </div>
-                </div>
-
-                <div class="project-card scroll-reveal">
-                    <div class="project-header">
-                        <h3>♻️ Smart Recycling Bin</h3>
-                        <div class="project-links">
-                            <a href="#" target="_blank">Research</a>
-                        </div>
-                    </div>
-                    <p class="project-description">
-                        CNN-powered recycling bin prototype with 95% material detection accuracy. Integrated Arduino-based sorting mechanism.
-                    </p>
-                    <div class="project-stats">
-                        <span class="stat-item">95% Accuracy</span>
-                        <span class="stat-item">Real-time</span>
-                    </div>
-                    <div class="tech-tags">
-                        <span class="tag">TensorFlow</span>
-                        <span class="tag">Arduino</span>
-                        <span class="tag">Computer Vision</span>
-                    </div>
-                </div>
-                </div> <!-- End projects-grid -->
-            </div> <!-- End modern-projects-grid -->
-        </div>
-    </section>
-
-    <section id="contact" class="contact">
-        <div class="section-content">
-            <h2 class="section-title">Let's Connect</h2>
-            <p class="contact-intro">
-                I'm currently exploring opportunities where deep systems work meets impactful user experience.
-                If your team is uniting robust infrastructure with intuitive applications, let's talk.
-            </p>
-            <div class="contact-methods">
-                <button id="openContactForm" class="contact-button primary">
-                    📧 <span data-i18n="contact.send">Send Message</span>
-                </button>
-                <a href="https://linkedin.com/in/mykolasperevicius" target="_blank" class="contact-button">
-                    💼 <span data-i18n="contact.linkedin">Connect on LinkedIn</span>
-                </a>
-                <a href="mailto:Perevicius.Mykolas@gmail.com" class="contact-button">
-                    ✉️ <span data-i18n="contact.email">Direct Email</span>
-                </a>
-            </div>
-        </div>
-    </section>
-
-    <section id="about">
-        <div class="section-content">
-            <h2 class="section-title">About Me</h2>
-            <div class="about-content">
-                <p><strong>🎓 Graduate Computer Science @ NJIT</strong> specializing in Compiler Design (CS485), Machine Learning (CS482), and GPU Cluster Programming. Built a multi-language compiler supporting C++, Rust, Python, Java, Kotlin, Haskell, OCaml, Assembly, and more.</p>
-
-                <p><strong>🚀 Currently:</strong> Software Engineer at UserAuthGuard, shipping production Django for 17,000+ students across multiple school districts. Achieved 90% test coverage (from 51%) across 840+ Python files with comprehensive pytest-django behavioral test suites.</p>
-
-                <p><strong>⚡ Performance Engineering:</strong> Custom CUDA kernels achieving 4.6× speedup over PyTorch. Graduate coursework in GPU cluster programming with MPI orchestration. Running local RTX 3090 setup for AI/ML development.</p>
-
-                <p><strong>💼 Previous Impact:</strong> Saved Bessemer Trust analysts 60% of their time with custom securities platform. Optimized SQL queries cutting latency by 45%. Delivered AI Tech Talk to 500+ employees.</p>
-
-                <p><strong>🛠️ Production Stack:</strong> Django REST Framework, PostgreSQL, Redis, Docker, Kubernetes, AWS (ECS, Lambda, RDS). Integrated Stripe, Google Workspace, Dell APIs. Real-time WebSockets with Django Channels.</p>
-
-                <p><strong>📚 Teaching:</strong> Created 117 Jupyter notebooks covering Python from basics to GPU programming. 90% student certification rate. Mentored 100+ students through hands-on projects.</p>
-            </div>
-        </div>
-    </section>
-
-    <section id="experience" class="experience" data-hint-anchor="experience">
+    <section id="experience" class="experience">
         <div class="section-content">
             <h2 class="section-title">Experience</h2>
             <div class="timeline">
@@ -645,1594 +199,234 @@
         </div>
     </section>
 
-    <section id="skills" class="skills">
+    <section id="projects" class="projects">
         <div class="section-content">
-            <h2 class="section-title">Technical Arsenal</h2>
-            <div class="skills-grid">
-                <div class="skill-category scroll-reveal">
-                    <h3>Languages</h3>
-                    <div class="skill-items">
-                        <div class="skill-item">Python</div>
-                        <div class="skill-item">C/C++</div>
-                        <div class="skill-item">Java</div>
-                        <div class="skill-item">C#</div>
-                        <div class="skill-item">JavaScript/TypeScript</div>
-                        <div class="skill-item">Go</div>
-                        <div class="skill-item">Rust</div>
-                    </div>
-                </div>
+            <h2 class="section-title">Featured Projects</h2>
 
-                <div class="skill-category scroll-reveal">
-                    <h3>Frameworks</h3>
-                    <div class="skill-items">
-                        <div class="skill-item">Django REST</div>
-                        <div class="skill-item">Spring Boot</div>
-                        <div class="skill-item">.NET Core</div>
-                        <div class="skill-item">React 18</div>
-                        <div class="skill-item">Node.js</div>
-                        <div class="skill-item">Express</div>
+            <!-- Projects Grid -->
+            <div class="projects-grid">
+                <!-- Featured Project: Distributed AlexNet -->
+                <div class="project-card featured scroll-reveal">
+                    <div class="project-header">
+                        <h3>Distributed AlexNet</h3>
+                        <div class="project-links">
+                            <a href="https://github.com/mykolas-perevicius/CUDA-MPI-GPU-Cluster-Programming" target="_blank">GitHub</a>
+                        </div>
                     </div>
-                </div>
-
-                <div class="skill-category scroll-reveal">
-                    <h3>Infrastructure</h3>
-                    <div class="skill-items">
-                        <div class="skill-item">Docker</div>
-                        <div class="skill-item">Kubernetes</div>
-                        <div class="skill-item">AWS (Lambda, ECS, RDS)</div>
-                        <div class="skill-item">GitHub Actions</div>
-                        <div class="skill-item">Jenkins</div>
-                        <div class="skill-item">Linux</div>
-                    </div>
-                </div>
-
-                <div class="skill-category scroll-reveal">
-                    <h3>Specialized</h3>
-                    <div class="skill-items">
-                        <div class="skill-item">CUDA Programming</div>
-                        <div class="skill-item">MPI</div>
-                        <div class="skill-item">PyTorch</div>
-                        <div class="skill-item">TensorFlow</div>
-                        <div class="skill-item">Machine Learning</div>
-                        <div class="skill-item">Computer Vision</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section class="education">
-        <div class="section-content">
-            <h2 class="section-title">Education</h2>
-            <div class="education-card scroll-reveal">
-                <div class="education-header">
-                    <h3>New Jersey Institute of Technology</h3>
-                    <span class="education-date">Sep 2021 - Dec 2025</span>
-                </div>
-                <div class="education-details">
-                    <p><strong>B.S. Computer Science</strong> • Dean's List</p>
-                    <p class="coursework">
-                        <strong>Key Coursework:</strong> GPU Cluster Programming, Compiler Design, Machine Learning,
-                        Operating Systems, Advanced Data Structures & Algorithms, Database Systems Design, Programming Languages Concepts
+                    <p class="project-description">
+                        Custom CUDA kernels and MPI orchestration for AlexNet training. Achieved 4.6x speedup over baseline PyTorch on DGX-1 cluster through optimized memory coalescing and multi-GPU coordination.
                     </p>
+                    <div class="project-stats">
+                        <span class="stat-item">4.6x Faster</span>
+                        <span class="stat-item">Multi-GPU</span>
+                    </div>
+                    <div class="tech-tags">
+                        <span class="tag">CUDA</span>
+                        <span class="tag">C++</span>
+                        <span class="tag">MPI</span>
+                        <span class="tag">PyTorch</span>
+                    </div>
+                </div>
+
+                <!-- Piano Keyboard Trainer -->
+                <div class="project-card scroll-reveal">
+                    <div class="project-header">
+                        <h3>Piano Keyboard Trainer</h3>
+                        <div class="project-links">
+                            <a href="https://github.com/mykolas-perevicius/Piano-Keyboard-Trainer" target="_blank">GitHub</a>
+                        </div>
+                    </div>
+                    <p class="project-description">
+                        Interactive piano learning application with real-time feedback. Practice scales, chords, and songs with visual guidance and progress tracking.
+                    </p>
+                    <div class="project-stats">
+                        <span class="stat-item">Interactive</span>
+                        <span class="stat-item">Real-time</span>
+                    </div>
+                    <div class="tech-tags">
+                        <span class="tag">JavaScript</span>
+                        <span class="tag">Web Audio API</span>
+                        <span class="tag">Canvas</span>
+                    </div>
+                </div>
+
+                <!-- Video Frame Interpolation -->
+                <div class="project-card scroll-reveal">
+                    <div class="project-header">
+                        <h3>Video Frame Interpolation</h3>
+                        <div class="project-links">
+                            <a href="https://github.com/mykolas-perevicius/Video-Frame-Interpolation" target="_blank">GitHub</a>
+                        </div>
+                    </div>
+                    <p class="project-description">
+                        ML-powered video frame interpolation for smooth slow-motion effects. Generates intermediate frames using deep learning to increase video frame rates.
+                    </p>
+                    <div class="project-stats">
+                        <span class="stat-item">ML-Powered</span>
+                        <span class="stat-item">Video Processing</span>
+                    </div>
+                    <div class="tech-tags">
+                        <span class="tag">Python</span>
+                        <span class="tag">PyTorch</span>
+                        <span class="tag">Computer Vision</span>
+                    </div>
+                </div>
+
+                <!-- Koala's Forge -->
+                <div class="project-card scroll-reveal">
+                    <div class="project-header">
+                        <h3>Koala's Forge</h3>
+                        <div class="project-links">
+                            <a href="https://github.com/mykolas-perevicius/koalas-forge" target="_blank">GitHub</a>
+                        </div>
+                    </div>
+                    <p class="project-description">
+                        Free, cross-platform system installer supporting 100+ applications. Automated package management with dependency resolution and rollback support.
+                    </p>
+                    <div class="project-stats">
+                        <span class="stat-item">100+ Apps</span>
+                        <span class="stat-item">Cross-platform</span>
+                    </div>
+                    <div class="tech-tags">
+                        <span class="tag">PowerShell</span>
+                        <span class="tag">Bash</span>
+                        <span class="tag">Python</span>
+                    </div>
+                </div>
+
+                <!-- Education Playground -->
+                <div class="project-card scroll-reveal">
+                    <div class="project-header">
+                        <h3>Education Playground</h3>
+                        <div class="project-links">
+                            <a href="https://mykolas-perevicius.github.io/Education_Playground/" target="_blank">Live</a>
+                            <a href="https://github.com/mykolas-perevicius/Education_Playground" target="_blank">GitHub</a>
+                        </div>
+                    </div>
+                    <p class="project-description">
+                        Interactive Python learning platform with 117 Jupyter notebooks. Covers basics to GPU programming with 90% student certification pass rate.
+                    </p>
+                    <div class="project-stats">
+                        <span class="stat-item">117 Notebooks</span>
+                        <span class="stat-item">90% Pass Rate</span>
+                    </div>
+                    <div class="tech-tags">
+                        <span class="tag">Python</span>
+                        <span class="tag">Jupyter</span>
+                        <span class="tag">Education</span>
+                    </div>
+                </div>
+
+                <!-- stocksandoptions.org -->
+                <div class="project-card scroll-reveal">
+                    <div class="project-header">
+                        <h3>stocksandoptions.org</h3>
+                        <div class="project-links">
+                            <a href="https://stocksandoptions.org" target="_blank">Live</a>
+                        </div>
+                    </div>
+                    <p class="project-description">
+                        Financial education platform teaching stocks and options trading fundamentals. Interactive lessons and real-world examples for beginner investors.
+                    </p>
+                    <div class="project-stats">
+                        <span class="stat-item">Finance</span>
+                        <span class="stat-item">Education</span>
+                    </div>
+                    <div class="tech-tags">
+                        <span class="tag">React</span>
+                        <span class="tag">TypeScript</span>
+                        <span class="tag">Finance</span>
+                    </div>
+                </div>
+
+                <!-- Rosetta (In Progress) -->
+                <div class="project-card scroll-reveal">
+                    <div class="project-header">
+                        <h3>Rosetta</h3>
+                        <span class="project-badge in-progress">In Progress</span>
+                    </div>
+                    <p class="project-description">
+                        An upcoming project currently under development. Stay tuned for more details.
+                    </p>
+                    <div class="project-stats">
+                        <span class="stat-item">Coming Soon</span>
+                    </div>
+                    <div class="tech-tags">
+                        <span class="tag">TBD</span>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <section id="blog" class="blog">
+    <section id="contact" class="contact">
         <div class="section-content">
-            <h2 class="section-title">Technical Writing</h2>
-
-            <article class="blog-post scroll-reveal" data-post-id="cuda-alexnet">
-                <div class="blog-post-header">
-                    <h3>Achieving 4.6× Speedup: Custom CUDA Kernels for AlexNet</h3>
-                    <div class="blog-meta">
-                        <span class="blog-date">December 2024</span>
-                        <span class="blog-tag">GPU Computing</span>
-                        <span class="blog-tag">CUDA</span>
-                    </div>
-                </div>
-                <p class="blog-excerpt">
-                    When PyTorch's default kernels aren't fast enough, you write your own. Here's how I optimized AlexNet training
-                    on an NVIDIA DGX-1 cluster using custom CUDA kernels and MPI orchestration, the architectural decisions that
-                    mattered most, and what I learned about memory coalescing the hard way.
-                </p>
-                <div class="blog-highlights">
-                    <div class="highlight-item">⚡ 4.6× faster than baseline PyTorch</div>
-                    <div class="highlight-item">🔧 Custom memory management patterns</div>
-                    <div class="highlight-item">📊 Multi-GPU orchestration with MPI</div>
-                </div>
-                <button class="blog-read-more">Read Full Article →</button>
-            </article>
-
-            <article class="blog-post scroll-reveal" data-post-id="koalas-forge">
-                <div class="blog-post-header">
-                    <h3>Why I Built Yet Another System Installer (And Why You Might Need One Too)</h3>
-                    <div class="blog-meta">
-                        <span class="blog-date">November 2024</span>
-                        <span class="blog-tag">DevOps</span>
-                        <span class="blog-tag">Automation</span>
-                    </div>
-                </div>
-                <p class="blog-excerpt">
-                    Losing access to three machines in one weekend taught me something: your development environment should be
-                    reproducible in under an hour. Koala's Forge is my answer to Ninite's $30/year subscription, a free,
-                    cross-platform installer supporting 100+ apps with silent installations, dependency resolution, and rollback support.
-                </p>
-                <div class="blog-highlights">
-                    <div class="highlight-item">🐨 100+ applications supported</div>
-                    <div class="highlight-item">🔄 Automatic dependency resolution</div>
-                    <div class="highlight-item">⏪ Rollback failed installations</div>
-                </div>
-                <button class="blog-read-more">Read Full Article →</button>
-            </article>
-
-            <article class="blog-post scroll-reveal" data-post-id="abstraction-performance">
-                <div class="blog-post-header">
-                    <h3>The Hidden Cost of Convenience: When Abstractions Leak Performance</h3>
-                    <div class="blog-meta">
-                        <span class="blog-date">October 2024</span>
-                        <span class="blog-tag">Performance</span>
-                        <span class="blog-tag">Systems</span>
-                    </div>
-                </div>
-                <p class="blog-excerpt">
-                    High-level frameworks are amazing, until they're not. A deep dive into when PyTorch's conveniences become
-                    bottlenecks, why dropping to CUDA gave me 4.6× speedup, and how to know when it's time to stop using
-                    abstractions and start writing assembly (or close to it). Plus: the mental model I use to decide when
-                    optimization is premature vs. necessary.
-                </p>
-                <div class="blog-highlights">
-                    <div class="highlight-item">🎯 When to optimize (and when not to)</div>
-                    <div class="highlight-item">⚙️ Understanding abstraction overhead</div>
-                    <div class="highlight-item">🔍 Profiling strategies that actually work</div>
-                </div>
-                <button class="blog-read-more">Read Full Article →</button>
-            </article>
-
-            <article class="blog-post scroll-reveal" data-post-id="distributed-consensus">
-                <div class="blog-post-header">
-                    <h3>Breaking Things to Understand Them: A Weekend with Distributed Consensus</h3>
-                    <div class="blog-meta">
-                        <span class="blog-date">September 2024</span>
-                        <span class="blog-tag">Distributed Systems</span>
-                        <span class="blog-tag">Learning</span>
-                    </div>
-                </div>
-                <p class="blog-excerpt">
-                    I spent a weekend intentionally breaking Raft consensus to understand how it works. What happens when you
-                    introduce network partitions? What if followers lie about their log indices? Can you make the cluster elect
-                    two leaders? Turns out, theoretical correctness and practical resilience are two very different things.
-                </p>
-                <div class="blog-highlights">
-                    <div class="highlight-item">🔨 Breaking Raft in creative ways</div>
-                    <div class="highlight-item">🧪 Network partition experiments</div>
-                    <div class="highlight-item">💡 What textbooks don't tell you</div>
-                </div>
-                <button class="blog-read-more">Read Full Article →</button>
-            </article>
-
-            <article class="blog-post scroll-reveal" data-post-id="education-playground">
-                <div class="blog-post-header">
-                    <h3>Teaching Python by Building Games: Why Education Playground Works</h3>
-                    <div class="blog-meta">
-                        <span class="blog-date">August 2024</span>
-                        <span class="blog-tag">Education</span>
-                        <span class="blog-tag">Python</span>
-                    </div>
-                </div>
-                <p class="blog-excerpt">
-                    117 interactive Jupyter notebooks covering Python from basics to GPU programming. The secret? Every concept is taught
-                    through building something you can actually see and interact with. No "hello world" tutorials here, we're building
-                    games, visualizations, and tools from day one. Here's why learning by building beats learning by reading.
-                </p>
-                <div class="blog-highlights">
-                    <div class="highlight-item">🎮 Learn by building games</div>
-                    <div class="highlight-item">📚 117 hands-on lessons</div>
-                    <div class="highlight-item">🚀 Basics to GPU programming</div>
-                </div>
-                <button class="blog-read-more">Read Full Article →</button>
-            </article>
+            <h2 class="section-title">Let's Connect</h2>
+            <p class="contact-intro">
+                I'm currently exploring opportunities where deep systems work meets impactful user experience.
+                If your team is uniting robust infrastructure with intuitive applications, let's talk.
+            </p>
+            <div class="contact-methods">
+                <button id="openContactForm" class="contact-button primary">
+                    📧 Send Message
+                </button>
+                <a href="https://linkedin.com/in/mykolasperevicius" target="_blank" class="contact-button">
+                    💼 Connect on LinkedIn
+                </a>
+                <a href="mailto:Perevicius.Mykolas@gmail.com" class="contact-button">
+                    ✉️ Direct Email
+                </a>
+            </div>
         </div>
     </section>
 
-    <!-- Blog Post Modals -->
-    <div class="blog-modal" id="blog-modal-cuda-alexnet">
-        <div class="blog-modal-content">
-            <button class="blog-modal-close">×</button>
-
-            <div class="blog-full-header">
-                <h1 class="blog-full-title">Achieving 4.6× Speedup: Custom CUDA Kernels for AlexNet</h1>
-                <div class="blog-meta">
-                    <span class="blog-date">December 2024</span>
-                    <span class="blog-tag">GPU Computing</span>
-                    <span class="blog-tag">CUDA</span>
-                    <span class="blog-tag">MPI</span>
-                </div>
+    <footer class="footer glass-panel">
+        <div class="footer-content">
+            <div class="footer-links">
+                <a href="https://github.com/mykolas-perevicius" target="_blank">GitHub</a>
+                <a href="https://linkedin.com/in/mykolasperevicius" target="_blank">LinkedIn</a>
+                <a href="mailto:Perevicius.Mykolas@gmail.com">Email</a>
             </div>
-
-            <div class="blog-full-content">
-                <h2>The Problem: PyTorch Was Too Slow</h2>
-                <p>
-                    Training AlexNet on ImageNet should be fast, we're running on an <strong>NVIDIA DGX-1</strong> with 8× V100 GPUs.
-                    But PyTorch's default kernels weren't cutting it. Profiling showed we were spending 40% of our time in convolution operations,
-                    and another 30% just moving data between GPUs.
-                </p>
-
-                <p>That's when I decided: <strong>if the framework won't give me the performance I need, I'll write my own kernels.</strong></p>
-
-                <h2>Memory Coalescing: The 10× Difference</h2>
-                <p>
-                    The first major optimization came from fixing memory access patterns. GPU memory is fast, but only if you access it correctly.
-                    Here's the problem with naive implementations:
-                </p>
-
-                <div class="code-sandbox" data-lang="javascript">
-                    <code>// Simulating bad vs good memory access patterns
-// Run this to see the performance difference!
-
-console.log("=== Memory Access Pattern Demo ===\n");
-
-// BAD: Non-coalesced access (strided)
-function badMemoryAccess(size) {
-    const arr = new Float32Array(size);
-    const start = performance.now();
-
-    for (let i = 0; i < size; i += 8) {  // Stride of 8
-        arr[i] = i * 2;
-    }
-
-    return performance.now() - start;
-}
-
-// GOOD: Coalesced access (sequential)
-function goodMemoryAccess(size) {
-    const arr = new Float32Array(size);
-    const start = performance.now();
-
-    for (let i = 0; i < size; i++) {  // Sequential
-        arr[i] = i * 2;
-    }
-
-    return performance.now() - start;
-}
-
-const size = 10000000;
-const badTime = badMemoryAccess(size);
-const goodTime = goodMemoryAccess(size);
-
-console.log(`Bad (strided):     ${badTime.toFixed(2)}ms`);
-console.log(`Good (sequential): ${goodTime.toFixed(2)}ms`);
-console.log(`Speedup: ${(badTime / goodTime).toFixed(2)}x\n`);
-
-console.log("On a GPU, this difference is even more extreme!");
-console.log("Coalesced memory = 10x faster in real CUDA code.");
-</code>
-                </div>
-
-                <h2>Custom Convolution Kernel</h2>
-                <p>
-                    The core of the speedup came from a custom convolution kernel that:
-                </p>
-                <ul>
-                    <li><strong>Uses shared memory</strong> to reduce global memory accesses by 80%</li>
-                    <li><strong>Coalesces memory reads</strong> for 10× bandwidth improvement</li>
-                    <li><strong>Optimizes thread block size</strong> for V100's SM architecture</li>
-                    <li><strong>Fuses operations</strong> to eliminate intermediate buffers</li>
-                </ul>
-
-                <p>Here's a simplified version of the core convolution logic:</p>
-
-                <div class="code-sandbox" data-lang="javascript">
-                    <code>// Simplified 2D convolution (concept demo in JS)
-// Real CUDA version is in C++ with __shared__ memory
-
-function conv2D(input, kernel, inputSize, kernelSize) {
-    const outputSize = inputSize - kernelSize + 1;
-    const output = new Float32Array(outputSize * outputSize);
-
-    console.log(`Input: ${inputSize}x${inputSize}`);
-    console.log(`Kernel: ${kernelSize}x${kernelSize}`);
-    console.log(`Output: ${outputSize}x${outputSize}\n`);
-
-    // Convolution operation
-    for (let oy = 0; oy < outputSize; oy++) {
-        for (let ox = 0; ox < outputSize; ox++) {
-            let sum = 0;
-
-            // Apply kernel
-            for (let ky = 0; ky < kernelSize; ky++) {
-                for (let kx = 0; kx < kernelSize; kx++) {
-                    const ix = ox + kx;
-                    const iy = oy + ky;
-                    sum += input[iy * inputSize + ix] * kernel[ky * kernelSize + kx];
-                }
-            }
-
-            output[oy * outputSize + ox] = sum;
-        }
-    }
-
-    return output;
-}
-
-// Example: 5x5 input with 3x3 kernel
-const input = new Float32Array([
-    1, 2, 3, 4, 5,
-    2, 3, 4, 5, 6,
-    3, 4, 5, 6, 7,
-    4, 5, 6, 7, 8,
-    5, 6, 7, 8, 9
-]);
-
-const kernel = new Float32Array([
-    1, 0, -1,
-    1, 0, -1,
-    1, 0, -1
-]);
-
-const result = conv2D(input, kernel, 5, 3);
-
-console.log("Convolution result:");
-for (let y = 0; y < 3; y++) {
-    const row = [];
-    for (let x = 0; x < 3; x++) {
-        row.push(result[y * 3 + x].toFixed(1));
-    }
-    console.log(row.join("  "));
-}
-
-console.log("\nIn CUDA: This runs in parallel across 1000s of threads!");
-</code>
-                </div>
-
-                <h2>Multi-GPU with MPI</h2>
-                <p>
-                    Once a single GPU was optimized, scaling to 8 GPUs required careful orchestration with <strong>MPI (Message Passing Interface)</strong>.
-                    The key challenges:
-                </p>
-
-                <blockquote>
-                    "The fastest code in the world is useless if you spend all your time waiting for data to transfer between GPUs."
-                </blockquote>
-
-                <p>My solution used:</p>
-                <ul>
-                    <li><strong>Asynchronous communication</strong> - overlap compute with transfers</li>
-                    <li><strong>Ring-allreduce</strong> for gradient synchronization</li>
-                    <li><strong>NCCL</strong> for fast GPU-to-GPU communication</li>
-                    <li><strong>Pipeline parallelism</strong> to keep all GPUs busy</li>
-                </ul>
-
-                <h2>Results: 4.6× Faster</h2>
-                <p>
-                    Final benchmarks on ImageNet training:
-                </p>
-                <ul>
-                    <li><strong>Baseline PyTorch:</strong> 3.2 hours/epoch</li>
-                    <li><strong>Custom CUDA:</strong> 0.7 hours/epoch</li>
-                    <li><strong>Speedup:</strong> 4.6×</li>
-                </ul>
-
-                <p>
-                    The biggest lesson? <strong>Frameworks are great until they're not.</strong> When you need maximum performance,
-                    understanding what's happening at the hardware level and being willing to drop down to custom kernels makes all the difference.
-                </p>
-
-                <h2>Try It Yourself</h2>
-                <p>
-                    Want to explore the full implementation? Check out the repository:
-                </p>
-                <p>
-                    <a href="https://github.com/mykolas-perevicius/CUDA-MPI-GPU-Cluster-Programming" target="_blank" class="blog-link">
-                        View Full Project on GitHub →
-                    </a>
-                </p>
+            <div class="footer-metrics" id="githubMetrics">
+                <span class="metric"><span id="totalCommits">--</span> commits</span>
+                <span class="metric"><span id="totalRepos">--</span> repos</span>
+                <span class="metric"><span id="totalStars">--</span> stars</span>
             </div>
         </div>
-    </div>
-
-    <!-- Koala's Forge Blog Modal -->
-    <div class="blog-modal" id="blog-modal-koalas-forge">
-        <div class="blog-modal-content">
-            <button class="blog-modal-close">×</button>
-
-            <div class="blog-full-header">
-                <h1 class="blog-full-title">Why I Built Yet Another System Installer (And Why You Might Need One Too)</h1>
-                <div class="blog-meta">
-                    <span class="blog-date">November 2024</span>
-                    <span class="blog-tag">DevOps</span>
-                    <span class="blog-tag">Automation</span>
-                    <span class="blog-tag">PowerShell</span>
-                </div>
-            </div>
-
-            <div class="blog-full-content">
-                <h2>The Weekend Everything Broke</h2>
-                <p>
-                    Friday evening: Laptop dies. Saturday morning: Desktop BSOD. Sunday afternoon: My GPU workstation refused to boot.
-                    <strong>Three machines, one weekend, zero backups of my development environment.</strong>
-                </p>
-
-                <p>
-                    I spent 18 hours reinstalling tools. VSCode. Python. Node. Docker. Postgres. Git. CUDA toolkit. The list went on.
-                    By hour 12, I was searching for "Ninite alternatives 2024" and discovering that the free version only supports 15 apps,
-                    while Ninite Pro costs $30/year. For something I might use twice a year.
-                </p>
-
-                <p>That's when I decided: <strong>I'm building my own.</strong></p>
-
-                <h2>What Is Koala's Forge?</h2>
-                <p>
-                    Koala's Forge is a free, open-source system installer that supports <strong>100+ applications</strong> across Windows, macOS, and Linux.
-                    Think Ninite, but cross-platform, completely free, and designed for developers who need GPU drivers, compilers, and dev tools
-                    that "mainstream" installers ignore.
-                </p>
-
-                <div class="code-sandbox" data-lang="javascript">
-                    <code>// Simplified version of the core installation logic
-// Real implementation is in PowerShell/Bash with robust error handling
-
-class PackageInstaller {
-    constructor() {
-        this.packages = new Map();
-        this.dependencies = new Map();
-    }
-
-    // Register a package with its metadata
-    addPackage(name, config) {
-        this.packages.set(name, {
-            name,
-            url: config.url,
-            installer: config.installer,
-            depends: config.depends || [],
-            postInstall: config.postInstall || null
-        });
-
-        // Build dependency graph
-        (config.depends || []).forEach(dep => {
-            if (!this.dependencies.has(dep)) {
-                this.dependencies.set(dep, []);
-            }
-            this.dependencies.get(dep).push(name);
-        });
-    }
-
-    // Topological sort for dependency resolution
-    resolveDependencies(packageName) {
-        const visited = new Set();
-        const stack = [];
-
-        const visit = (pkg) => {
-            if (visited.has(pkg)) return;
-            visited.add(pkg);
-
-            const packageInfo = this.packages.get(pkg);
-            if (!packageInfo) {
-                throw new Error(`Package ${pkg} not found`);
-            }
-
-            // Visit dependencies first
-            packageInfo.depends.forEach(dep => visit(dep));
-            stack.push(pkg);
-        };
-
-        visit(packageName);
-        return stack;
-    }
-
-    // Install packages in correct order
-    async installPackages(packageNames) {
-        const allPackages = new Set();
-
-        // Collect all packages and dependencies
-        packageNames.forEach(name => {
-            const deps = this.resolveDependencies(name);
-            deps.forEach(pkg => allPackages.add(pkg));
-        });
-
-        console.log(`Installing ${allPackages.size} packages (including dependencies)...\n`);
-
-        // Install in dependency order
-        for (const pkgName of allPackages) {
-            const pkg = this.packages.get(pkgName);
-            console.log(`[${Array.from(allPackages).indexOf(pkgName) + 1}/${allPackages.size}] Installing ${pkg.name}...`);
-
-            // Simulate installation
-            await this.simulateInstall(pkg);
-
-            if (pkg.postInstall) {
-                console.log(`  Running post-install script for ${pkg.name}`);
-            }
-        }
-
-        console.log(`\n✓ All packages installed successfully!`);
-    }
-
-    async simulateInstall(pkg) {
-        // In real implementation: download, verify checksum, run installer
-        return new Promise(resolve => setTimeout(resolve, 100));
-    }
-}
-
-// Example usage
-const installer = new PackageInstaller();
-
-// Register packages with dependencies
-installer.addPackage('python', {
-    url: 'https://python.org/downloads/latest',
-    installer: 'python-installer.exe',
-    postInstall: () => console.log('Adding Python to PATH')
-});
-
-installer.addPackage('pip', {
-    url: 'https://bootstrap.pypa.io/get-pip.py',
-    depends: ['python']
-});
-
-installer.addPackage('jupyter', {
-    url: 'pypi://jupyter',
-    depends: ['python', 'pip'],
-    postInstall: () => console.log('Configuring Jupyter kernel')
-});
-
-installer.addPackage('vscode', {
-    url: 'https://code.visualstudio.com/download',
-    installer: 'vscode-installer.exe'
-});
-
-// Install Jupyter (automatically resolves Python + pip)
-installer.installPackages(['jupyter', 'vscode']);
-</code>
-                </div>
-
-                <h2>Key Features</h2>
-                <p>
-                    What makes Koala's Forge different from existing solutions?
-                </p>
-
-                <h3>1. Dependency Resolution</h3>
-                <p>
-                    Want to install Jupyter? The installer knows you need Python and pip first. It builds a dependency graph
-                    and installs everything in the correct order. No more "ERROR: Python not found" halfway through your setup.
-                </p>
-
-                <h3>2. Silent Installations</h3>
-                <p>
-                    Every package supports silent installation flags. Start the script, go make coffee, come back to a fully configured system.
-                    No clicking "Next" 47 times.
-                </p>
-
-                <h3>3. Rollback Support</h3>
-                <p>
-                    If an installation fails (corrupted download, disk full, dependency conflict), Koala's Forge can roll back
-                    to the previous state. Checkpoints are created before each package installation.
-                </p>
-
-                <div class="code-sandbox" data-lang="javascript">
-                    <code>// Rollback mechanism (simplified)
-
-class InstallationManager {
-    constructor() {
-        this.checkpoints = [];
-        this.installedPackages = [];
-    }
-
-    createCheckpoint() {
-        const checkpoint = {
-            timestamp: new Date(),
-            packages: [...this.installedPackages],
-            state: 'saved'
-        };
-        this.checkpoints.push(checkpoint);
-        console.log(`Checkpoint created: ${checkpoint.packages.length} packages`);
-        return checkpoint;
-    }
-
-    async installWithRollback(packageName) {
-        // Create checkpoint before installation
-        const checkpoint = this.createCheckpoint();
-
-        try {
-            console.log(`Installing ${packageName}...`);
-
-            // Simulate installation that might fail
-            const success = Math.random() > 0.3; // 70% success rate for demo
-
-            if (!success) {
-                throw new Error('Installation failed: Download corrupted');
-            }
-
-            this.installedPackages.push(packageName);
-            console.log(`✓ ${packageName} installed successfully`);
-
-        } catch (error) {
-            console.error(`✗ Installation failed: ${error.message}`);
-            console.log('Rolling back to previous checkpoint...');
-
-            // Rollback to checkpoint
-            this.rollback(checkpoint);
-        }
-    }
-
-    rollback(checkpoint) {
-        const packagesToRemove = this.installedPackages.filter(
-            pkg => !checkpoint.packages.includes(pkg)
-        );
-
-        packagesToRemove.forEach(pkg => {
-            console.log(`  Removing ${pkg}...`);
-        });
-
-        this.installedPackages = [...checkpoint.packages];
-        console.log(`✓ Rolled back to checkpoint (${checkpoint.packages.length} packages)`);
-    }
-}
-
-// Demo: Try installing packages with potential failures
-const manager = new InstallationManager();
-
-async function demo() {
-    await manager.installWithRollback('Git');
-    await manager.installWithRollback('Docker');
-    await manager.installWithRollback('Node.js');
-    await manager.installWithRollback('VSCode');
-
-    console.log(`\nFinal installed packages: ${manager.installedPackages.join(', ')}`);
-}
-
-demo();
-</code>
-                </div>
-
-                <h2>Real-World Impact</h2>
-                <p>
-                    Since releasing Koala's Forge:
-                </p>
-                <ul>
-                    <li><strong>Setup time: 18 hours → 45 minutes</strong> for a full dev environment</li>
-                    <li><strong>100+ packages</strong> supported across Windows, macOS, Linux</li>
-                    <li><strong>Zero manual downloads</strong> — everything is scripted</li>
-                    <li><strong>Reproducible environments</strong> — same setup on every machine</li>
-                </ul>
-
-                <blockquote>
-                    "Your development environment should be code, not a 47-step manual process you hope you remember correctly."
-                </blockquote>
-
-                <h2>Try It Yourself</h2>
-                <p>
-                    Koala's Forge is completely free and open source. If you're tired of reinstalling your dev environment from scratch
-                    every time you get a new machine, give it a try:
-                </p>
-                <p>
-                    <a href="https://github.com/mykolas-perevicius/koalas-forge" target="_blank" class="blog-link">
-                        View Project on GitHub →
-                    </a>
-                </p>
-            </div>
-        </div>
-    </div>
-
-    <!-- Performance Abstractions Blog Modal -->
-    <div class="blog-modal" id="blog-modal-abstraction-performance">
-        <div class="blog-modal-content">
-            <button class="blog-modal-close">×</button>
-
-            <div class="blog-full-header">
-                <h1 class="blog-full-title">The Hidden Cost of Convenience: When Abstractions Leak Performance</h1>
-                <div class="blog-meta">
-                    <span class="blog-date">October 2024</span>
-                    <span class="blog-tag">Performance</span>
-                    <span class="blog-tag">Systems</span>
-                    <span class="blog-tag">Optimization</span>
-                </div>
-            </div>
-
-            <div class="blog-full-content">
-                <h2>The Performance Paradox</h2>
-                <p>
-                    High-level frameworks are amazing. PyTorch lets you prototype a neural network in 10 lines of Python.
-                    Django abstracts away SQL injection nightmares. React handles DOM updates for you.
-                </p>
-
-                <p>
-                    But here's the catch: <strong>every abstraction has a cost.</strong> Sometimes that cost is invisible.
-                    Sometimes it's 4.6× slower than it needs to be.
-                </p>
-
-                <blockquote>
-                    "Premature optimization is the root of all evil." — Donald Knuth
-                </blockquote>
-
-                <p>
-                    Everyone quotes Knuth. Few people finish the quote: <strong>"Yet we should not pass up our opportunities in that critical 3%."</strong>
-                    The trick is knowing when you're in that 3%.
-                </p>
-
-                <h2>When Abstractions Break Down</h2>
-                <p>
-                    Let me tell you about the time PyTorch cost me 18 hours of compute time per epoch.
-                </p>
-
-                <p>
-                    I was training AlexNet on ImageNet using PyTorch's built-in convolution layers. Standard stuff.
-                    The code was clean, the API was beautiful, and the performance was... terrible.
-                </p>
-
-                <p>
-                    Profiling showed 40% of time in convolution operations. Not unexpected. But when I dug deeper,
-                    I found PyTorch was using a generic convolution kernel that worked for any input size, any stride, any padding.
-                    <strong>Generality has a price.</strong>
-                </p>
-
-                <div class="code-sandbox" data-lang="javascript">
-                    <code>// Generic vs Specialized: A Simple Example
-// This demonstrates why specialized code beats generic code
-
-console.log("=== Generic vs Specialized Performance ===\n");
-
-// GENERIC: Works for any array, any operation
-function genericMapReduce(arr, mapFn, reduceFn, initial) {
-    return arr.map(mapFn).reduce(reduceFn, initial);
-}
-
-// SPECIALIZED: Only sums squares, but optimized
-function sumOfSquares(arr) {
-    let sum = 0;
-    for (let i = 0; i < arr.length; i++) {
-        const val = arr[i];
-        sum += val * val;  // Inlined, no function calls
-    }
-    return sum;
-}
-
-// Benchmark
-const data = Array.from({length: 1000000}, (_, i) => i);
-
-console.time('Generic approach');
-const result1 = genericMapReduce(
-    data,
-    x => x * x,
-    (acc, x) => acc + x,
-    0
-);
-console.timeEnd('Generic approach');
-
-console.time('Specialized approach');
-const result2 = sumOfSquares(data);
-console.timeEnd('Specialized approach');
-
-console.log(`\nBoth compute the same result: ${result1 === result2}`);
-console.log(`\nThe specialized version is faster because:`);
-console.log(`  - No intermediate array allocation`);
-console.log(`  - No function call overhead`);
-console.log(`  - Better cache locality`);
-console.log(`  - Compiler can optimize the simple loop`);
-</code>
-                </div>
-
-                <h2>My Mental Model for Optimization</h2>
-                <p>
-                    Over the years, I've developed a framework for deciding when to optimize:
-                </p>
-
-                <h3>Phase 1: Make It Work</h3>
-                <p>
-                    Use the highest-level abstraction available. PyTorch, not CUDA. React, not vanilla DOM manipulation.
-                    <strong>Correctness first.</strong> You can't optimize code that doesn't work.
-                </p>
-
-                <h3>Phase 2: Measure Everything</h3>
-                <p>
-                    Profile before optimizing. Not guessing, not hunches. <strong>Data.</strong>
-                </p>
-
-                <ul>
-                    <li><code>cProfile</code> for Python CPU profiling</li>
-                    <li><code>nvidia-smi</code> for GPU utilization</li>
-                    <li>PyTorch's built-in profiler for kernel-level metrics</li>
-                    <li><code>perf</code> for low-level CPU counters</li>
-                </ul>
-
-                <p>
-                    If your code spends 90% of time in function A and 10% in function B, optimizing B is wasted effort.
-                </p>
-
-                <div class="code-sandbox" data-lang="javascript">
-                    <code>// Profiling: Where Does The Time Go?
-
-class Profiler {
-    constructor() {
-        this.timings = new Map();
-    }
-
-    profile(name, fn) {
-        const start = performance.now();
-        const result = fn();
-        const elapsed = performance.now() - start;
-
-        if (!this.timings.has(name)) {
-            this.timings.set(name, []);
-        }
-        this.timings.get(name).push(elapsed);
-
-        return result;
-    }
-
-    report() {
-        console.log("\n=== Profiling Report ===\n");
-
-        const totals = new Map();
-        let grandTotal = 0;
-
-        for (const [name, times] of this.timings) {
-            const total = times.reduce((a, b) => a + b, 0);
-            totals.set(name, total);
-            grandTotal += total;
-        }
-
-        // Sort by total time
-        const sorted = [...totals.entries()].sort((a, b) => b[1] - a[1]);
-
-        sorted.forEach(([name, total]) => {
-            const percentage = ((total / grandTotal) * 100).toFixed(1);
-            const avgTime = (total / this.timings.get(name).length).toFixed(2);
-            const calls = this.timings.get(name).length;
-
-            console.log(`${name}:`);
-            console.log(`  Total: ${total.toFixed(2)}ms (${percentage}%)`);
-            console.log(`  Calls: ${calls}`);
-            console.log(`  Avg:   ${avgTime}ms/call\n`);
-        });
-
-        console.log(`Grand Total: ${grandTotal.toFixed(2)}ms`);
-    }
-}
-
-// Example: Profile a simulated application
-const profiler = new Profiler();
-
-function simulateDataProcessing() {
-    // Simulate expensive database query
-    profiler.profile('Database Query', () => {
-        const arr = new Array(1000000);
-        for (let i = 0; i < arr.length; i++) arr[i] = Math.random();
-        return arr;
-    });
-
-    // Simulate data transformation
-    profiler.profile('Data Transform', () => {
-        return new Array(500000).fill(0).map(Math.random);
-    });
-
-    // Simulate rendering (fast)
-    profiler.profile('Rendering', () => {
-        return Math.sqrt(Math.random());
-    });
-}
-
-// Run multiple times
-for (let i = 0; i < 5; i++) {
-    simulateDataProcessing();
-}
-
-profiler.report();
-
-console.log("\n💡 Key Insight: Focus optimization on the top time consumers!");
-</code>
-                </div>
-
-                <h3>Phase 3: Optimize The Hot Path</h3>
-                <p>
-                    Once you know where the time goes, you have options:
-                </p>
-
-                <ol>
-                    <li><strong>Algorithmic improvement</strong> — O(n²) to O(n log n) beats any micro-optimization</li>
-                    <li><strong>Remove abstraction layers</strong> — Drop from framework to library to raw implementation</li>
-                    <li><strong>Specialize</strong> — Trade generality for speed</li>
-                    <li><strong>Parallel execution</strong> — Use multiple cores / GPUs</li>
-                </ol>
-
-                <p>
-                    For AlexNet, I did #2 and #3: custom CUDA kernels specialized for the exact layer dimensions I was using.
-                    No generality tax. <strong>4.6× speedup.</strong>
-                </p>
-
-                <h2>When NOT to Optimize</h2>
-                <p>
-                    Here's what I've learned about when to leave abstractions alone:
-                </p>
-
-                <ul>
-                    <li><strong>It's not the bottleneck</strong> — If profiling shows it's 2% of runtime, don't touch it</li>
-                    <li><strong>You're still prototyping</strong> — Code that might be deleted tomorrow doesn't need optimization</li>
-                    <li><strong>The abstraction prevents bugs</strong> — SQL injection > raw string concatenation, always</li>
-                    <li><strong>Maintenance cost is high</strong> — Custom CUDA kernels are 10× harder to debug than PyTorch</li>
-                </ul>
-
-                <blockquote>
-                    "Make it work, make it right, make it fast — in that order."
-                </blockquote>
-
-                <h2>The Takeaway</h2>
-                <p>
-                    Abstractions are incredible. They let us build faster, with fewer bugs, standing on the shoulders of giants.
-                    But when performance matters, you need to know:
-                </p>
-
-                <ul>
-                    <li><strong>Where</strong> your code spends time (profiling)</li>
-                    <li><strong>Why</strong> it's slow (understanding the abstraction cost)</li>
-                    <li><strong>When</strong> to drop down a level (is this the critical 3%?)</li>
-                </ul>
-
-                <p>
-                    The best engineers aren't the ones who write the fastest code. They're the ones who know when fast enough is fast enough,
-                    and when to roll up their sleeves and write CUDA kernels.
-                </p>
-
-                <p>
-                    Want to see the full CUDA optimization story? Check out my AlexNet project:
-                </p>
-                <p>
-                    <a href="https://github.com/mykolas-perevicius/CUDA-MPI-GPU-Cluster-Programming" target="_blank" class="blog-link">
-                        View Full CUDA Project →
-                    </a>
-                </p>
-            </div>
-        </div>
-    </div>
-
-    <!-- Distributed Consensus Blog Modal -->
-    <div class="blog-modal" id="blog-modal-distributed-consensus">
-        <div class="blog-modal-content">
-            <button class="blog-modal-close">×</button>
-
-            <div class="blog-full-header">
-                <h1 class="blog-full-title">Breaking Things to Understand Them: A Weekend with Distributed Consensus</h1>
-                <div class="blog-meta">
-                    <span class="blog-date">September 2024</span>
-                    <span class="blog-tag">Distributed Systems</span>
-                    <span class="blog-tag">Raft</span>
-                    <span class="blog-tag">Learning</span>
-                </div>
-            </div>
-
-            <div class="blog-full-content">
-                <h2>The Best Way to Learn: Break It On Purpose</h2>
-                <p>
-                    Reading the Raft paper is one thing. Understanding how distributed consensus actually works when networks partition,
-                    nodes lie, and Murphy's Law is in full effect? That requires getting your hands dirty.
-                </p>
-
-                <p>
-                    So I spent a weekend <strong>intentionally breaking Raft</strong> to see what would happen.
-                </p>
-
-                <blockquote>
-                    "If you want to understand how something works, try to break it. If you want to master it, try to break it in creative ways."
-                </blockquote>
-
-                <h2>Experiment 1: Can We Elect Two Leaders?</h2>
-                <p>
-                    Raft's safety property guarantees <strong>at most one leader per term.</strong> But what if we try really hard to break it?
-                </p>
-
-                <p>
-                    I modified a Raft implementation to introduce a "malicious node" that lies about its log index during elections.
-                    The node claims to have a longer log than it actually does, trying to win elections it shouldn't.
-                </p>
-
-                <div class="code-sandbox" data-lang="javascript">
-                    <code>// Simplified Raft Election Simulation
-// This demonstrates leader election with a malicious node
-
-class RaftNode {
-    constructor(id, logLength) {
-        this.id = id;
-        this.logLength = logLength;
-        this.currentTerm = 0;
-        this.votedFor = null;
-        this.isMalicious = false;
-    }
-
-    // Request vote from this node
-    requestVote(candidateId, candidateTerm, candidateLogLength) {
-        // Update term if candidate has higher term
-        if (candidateTerm > this.currentTerm) {
-            this.currentTerm = candidateTerm;
-            this.votedFor = null;
-        }
-
-        // Already voted in this term
-        if (this.votedFor !== null && this.votedFor !== candidateId) {
-            return false;
-        }
-
-        // Candidate's log must be at least as up-to-date
-        if (candidateLogLength >= this.logLength) {
-            this.votedFor = candidateId;
-            return true;
-        }
-
-        return false;
-    }
-
-    // Try to become leader (malicious nodes lie about log length)
-    runForLeader(nodes) {
-        this.currentTerm++;
-        this.votedFor = this.id;
-
-        const reportedLogLength = this.isMalicious
-            ? 9999  // LIE: claim to have huge log
-            : this.logLength;  // Tell the truth
-
-        let votes = 1;  // Vote for self
-
-        nodes.forEach(node => {
-            if (node.id !== this.id) {
-                const granted = node.requestVote(this.id, this.currentTerm, reportedLogLength);
-                if (granted) votes++;
-            }
-        });
-
-        const majority = Math.floor(nodes.length / 2) + 1;
-        return votes >= majority;
-    }
-}
-
-// Create cluster: 5 nodes with different log lengths
-const nodes = [
-    new RaftNode('A', 10),
-    new RaftNode('B', 8),
-    new RaftNode('C', 12),  // Most up-to-date
-    new RaftNode('D', 7),
-    new RaftNode('E', 5)    // Malicious with short log
-];
-
-nodes[4].isMalicious = true;  // Node E lies about log
-
-console.log("=== Raft Election with Malicious Node ===\n");
-
-// Honest node C tries to become leader
-console.log("Node C (log=12, honest) runs for leader:");
-const cWins = nodes[2].runForLeader(nodes);
-console.log(`  Result: ${cWins ? 'ELECTED' : 'FAILED'}`);
-
-// Reset votes
-nodes.forEach(n => { n.votedFor = null; n.currentTerm = 0; });
-
-// Malicious node E tries to become leader
-console.log("\nNode E (log=5, MALICIOUS claims log=9999) runs for leader:");
-const eWins = nodes[4].runForLeader(nodes);
-console.log(`  Result: ${eWins ? 'ELECTED (BAD!)' : 'FAILED'}`);
-
-console.log("\n💡 Raft's log comparison prevents malicious nodes from winning!");
-console.log("   But what if we had network partitions...?");
-</code>
-                </div>
-
-                <p>
-                    <strong>Result:</strong> Raft held up. The malicious node won elections because other nodes believed its lie,
-                    but as soon as it tried to replicate log entries, followers rejected them because the logs didn't match.
-                    The cluster detected the inconsistency and held another election.
-                </p>
-
-                <p>
-                    <strong>Lesson learned:</strong> Raft's safety doesn't rely on nodes being honest. It relies on <em>detecting inconsistencies</em>.
-                </p>
-
-                <h2>Experiment 2: Network Partitions (Split Brain)</h2>
-                <p>
-                    The classic distributed systems nightmare: what happens when the network splits the cluster in half?
-                </p>
-
-                <p>
-                    I simulated a 5-node cluster with nodes [A, B, C, D, E]. Then introduced a network partition that split them into:
-                </p>
-                <ul>
-                    <li><strong>Partition 1:</strong> [A, B, C] (3 nodes, can form quorum)</li>
-                    <li><strong>Partition 2:</strong> [D, E] (2 nodes, cannot form quorum)</li>
-                </ul>
-
-                <div class="code-sandbox" data-lang="javascript">
-                    <code>// Network Partition Simulation
-
-class Cluster {
-    constructor(nodeIds) {
-        this.nodes = nodeIds.map(id => ({
-            id,
-            term: 0,
-            leader: false,
-            canCommunicate: new Set(nodeIds)  // Initially all can talk
-        }));
-    }
-
-    // Introduce network partition
-    partition(group1, group2) {
-        console.log(`\n🔪 NETWORK PARTITION:`);
-        console.log(`  Group 1: [${group1.join(', ')}]`);
-        console.log(`  Group 2: [${group2.join(', ')}]`);
-
-        this.nodes.forEach(node => {
-            if (group1.includes(node.id)) {
-                node.canCommunicate = new Set(group1);
-            } else {
-                node.canCommunicate = new Set(group2);
-            }
-        });
-    }
-
-    // Try to elect leader in a group
-    electLeader(candidateId) {
-        const candidate = this.nodes.find(n => n.id === candidateId);
-        const reachableNodes = this.nodes.filter(n =>
-            candidate.canCommunicate.has(n.id)
-        );
-
-        candidate.term++;
-        let votes = 1;  // Self-vote
-
-        reachableNodes.forEach(node => {
-            if (node.id !== candidateId) {
-                // Simple voting: grant if same partition
-                if (node.canCommunicate.has(candidateId)) {
-                    votes++;
-                }
-            }
-        });
-
-        const totalClusterSize = this.nodes.length;
-        const majority = Math.floor(totalClusterSize / 2) + 1;
-        const elected = votes >= majority;
-
-        console.log(`\n${candidateId} election attempt:`);
-        console.log(`  Votes: ${votes}/${totalClusterSize}`);
-        console.log(`  Majority needed: ${majority}`);
-        console.log(`  Result: ${elected ? '✓ ELECTED' : '✗ FAILED'}`);
-
-        if (elected) {
-            candidate.leader = true;
-        }
-
-        return elected;
-    }
-}
-
-// Create 5-node cluster
-const cluster = new Cluster(['A', 'B', 'C', 'D', 'E']);
-
-console.log("=== Distributed Consensus Under Partition ===");
-console.log("\nInitial: All nodes can communicate");
-
-// No partition: A wins
-cluster.electLeader('A');
-
-// Introduce partition
-cluster.partition(['A', 'B', 'C'], ['D', 'E']);
-
-// Partition 1 (3 nodes) can elect leader
-cluster.electLeader('B');
-
-// Partition 2 (2 nodes) CANNOT elect leader
-cluster.electLeader('D');
-
-console.log("\n💡 Key Insight: Majority quorum prevents split-brain!");
-console.log("   Minority partition can't make progress = safety preserved");
-</code>
-                </div>
-
-                <p>
-                    <strong>Result:</strong> Partition 1 elected a new leader and continued operating. Partition 2 could not reach quorum
-                    and remained stuck in follower state, unable to elect a leader or accept writes.
-                </p>
-
-                <p>
-                    <strong>Key insight:</strong> This is <em>by design</em>. Raft sacrifices availability in the minority partition to preserve
-                    consistency. Better to have no leader than two leaders.
-                </p>
-
-                <h2>Experiment 3: Log Conflicts</h2>
-                <p>
-                    What happens when network partitions heal and nodes have conflicting logs?
-                </p>
-
-                <p>
-                    I set up a scenario where:
-                </p>
-                <ol>
-                    <li>Cluster operates normally, leader is A</li>
-                    <li>Network partition splits [A, B] from [C, D, E]</li>
-                    <li>Partition [C, D, E] elects new leader C in term 2</li>
-                    <li>Both partitions accept writes to their logs</li>
-                    <li>Network partition heals</li>
-                </ol>
-
-                <p>
-                    Now we have <strong>divergent logs</strong>. Nodes A and B have entries from term 1. Nodes C, D, E have entries from term 2.
-                </p>
-
-                <blockquote>
-                    "When partitions heal, Raft doesn't try to merge divergent histories. It picks one truth and makes everyone agree."
-                </blockquote>
-
-                <p>
-                    The node with the higher term number (C with term 2) becomes the authority. Nodes A and B <strong>discard</strong> their uncommitted
-                    entries from term 1 and sync with C's log.
-                </p>
-
-                <p>
-                    <strong>This is brutal but correct.</strong> Raft guarantees linearizability: if a client got an acknowledgment, that write is durable.
-                    If they didn't get an ack, it might be lost. No maybes.
-                </p>
-
-                <h2>What Textbooks Don't Tell You</h2>
-                <p>
-                    After a weekend of breaking Raft, here's what I learned that wasn't obvious from the paper:
-                </p>
-
-                <ul>
-                    <li><strong>Raft is paranoid by design</strong> — It assumes networks are unreliable, nodes can lie, and messages can be duplicated or lost</li>
-                    <li><strong>Safety beats liveness</strong> — Raft would rather stop making progress than violate consistency</li>
-                    <li><strong>Term numbers are everything</strong> — They're the global logical clock that orders events across the cluster</li>
-                    <li><strong>Log matching is the key invariant</strong> — If two logs have the same entry at the same index, everything before that must match</li>
-                </ul>
-
-                <h2>Try Breaking It Yourself</h2>
-                <p>
-                    The best way to truly understand distributed consensus is to implement it and break it. Some ideas to try:
-                </p>
-
-                <ul>
-                    <li>What happens if messages are delayed by 10 seconds?</li>
-                    <li>Can you create a livelock where no leader is ever elected?</li>
-                    <li>What if a follower's disk fails and it loses its log?</li>
-                    <li>Can a minority partition ever commit a write?</li>
-                </ul>
-
-                <p>
-                    Distributed systems are hard because the failure modes are creative and surprising. The only way to build intuition
-                    is to see them fail, repeatedly, until the patterns become clear.
-                </p>
-            </div>
-        </div>
-    </div>
-
-    <!-- Education Playground Blog Modal -->
-    <div class="blog-modal" id="blog-modal-education-playground">
-        <div class="blog-modal-content">
-            <button class="blog-modal-close">×</button>
-
-            <div class="blog-full-header">
-                <h1 class="blog-full-title">Teaching Python by Building Games: Why Education Playground Works</h1>
-                <div class="blog-meta">
-                    <span class="blog-date">August 2024</span>
-                    <span class="blog-tag">Education</span>
-                    <span class="blog-tag">Python</span>
-                    <span class="blog-tag">Teaching</span>
-                </div>
-            </div>
-
-            <div class="blog-full-content">
-                <h2>The Problem with Traditional Tutorials</h2>
-                <p>
-                    Most programming tutorials start the same way:
-                </p>
-
-                <pre><code>print("Hello, World!")</code></pre>
-
-                <p>
-                    Then they move to variables, then loops, then... students fall asleep. <strong>Why?</strong>
-                    Because there's no payoff. No visible result. No game, no animation, no "wow, I built that!"
-                </p>
-
-                <p>
-                    Education Playground takes a different approach: <strong>build something cool from day one.</strong>
-                </p>
-
-                <h2>Learning By Building</h2>
-                <p>
-                    The platform consists of <strong>117 interactive Jupyter notebooks</strong> covering Python from absolute basics
-                    to GPU programming with CUDA. But unlike traditional courses, every concept is taught through building something you can see.
-                </p>
-
-                <h3>Lesson 1: Not "Hello World", but "Make a Game"</h3>
-                <p>
-                    Instead of printing text, the first lesson builds a simple number guessing game:
-                </p>
-
-                <div class="code-sandbox" data-lang="javascript">
-                    <code>// Python number guessing game (translated to JS for demo)
-// Students see this in Lesson 1
-
-function playGuessingGame() {
-    const secret = Math.floor(Math.random() * 100) + 1;
-    let attempts = 0;
-    const maxAttempts = 7;
-
-    console.log("🎮 Welcome to Guess the Number!");
-    console.log(`I'm thinking of a number between 1 and 100`);
-    console.log(`You have ${maxAttempts} attempts\n`);
-
-    // Simulated guesses for demo
-    const guesses = [50, 75, 87, 93, 96, 94, 95];
-
-    guesses.forEach(guess => {
-        attempts++;
-
-        if (guess === secret) {
-            console.log(`\n🎉 Correct! You found it in ${attempts} attempts!`);
-            return;
-        } else if (guess < secret) {
-            console.log(`Attempt ${attempts}: ${guess} is too low! ⬆️`);
-        } else {
-            console.log(`Attempt ${attempts}: ${guess} is too high! ⬇️`);
-        }
-
-        if (attempts >= maxAttempts) {
-            console.log(`\n😞 Out of attempts! The number was ${secret}`);
-        }
-    });
-}
-
-playGuessingGame();
-
-console.log("\n💡 In Lesson 1, students learn:");
-console.log("  - Variables (secret, attempts)");
-console.log("  - Conditionals (if/else)");
-console.log("  - Loops (while)");
-console.log("  - Input/Output");
-console.log("\nAll by building a playable game!");
-</code>
-                </div>
-
-                <p>
-                    By the end of Lesson 1, students have a working game. They've learned variables, conditionals, and loops
-                    <strong>without realizing they were learning syntax.</strong> They were too busy having fun.
-                </p>
-
-                <h2>Progressive Complexity: From Games to GPU Programming</h2>
-                <p>
-                    The 117 notebooks follow a carefully designed progression:
-                </p>
-
-                <h3>Weeks 1-4: Fundamentals Through Games</h3>
-                <ul>
-                    <li>Guess the Number (variables, loops, conditionals)</li>
-                    <li>Hangman (strings, lists, functions)</li>
-                    <li>Tic-Tac-Toe (2D arrays, game state)</li>
-                    <li>Snake Game (classes, object-oriented programming)</li>
-                </ul>
-
-                <h3>Weeks 5-8: Data Structures Through Visualizations</h3>
-                <ul>
-                    <li>Sorting Visualizer (algorithms, complexity)</li>
-                    <li>Graph Explorer (trees, graphs, search algorithms)</li>
-                    <li>Maze Generator (recursion, backtracking)</li>
-                </ul>
-
-                <h3>Weeks 9-12: Real-World Applications</h3>
-                <ul>
-                    <li>Web Scraper (requests, BeautifulSoup)</li>
-                    <li>Data Analysis Dashboard (pandas, matplotlib)</li>
-                    <li>Machine Learning Basics (scikit-learn)</li>
-                    <li>GPU Acceleration (CUDA, parallel programming)</li>
-                </ul>
-
-                <div class="code-sandbox" data-lang="javascript">
-                    <code>// Example: Teaching sorting through visualization
-// Students see the algorithm AND the result
-
-function bubbleSort(arr) {
-    const n = arr.length;
-    const steps = [];
-
-    // Make a copy to sort
-    const sorted = [...arr];
-
-    for (let i = 0; i < n; i++) {
-        for (let j = 0; j < n - i - 1; j++) {
-            // Capture state for visualization
-            steps.push({
-                array: [...sorted],
-                comparing: [j, j + 1],
-                action: 'compare'
-            });
-
-            if (sorted[j] > sorted[j + 1]) {
-                // Swap
-                [sorted[j], sorted[j + 1]] = [sorted[j + 1], sorted[j]];
-
-                steps.push({
-                    array: [...sorted],
-                    swapped: [j, j + 1],
-                    action: 'swap'
-                });
-            }
-        }
-    }
-
-    return steps;
-}
-
-// Visualize sorting
-const unsorted = [64, 34, 25, 12, 22, 11, 90];
-console.log("🎯 Teaching Bubble Sort Visually\n");
-console.log(`Initial array: [${unsorted.join(', ')}]\n`);
-
-const steps = bubbleSort(unsorted);
-
-// Show key steps
-const keySteps = [0, 5, 10, 15, steps.length - 1];
-keySteps.forEach(i => {
-    if (i < steps.length) {
-        const step = steps[i];
-        console.log(`Step ${i + 1}: [${step.array.join(', ')}]`);
-        if (step.action === 'swap') {
-            console.log(`  → Swapped positions ${step.swapped[0]} and ${step.swapped[1]}`);
-        }
-    }
-});
-
-console.log(`\n✓ Sorted: [${steps[steps.length - 1].array.join(', ')}]`);
-console.log(`\nStudents learn:`);
-console.log(`  - Nested loops`);
-console.log(`  - Algorithm complexity (O(n²))`);
-console.log(`  - By WATCHING it work, not just reading about it`);
-</code>
-                </div>
-
-                <h2>Results: 90% Certification Pass Rate</h2>
-                <p>
-                    After implementing this curriculum with <strong>120+ students</strong>, the results speak for themselves:
-                </p>
-
-                <ul>
-                    <li><strong>90% pass rate</strong> on PCEP (Certified Entry-Level Python Programmer) exams</li>
-                    <li><strong>30+ hours</strong> of comprehensive coursework</li>
-                    <li><strong>100+ students</strong> mentored through hands-on projects</li>
-                    <li><strong>117 interactive notebooks</strong> covering basics to GPU programming</li>
-                </ul>
-
-                <h2>Why It Works: The Science of Learning</h2>
-                <p>
-                    Education Playground's approach is backed by learning science research:
-                </p>
-
-                <h3>1. Active Learning Beats Passive Reading</h3>
-                <p>
-                    Students don't just read about loops, they write loops that make characters move on screen.
-                    The brain encodes "doing" much more strongly than "reading about."
-                </p>
-
-                <h3>2. Immediate Feedback</h3>
-                <p>
-                    Jupyter notebooks give instant visual feedback. Change the code, run the cell, see the result.
-                    No waiting, no context switching.
-                </p>
-
-                <h3>3. Progressive Complexity</h3>
-                <p>
-                    Each lesson builds on the last. By week 12, students are writing GPU-accelerated code using concepts
-                    from week 1, without realizing how far they've come.
-                </p>
-
-                <h3>4. Intrinsic Motivation</h3>
-                <p>
-                    Students aren't completing exercises for a grade. They're building games they can show their friends.
-                    That's powerful motivation.
-                </p>
-
-                <blockquote>
-                    "Tell me and I forget. Teach me and I remember. Involve me and I learn." — Benjamin Franklin
-                </blockquote>
-
-                <h2>Try It Yourself</h2>
-                <p>
-                    Education Playground is completely free and open source. All 117 notebooks are available online:
-                </p>
-
-                <p>
-                    <a href="https://mykolas-perevicius.github.io/Education_Playground/" target="_blank" class="blog-link">
-                        Try Education Playground Live →
-                    </a>
-                </p>
-
-                <p>
-                    Whether you're a teacher looking for curriculum, a student learning Python, or just curious how to make
-                    programming education more engaging, the platform is ready to use. No installation required.
-                </p>
-
-                <p>
-                    Because learning to code shouldn't be boring. It should be building games, solving puzzles, and creating
-                    things that make you say "I can't believe I built that."
-                </p>
-            </div>
-        </div>
-    </div>
-
-
-    <section id="live-stats" class="stats-section">
-        <div class="container">
-            <h2 class="section-title">Live GitHub Metrics</h2>
-            <div id="liveMetricsContainer" class="live-metrics-container">
-                <!-- Metrics will be dynamically loaded here -->
-            </div>
-            <div id="metricsActivity" class="metrics-activity" aria-live="polite"></div>
-        </div>
-    </section>
-
-    <footer class="footer">
-        <div class="container">
-            <p>&copy; 2025 Mykolas Perevicius. Built with vanilla JavaScript.</p>
-            <p class="footer-hint">Vim shortcuts enabled: j/k to scroll, gg/G for top/bottom, p/e/c for sections</p>
-        </div>
+        <p class="footer-copyright">&copy; 2025 Mykolas Perevicius</p>
     </footer>
-
-    <div class="terminal-overlay" id="terminalOverlay">
-        <div class="terminal">
-            <div class="terminal-header">
-                <div class="terminal-dot red"></div>
-                <div class="terminal-dot yellow"></div>
-                <div class="terminal-dot green"></div>
-            </div>
-            <div class="terminal-body" id="terminalBody">
-                <div class="terminal-line"><span class="terminal-prompt">mykolas@perevici.us:~$</span> whoami</div>
-                <div class="terminal-line">&gt; Full-stack engineer shipping code that matters</div>
-                <div class="terminal-line"></div>
-                <div class="terminal-line"><span class="terminal-prompt">mykolas@perevici.us:~$</span> ls projects/</div>
-                <div class="terminal-line">&gt; koalas-forge/ distributed-alexnet/ ultimate-setup/ education-playground/</div>
-                <div class="terminal-line"></div>
-                <div class="terminal-line"><span class="terminal-prompt">mykolas@perevici.us:~$</span> cat philosophy.txt</div>
-                <div class="terminal-line">&gt; "Ship fast. Test everything. Impact users."</div>
-                <div class="terminal-line"></div>
-                <div class="terminal-line"><span class="terminal-prompt">mykolas@perevici.us:~$</span> echo $SKILLS</div>
-                <div class="terminal-line">&gt; Python | Django | React | AWS | CUDA | Docker | PostgreSQL</div>
-                <div class="terminal-line"></div>
-                <div class="terminal-line"><span class="terminal-prompt">mykolas@perevici.us:~$</span> cat contact.txt</div>
-                <div class="terminal-line">&gt; Email: Perevicius.Mykolas@gmail.com</div>
-                <div class="terminal-line">&gt; GitHub: github.com/mykolas-perevicius</div>
-                <div class="terminal-line">&gt; LinkedIn: linkedin.com/in/mykolasperevicius</div>
-                <div class="terminal-line"></div>
-                <div class="terminal-line terminal-hint">&gt; Press ESC or click outside to close</div>
-            </div>
-        </div>
-    </div>
 
     <!-- Contact Form Modal -->
     <div class="contact-modal" id="contactModal">
         <div class="contact-modal-content">
-            <button class="contact-modal-close" id="closeContactForm" data-i18n-aria="aria.closeModal" aria-label="Close">×</button>
-            <h2 data-i18n="form.title">Get In Touch</h2>
-            <p class="contact-modal-subtitle" data-i18n="form.subtitle">Have a project in mind or want to chat? Let's connect!</p>
+            <button class="contact-modal-close" id="closeContactForm" aria-label="Close">×</button>
+            <h2>Get In Touch</h2>
+            <p class="contact-modal-subtitle">Have a project in mind or want to chat? Let's connect!</p>
 
             <form id="contactForm" class="contact-form">
                 <div class="form-group">
-                    <label for="name" data-i18n="form.name">Name</label>
-                    <input type="text" id="name" name="name" required data-i18n-placeholder="form.namePlaceholder" placeholder="Your name">
+                    <label for="name">Name</label>
+                    <input type="text" id="name" name="name" required placeholder="Your name">
                 </div>
 
                 <div class="form-group">
-                    <label for="email" data-i18n="form.email">Email</label>
-                    <input type="email" id="email" name="email" required data-i18n-placeholder="form.emailPlaceholder" placeholder="your.email@example.com">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" required placeholder="your.email@example.com">
                 </div>
 
                 <div class="form-group">
-                    <label for="subject" data-i18n="form.subject">Subject</label>
-                    <input type="text" id="subject" name="subject" required data-i18n-placeholder="form.subjectPlaceholder" placeholder="What's this about?">
+                    <label for="subject">Subject</label>
+                    <input type="text" id="subject" name="subject" required placeholder="What's this about?">
                 </div>
 
                 <div class="form-group">
-                    <label for="message" data-i18n="form.message">Message</label>
-                    <textarea id="message" name="message" rows="6" required data-i18n-placeholder="form.messagePlaceholder" placeholder="Tell me about your project or idea..."></textarea>
+                    <label for="message">Message</label>
+                    <textarea id="message" name="message" rows="6" required placeholder="Tell me about your project or idea..."></textarea>
                 </div>
 
                 <button type="submit" class="contact-form-submit">
-                    <span class="submit-text" data-i18n="form.submit">Send Message</span>
-                    <span class="submit-loading" data-i18n="form.sending" style="display: none;">Sending...</span>
+                    <span class="submit-text">Send Message</span>
+                    <span class="submit-loading" style="display: none;">Sending...</span>
                 </button>
 
                 <div class="form-status" id="formStatus"></div>
@@ -2240,7 +434,6 @@ console.log(`  - By WATCHING it work, not just reading about it`);
         </div>
     </div>
 
-    <canvas class="matrix-rain" id="matrixCanvas"></canvas>
     <canvas id="threejsBackground"></canvas>
 
     <!-- Three.js -->

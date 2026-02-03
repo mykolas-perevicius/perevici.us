@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" width="400" height="300">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#3b82f6"/>
+      <stop offset="100%" style="stop-color:#1d4ed8"/>
+    </linearGradient>
+  </defs>
+  <rect width="400" height="300" fill="url(#bg)"/>
+  <!-- Globe -->
+  <g transform="translate(200, 130)" fill="none" stroke="rgba(255,255,255,0.7)" stroke-width="2">
+    <!-- Outer circle -->
+    <circle r="70"/>
+    <!-- Latitude lines -->
+    <ellipse rx="70" ry="25"/>
+    <ellipse rx="70" ry="50"/>
+    <ellipse rx="55" ry="70" transform="rotate(90)"/>
+    <!-- Longitude curves -->
+    <path d="M-70 0 Q-70 -50 0 -70"/>
+    <path d="M70 0 Q70 -50 0 -70"/>
+    <path d="M-70 0 Q-70 50 0 70"/>
+    <path d="M70 0 Q70 50 0 70"/>
+    <!-- Meridian -->
+    <ellipse rx="35" ry="70"/>
+  </g>
+  <!-- Language text floating around -->
+  <g fill="rgba(255,255,255,0.5)" font-family="system-ui" font-size="14">
+    <text x="60" y="80">Hello</text>
+    <text x="290" y="90">Hola</text>
+    <text x="50" y="180">Bonjour</text>
+    <text x="300" y="170">Ciao</text>
+  </g>
+  <!-- Translation arrows -->
+  <g stroke="rgba(255,255,255,0.4)" stroke-width="2" fill="none">
+    <!-- Left to center -->
+    <path d="M100 85 Q130 100 135 115"/>
+    <path d="M100 175 Q130 160 135 145"/>
+    <!-- Right to center -->
+    <path d="M285 95 Q260 105 265 120"/>
+    <path d="M295 165 Q270 155 265 140"/>
+  </g>
+  <!-- Document icon in corner -->
+  <g transform="translate(330, 200)" fill="none" stroke="rgba(255,255,255,0.4)" stroke-width="2">
+    <rect x="0" y="0" width="30" height="40" rx="3"/>
+    <line x1="6" y1="12" x2="24" y2="12"/>
+    <line x1="6" y1="20" x2="24" y2="20"/>
+    <line x1="6" y1="28" x2="18" y2="28"/>
+  </g>
+  <text x="200" y="260" text-anchor="middle" fill="rgba(255,255,255,0.8)" font-family="system-ui" font-size="14">Rosetta</text>
+</svg>
