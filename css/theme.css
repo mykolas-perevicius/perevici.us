@@ -16,13 +16,14 @@
     --accent-color: #40e0d0;
     --success: #10b981;
 
-    /* Glass effect system - angular/fragmented aesthetic */
-    --glass-bg: rgba(255, 255, 255, 0.03);
-    --glass-border: rgba(0, 212, 255, 0.15);
-    --glass-border-alt: rgba(255, 0, 255, 0.1);
-    --glass-glow: rgba(0, 212, 255, 0.25);
-    --glass-glow-alt: rgba(255, 0, 255, 0.15);
-    --glass-blur: 12px;
+    /* Apple Liquid Glass System */
+    --glass-blur: 24px;
+    --glass-bg: rgba(255, 255, 255, 0.08);
+    --glass-border: rgba(255, 255, 255, 0.18);
+    --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    --glass-highlight-top: linear-gradient(180deg, rgba(255,255,255,0.25) 0%, transparent 100%);
+    --glass-highlight-edge: linear-gradient(135deg, rgba(255,255,255,0.3) 0%, transparent 50%);
+    --glass-refraction: 0 0 0 1px rgba(255, 255, 255, 0.15);
 
     /* Typography */
     --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
@@ -45,12 +46,14 @@
     --chip-text: #111827;
     --link: #1D4ED8;
 
-    /* Glass effect adjustments for light mode - stronger contrast */
+    /* Apple Liquid Glass System - Light */
+    --glass-blur: 24px;
     --glass-bg: rgba(0, 0, 0, 0.04);
-    --glass-border: rgba(0, 0, 0, 0.15);
-    --glass-border-alt: rgba(0, 100, 200, 0.2);
-    --glass-glow: rgba(0, 100, 200, 0.12);
-    --glass-glow-alt: rgba(150, 0, 200, 0.08);
+    --glass-border: rgba(0, 0, 0, 0.12);
+    --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+    --glass-highlight-top: linear-gradient(180deg, rgba(255,255,255,0.8) 0%, transparent 100%);
+    --glass-highlight-edge: linear-gradient(135deg, rgba(255,255,255,0.6) 0%, transparent 50%);
+    --glass-refraction: 0 0 0 1px rgba(0, 0, 0, 0.08);
 }
 
 /* Base styles */

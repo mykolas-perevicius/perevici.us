@@ -3,6 +3,19 @@ export function initThreeBackground() {
     const canvas = document.getElementById('threejsBackground');
     if (!canvas) return;
 
+    // Section-based opacity targets for depth effect
+    const SECTION_OPACITY = {
+        hero: 1.0,       // 100% - full vibrancy at top
+        projects: 0.3,   // 30% - dimmed for content focus
+        experience: 0.1, // 10% - subtle background
+        footer: 0.0      // 0% - solid background
+    };
+
+    let currentOpacity = 1.0;
+    let targetOpacity = 1.0;
+    let currentLineOpacity = 0.15;
+    let targetLineOpacity = 0.15;
+
     // Scene setup
     const scene = new THREE.Scene();
     const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
@@ -128,6 +141,13 @@ export function initThreeBackground() {
         particleSystem.rotation.y += 0.0005;
         lineSegments.rotation.y += 0.0005;
 
+        // Smoothly interpolate opacity based on scroll position
+        currentOpacity += (targetOpacity - currentOpacity) * 0.1;
+        currentLineOpacity += (targetLineOpacity - currentLineOpacity) * 0.1;
+
+        particleMaterial.opacity = currentOpacity * 0.6; // Base opacity was 0.6
+        lineMaterial.opacity = currentLineOpacity;
+
         renderer.render(scene, camera);
     }
 
@@ -136,6 +156,62 @@ export function initThreeBackground() {
         mouseX = event.clientX - window.innerWidth / 2;
         mouseY = event.clientY - window.innerHeight / 2;
     });
+
+    // Linear interpolation helper
+    function lerp(start, end, t) {
+        return start + (end - start) * t;
+    }
+
+    function updateScrollOpacity() {
+        const scrollY = window.scrollY;
+        const windowHeight = window.innerHeight;
+
+        // Get section positions (with fallbacks)
+        const heroSection = document.querySelector('.hero');
+        const projectsSection = document.getElementById('projects');
+        const experienceSection = document.getElementById('experience');
+        const footerSection = document.querySelector('.footer');
+
+        const heroEnd = heroSection ? heroSection.offsetTop + heroSection.offsetHeight : windowHeight;
+        const projectsEnd = projectsSection ? projectsSection.offsetTop + projectsSection.offsetHeight : heroEnd + windowHeight;
+        const experienceEnd = experienceSection ? experienceSection.offsetTop + experienceSection.offsetHeight : projectsEnd + windowHeight;
+
+        // Calculate which section we're in and interpolate
+        if (scrollY < heroEnd * 0.7) {
+            // In hero
+            targetOpacity = SECTION_OPACITY.hero;
+            targetLineOpacity = 0.15;
+        } else if (scrollY < projectsEnd * 0.8) {
+            // In projects - interpolate from hero to projects
+            const progress = (scrollY - heroEnd * 0.7) / (projectsEnd * 0.8 - heroEnd * 0.7);
+            targetOpacity = lerp(SECTION_OPACITY.hero, SECTION_OPACITY.projects, Math.min(progress, 1));
+            targetLineOpacity = lerp(0.15, 0.05, Math.min(progress, 1));
+        } else if (scrollY < experienceEnd * 0.9) {
+            // In experience
+            const progress = (scrollY - projectsEnd * 0.8) / (experienceEnd * 0.9 - projectsEnd * 0.8);
+            targetOpacity = lerp(SECTION_OPACITY.projects, SECTION_OPACITY.experience, Math.min(progress, 1));
+            targetLineOpacity = lerp(0.05, 0.02, Math.min(progress, 1));
+        } else {
+            // Footer
+            targetOpacity = SECTION_OPACITY.footer;
+            targetLineOpacity = 0;
+        }
+    }
+
+    // Throttled scroll handler for depth-aware opacity
+    let scrollTicking = false;
+    window.addEventListener('scroll', () => {
+        if (!scrollTicking) {
+            requestAnimationFrame(() => {
+                updateScrollOpacity();
+                scrollTicking = false;
+            });
+            scrollTicking = true;
+        }
+    });
+
+    // Initial call to set opacity on load
+    updateScrollOpacity();
 
     // Handle window resize
     function handleResize() {

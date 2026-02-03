@@ -1,0 +1,63 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" width="400" height="300">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#8b5cf6"/>
+      <stop offset="100%" style="stop-color:#6366f1"/>
+    </linearGradient>
+  </defs>
+  <rect width="400" height="300" fill="url(#bg)"/>
+  <!-- Film strip top -->
+  <rect x="30" y="60" width="340" height="25" fill="rgba(0,0,0,0.4)"/>
+  <g fill="rgba(255,255,255,0.3)">
+    <rect x="40" y="65" width="15" height="15" rx="2"/>
+    <rect x="65" y="65" width="15" height="15" rx="2"/>
+    <rect x="90" y="65" width="15" height="15" rx="2"/>
+    <rect x="115" y="65" width="15" height="15" rx="2"/>
+    <rect x="140" y="65" width="15" height="15" rx="2"/>
+    <rect x="165" y="65" width="15" height="15" rx="2"/>
+    <rect x="190" y="65" width="15" height="15" rx="2"/>
+    <rect x="215" y="65" width="15" height="15" rx="2"/>
+    <rect x="240" y="65" width="15" height="15" rx="2"/>
+    <rect x="265" y="65" width="15" height="15" rx="2"/>
+    <rect x="290" y="65" width="15" height="15" rx="2"/>
+    <rect x="315" y="65" width="15" height="15" rx="2"/>
+    <rect x="340" y="65" width="15" height="15" rx="2"/>
+  </g>
+  <!-- Video frames -->
+  <g stroke="rgba(255,255,255,0.5)" stroke-width="2" fill="rgba(255,255,255,0.1)">
+    <rect x="50" y="100" width="80" height="60" rx="4"/>
+    <rect x="160" y="100" width="80" height="60" rx="4"/>
+    <rect x="270" y="100" width="80" height="60" rx="4"/>
+  </g>
+  <!-- Frame numbers -->
+  <g fill="rgba(255,255,255,0.7)" font-family="monospace" font-size="12">
+    <text x="90" y="140">F1</text>
+    <text x="200" y="140">F2</text>
+    <text x="310" y="140">F3</text>
+  </g>
+  <!-- Interpolation arrows -->
+  <g stroke="rgba(255,255,255,0.6)" stroke-width="2" fill="none">
+    <path d="M135 130 L155 130" marker-end="url(#arrow)"/>
+    <path d="M245 130 L265 130" marker-end="url(#arrow)"/>
+  </g>
+  <!-- Interpolated frame (dashed) -->
+  <rect x="160" y="100" width="80" height="60" rx="4" stroke="rgba(255,255,255,0.8)" stroke-width="2" stroke-dasharray="5,3" fill="rgba(255,255,255,0.2)"/>
+  <!-- Film strip bottom -->
+  <rect x="30" y="175" width="340" height="25" fill="rgba(0,0,0,0.4)"/>
+  <g fill="rgba(255,255,255,0.3)">
+    <rect x="40" y="180" width="15" height="15" rx="2"/>
+    <rect x="65" y="180" width="15" height="15" rx="2"/>
+    <rect x="90" y="180" width="15" height="15" rx="2"/>
+    <rect x="115" y="180" width="15" height="15" rx="2"/>
+    <rect x="140" y="180" width="15" height="15" rx="2"/>
+    <rect x="165" y="180" width="15" height="15" rx="2"/>
+    <rect x="190" y="180" width="15" height="15" rx="2"/>
+    <rect x="215" y="180" width="15" height="15" rx="2"/>
+    <rect x="240" y="180" width="15" height="15" rx="2"/>
+    <rect x="265" y="180" width="15" height="15" rx="2"/>
+    <rect x="290" y="180" width="15" height="15" rx="2"/>
+    <rect x="315" y="180" width="15" height="15" rx="2"/>
+    <rect x="340" y="180" width="15" height="15" rx="2"/>
+  </g>
+  <text x="200" y="260" text-anchor="middle" fill="rgba(255,255,255,0.8)" font-family="system-ui" font-size="14">Video Frame Interpolation</text>
+</svg>
