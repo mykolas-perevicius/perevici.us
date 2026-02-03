@@ -186,7 +186,10 @@ document.addEventListener('DOMContentLoaded', async () => {
     // Medium priority: Load when user might need them
     requestIdleCallback(() => {
         Promise.all([
-            import('./contact-form.js').then(m => m.initContactForm())
+            import('./contact-form.js').then(m => m.initContactForm()),
+            import('./xp-window.js').then(m => m.initXPWindow()),
+            import('./word-window.js').then(m => m.initWordWindow()),
+            import('./hints.js').then(m => m.initHints())
         ]);
     }, { timeout: 2000 });
 

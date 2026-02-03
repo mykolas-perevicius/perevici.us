@@ -21,6 +21,7 @@
     <link rel="stylesheet" href="/css/components.css">
     <link rel="stylesheet" href="/css/main.css">
     <link rel="stylesheet" href="/css/contact-form.css">
+    <link rel="stylesheet" href="/css/word-window.css">
     
     <script type="application/ld+json">
     {
@@ -83,6 +84,19 @@
                     Email
                 </a>
             </div>
+            <!-- Resume Widget (opens Word 2003 modal) -->
+            <button class="resume-widget" data-document="resume" type="button" aria-label="Open resume in Microsoft Word 2003">
+                <div class="resume-widget-icon">
+                    <svg viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M14 2H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V8l-6-6zM6 20V4h7v5h5v11H6z"/>
+                        <path d="M8 12h8v2H8v-2zm0 4h8v2H8v-2z"/>
+                    </svg>
+                </div>
+                <div class="resume-widget-content">
+                    <h4>Resume.doc</h4>
+                    <p>Microsoft Word 2003</p>
+                </div>
+            </button>
         </div>
     </section>
 
@@ -99,7 +113,7 @@
         </div>
     </section>
 
-    <section id="experience" class="experience">
+    <section id="experience" class="experience" data-hint-anchor="experience">
         <div class="section-content">
             <h2 class="section-title">Experience</h2>
             <div class="timeline">
@@ -212,11 +226,50 @@
         </div>
     </section>
 
-    <section id="projects" class="projects">
+    <section id="projects" class="projects" data-hint-anchor="projects">
         <div class="section-content">
             <h2 class="section-title">Featured Projects</h2>
 
-            <!-- Projects Grid -->
+            <!-- View Toggle Button -->
+            <button class="view-toggle-btn" id="viewToggle" title="Switch to Windows XP view">
+                <span class="toggle-icon">🪟</span>
+                <span class="toggle-text">XP Mode</span>
+            </button>
+
+            <!-- XP Window View (hidden by default) -->
+            <div class="xp-window" style="display: none;">
+                <div class="xp-titlebar">
+                    <div class="xp-title">
+                        <img class="xp-icon" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath fill='%230054e3' d='M2 2v12h12V2H2zm1 3h10v8H3V5zm1-2h8v1H4V3z'/%3E%3C/svg%3E" alt="Internet Explorer">
+                        <span>Internet Explorer - Projects Portfolio</span>
+                    </div>
+                    <div class="xp-controls">
+                        <button class="xp-btn xp-minimize" aria-label="Minimize"><span>_</span></button>
+                        <button class="xp-btn xp-maximize" aria-label="Maximize"><span>□</span></button>
+                        <button class="xp-btn xp-close" aria-label="Close"><span>×</span></button>
+                    </div>
+                </div>
+                <div class="xp-toolbar">
+                    <div class="xp-address-bar">
+                        <label class="xp-address-label">Address</label>
+                        <div class="xp-address-input">
+                            <span>https://perevici.us/projects/all</span>
+                        </div>
+                        <button class="xp-go-button">Go</button>
+                    </div>
+                </div>
+                <div class="xp-content">
+                    <div class="projects-grid xp-projects-grid">
+                        <!-- XP view projects will be cloned here by JS -->
+                    </div>
+                </div>
+                <div class="xp-status">
+                    <span class="xp-status-text">Ready</span>
+                </div>
+            </div>
+
+            <!-- Modern Projects Grid (default view) -->
+            <div class="modern-projects-grid">
             <div class="projects-grid">
                 <!-- Featured Project: Distributed AlexNet -->
                 <div class="project-card featured scroll-reveal">
@@ -369,6 +422,7 @@
                     </div>
                 </div>
             </div>
+            </div> <!-- End modern-projects-grid -->
         </div>
     </section>
 
