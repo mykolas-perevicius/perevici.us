@@ -24,14 +24,24 @@
   },
   "experience": [
     {
+      "title": "CTO & Lead Developer",
+      "company": "TapiaTax by Tapia Accountants and Associates LLC",
+      "dates": "2025 -- Present",
+      "bullets": [
+        "Architected and deployed full-stack tax preparation portal (tapiatax.com) with secure document management, client workflows, and real-time collaboration for small business clients",
+        "Designed RESTful API layer and relational database schema (Supabase/PostgreSQL) handling sensitive PII with role-based access control and encrypted storage",
+        "Integrated TypeScript/React 19 frontend with backend services; deployed cloud-native application on Vercel with CI/CD automation"
+      ]
+    },
+    {
       "title": "Software Engineer",
       "company": "UserAuthGuard by Asan Digital LLC",
-      "dates": "Oct 2025 -- Present",
+      "dates": "Oct 2025 -- Feb 2026",
       "bullets": [
-        "Leading test-driven development for production Django SaaS serving 17,000+ students across multiple school districts",
-        "Achieved 90% test coverage (from 51%) across 840+ Python files with pytest-django behavioral test suites",
-        "Architected multi-tenant Chromebook management system with Google Workspace, Stripe, and Dell Warranty API integrations",
-        "Implemented real-time features using Django Channels (WebSockets) with Redis/Celery for async task processing"
+        "Spearheaded test-driven development initiative for a Django SaaS platform serving 17,000+ students across multiple school districts, increasing backend coverage with 1,500+ tests (unit, E2E, frontend walkthroughs)",
+        "Built automated testing infrastructure using pytest, Playwright, Factory Boy, and Faker, including BFS-based route discovery that achieved 96% frontend coverage with video-recorded test runs",
+        "Full-stack contributions across Django REST Framework, PostgreSQL, Redis, Celery, and Django Channels (WebSockets), with integrations to Google Workspace, Stripe, and Dell Warranty APIs",
+        "Implemented CI/CD pipelines with GitHub Actions and Docker for automated test execution, coverage reporting, and deployment validation"
       ]
     },
     {
@@ -48,7 +58,7 @@
     {
       "title": "Curriculum Developer & Instructor",
       "company": "The Coding Place",
-      "dates": "Dec 2022 -- Present",
+      "dates": "Dec 2022 -- Jun 2023",
       "bullets": [
         "Created 117 Jupyter notebooks covering Python from basics to GPU programming; 90% certification rate (120+ students)",
         "Built automated testing pipeline with GitHub Actions for student code evaluation"
@@ -57,7 +67,7 @@
     {
       "title": "Software Engineer",
       "company": "Project Innovate Newark",
-      "dates": "Dec 2021 -- Present",
+      "dates": "Dec 2019 -- Oct 2025",
       "bullets": [
         "Shipped event-planning suite (React, Node.js, PostgreSQL) reducing scheduling conflicts by 30% across 9+ programs",
         "Containerized with Docker, cut deployment from days to hours; zero critical findings in penetration testing"
