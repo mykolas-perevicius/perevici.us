@@ -106,46 +106,6 @@
     margin-bottom: 2rem;
 }
 
-/* Colorblind-friendly syntax highlighting with good contrast */
-.code-keyword { color: #ff6ac6; } /* Bright pink */
-.code-class { color: #5dff5d; } /* Saturated green */
-.code-function { color: #00d4ff; } /* Strong cyan */
-.code-param { color: #ff9933; } /* Deep orange */
-.code-string { color: #d4b000; } /* Darker gold - much better contrast */
-
-/* Stats Bar */
-.stats-bar {
-    background: var(--bg-elev);
-    border-top: 1px solid var(--border);
-    border-bottom: 1px solid var(--border);
-    padding: 2rem;
-    display: flex;
-    justify-content: space-around;
-    max-width: var(--max-width);
-    margin: 0 auto;
-    flex-wrap: wrap;
-    gap: 2rem;
-}
-
-.stat {
-    text-align: center;
-}
-
-.stat-number {
-    font-size: 2rem;
-    font-weight: 700;
-    color: var(--primary-color);
-    font-family: var(--font-mono);
-}
-
-.stat-label {
-    color: var(--muted);
-    font-size: 0.875rem;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    margin-top: 0.5rem;
-}
-
 /* Section Styles */
 section {
     padding: 4rem 0;
@@ -258,39 +218,6 @@ section {
     .glass-card {
         background: var(--bg-elev);
     }
-}
-
-/* GitHub Stats */
-.github-stats {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 1.5rem;
-    margin-bottom: 3rem;
-}
-
-.github-stat-card {
-    background: var(--bg-elev);
-    border: 1px solid var(--border);
-    border-radius: 0.5rem;
-    padding: 1.5rem;
-    transition: var(--transition);
-}
-
-.github-stat-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 30px rgba(0, 212, 255, 0.1);
-}
-
-.github-stat-card h3 {
-    font-family: var(--font-mono);
-    font-size: 2rem;
-    color: var(--primary-color);
-    margin-bottom: 0.5rem;
-}
-
-.github-stat-card p {
-    color: var(--muted);
-    margin: 0;
 }
 
 /* Timeline - Glass Aesthetic */
@@ -710,18 +637,6 @@ section {
     font-size: 0.875rem;
 }
 
-.footer-metric {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    color: var(--muted);
-}
-
-.footer-metric-value {
-    color: var(--primary-color);
-    font-weight: 600;
-}
-
 .footer-copyright {
     width: 100%;
     text-align: center;
@@ -741,26 +656,6 @@ section {
     .footer-links,
     .footer-metrics {
         justify-content: center;
-    }
-}
-
-/* Scroll Animations */
-.scroll-reveal {
-    opacity: 0;
-    transform: translateY(30px);
-    transition: opacity 0.6s, transform 0.6s;
-}
-
-.scroll-reveal.active {
-    opacity: 1;
-    transform: translateY(0);
-}
-
-@media (prefers-reduced-motion: reduce) {
-    .scroll-reveal {
-        opacity: 1;
-        transform: none;
-        transition: none;
     }
 }
 
@@ -787,9 +682,6 @@ section {
         left: -1.5rem;
     }
 
-    .github-stats {
-        grid-template-columns: 1fr;
-    }
 }
 
 /* Three.js Background Canvas */
@@ -821,78 +713,6 @@ section {
     #threejsBackground {
         opacity: 0.2;
     }
-}
-
-/* Swipe Gesture Feedback */
-.swipe-feedback {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%) scale(0);
-    width: 80px;
-    height: 80px;
-    background: var(--glass-bg);
-    backdrop-filter: blur(20px);
-    border: 2px solid var(--primary-color);
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 2rem;
-    color: var(--primary-color);
-    pointer-events: none;
-    z-index: 10000;
-    opacity: 0;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.swipe-feedback.next,
-.swipe-feedback.prev {
-    opacity: 1;
-    transform: translate(-50%, -50%) scale(1);
-}
-
-.swipe-feedback.next {
-    animation: swipeNext 0.3s ease-out;
-}
-
-.swipe-feedback.prev {
-    animation: swipePrev 0.3s ease-out;
-}
-
-@keyframes swipeNext {
-    0% { transform: translate(-50%, -50%) scale(0.5) translateX(-20px); }
-    100% { transform: translate(-50%, -50%) scale(1) translateX(0); }
-}
-
-@keyframes swipePrev {
-    0% { transform: translate(-50%, -50%) scale(0.5) translateX(20px); }
-    100% { transform: translate(-50%, -50%) scale(1) translateX(0); }
-}
-
-/* Image Optimization & Lazy Loading */
-img[data-src],
-img[loading="lazy"] {
-    opacity: 0;
-    transition: opacity 0.3s ease, filter 0.3s ease;
-}
-
-img.lazy-loaded {
-    opacity: 1;
-}
-
-/* Blur-up placeholder effect */
-img[data-src]::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: var(--glass-bg);
-    animation: pulse 1.5s ease-in-out infinite;
-}
-
-@keyframes pulse {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0.5; }
 }
 
 /* Responsive images */

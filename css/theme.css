@@ -12,7 +12,6 @@
 
     /* Accent colors (theme-independent) */
     --primary-color: #00d4ff;
-    --secondary-color: #00a6cc;
     --accent-color: #40e0d0;
     --success: #10b981;
 
@@ -131,6 +130,9 @@ a {
 a:hover {
     color: var(--accent-color);
 }
+
+/* Utility classes */
+.hidden { display: none; }
 
 /* Focus states for accessibility */
 *:focus-visible {

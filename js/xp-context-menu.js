@@ -76,12 +76,37 @@ function showAddressMenu(x, y) {
     const menu = createMenu([
         { label: 'Undo', action: () => {}, disabled: true },
         { separator: true },
-        { label: 'Cut', action: () => document.execCommand('cut') },
-        { label: 'Copy', action: () => document.execCommand('copy') },
-        { label: 'Paste', action: () => document.execCommand('paste') },
-        { label: 'Delete', action: () => document.execCommand('delete') },
+        { label: 'Cut', action: () => {
+            const sel = window.getSelection();
+            navigator.clipboard.writeText(sel.toString());
+            sel.deleteFromDocument();
+        }},
+        { label: 'Copy', action: () => {
+            navigator.clipboard.writeText(window.getSelection().toString());
+        }},
+        { label: 'Paste', action: () => {
+            navigator.clipboard.readText().then(text => {
+                const sel = window.getSelection();
+                if (sel.rangeCount) {
+                    sel.deleteFromDocument();
+                    sel.getRangeAt(0).insertNode(document.createTextNode(text));
+                }
+            });
+        }},
+        { label: 'Delete', action: () => {
+            window.getSelection().deleteFromDocument();
+        }},
         { separator: true },
-        { label: 'Select All', action: () => document.execCommand('selectAll') }
+        { label: 'Select All', action: () => {
+            const input = document.querySelector('.xp-address-input span');
+            if (input) {
+                const range = document.createRange();
+                range.selectNodeContents(input);
+                const sel = window.getSelection();
+                sel.removeAllRanges();
+                sel.addRange(range);
+            }
+        }}
     ]);
 
     showMenu(menu, x, y);

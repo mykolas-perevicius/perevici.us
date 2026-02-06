@@ -28,13 +28,13 @@ function updateViewDisplay() {
         if (modernGrid) {
             modernGrid.classList.add('fade-out');
             setTimeout(() => {
-                modernGrid.style.display = 'none';
+                modernGrid.classList.add('hidden');
                 modernGrid.classList.remove('fade-out');
             }, 300);
         }
 
         if (xpWindow) {
-            xpWindow.style.display = '';
+            xpWindow.classList.remove('hidden');
             xpWindow.classList.remove('minimized');
             // Force reflow then fade in
             xpWindow.offsetHeight;
@@ -45,13 +45,13 @@ function updateViewDisplay() {
         if (xpWindow) {
             xpWindow.classList.add('fade-out');
             setTimeout(() => {
-                xpWindow.style.display = 'none';
+                xpWindow.classList.add('hidden');
                 xpWindow.classList.remove('fade-out');
             }, 300);
         }
 
         if (modernGrid) {
-            modernGrid.style.display = 'block';
+            modernGrid.classList.remove('hidden');
             // Force reflow then fade in
             modernGrid.offsetHeight;
             modernGrid.style.opacity = '1';
@@ -63,11 +63,6 @@ export function initXPWindow() {
     const xpWindow = document.querySelector('.xp-window');
     const addressInput = document.querySelector('.xp-address-input span');
     const goButton = document.querySelector('.xp-go-button');
-    const backButton = document.querySelector('.xp-btn-back');
-    const forwardButton = document.querySelector('.xp-btn-forward');
-    const refreshButton = document.querySelector('.xp-btn-refresh');
-    const stopButton = document.querySelector('.xp-btn-stop');
-    const homeButton = document.querySelector('.xp-btn-home');
     const minimizeBtn = document.querySelector('.xp-minimize');
     const maximizeBtn = document.querySelector('.xp-maximize');
     const closeBtn = document.querySelector('.xp-close');
@@ -100,28 +95,6 @@ export function initXPWindow() {
             const path = addressInput.textContent.replace('https://perevici.us/projects/', '');
             applyFilter(path);
         });
-    }
-
-    // Navigation buttons
-    if (backButton) {
-        backButton.addEventListener('click', navigateBack);
-        updateNavButtons();
-    }
-
-    if (forwardButton) {
-        forwardButton.addEventListener('click', navigateForward);
-    }
-
-    if (refreshButton) {
-        refreshButton.addEventListener('click', refreshProjects);
-    }
-
-    if (stopButton) {
-        stopButton.addEventListener('click', toggleAnimations);
-    }
-
-    if (homeButton) {
-        homeButton.addEventListener('click', () => applyFilter('all'));
     }
 
     // Window controls
@@ -186,18 +159,18 @@ function initializeViewDisplay() {
     if (currentViewMode === 'modern') {
         // Show modern, hide XP
         if (xpWindow) {
-            xpWindow.style.display = 'none';
+            xpWindow.classList.add('hidden');
         }
         if (modernGrid) {
-            modernGrid.style.display = 'block';
+            modernGrid.classList.remove('hidden');
         }
     } else {
         // Show XP, hide modern
         if (xpWindow) {
-            xpWindow.style.display = '';
+            xpWindow.classList.remove('hidden');
         }
         if (modernGrid) {
-            modernGrid.style.display = 'none';
+            modernGrid.classList.add('hidden');
         }
     }
 }
@@ -294,38 +267,6 @@ function pushHistory(filter) {
     filterHistory = filterHistory.slice(0, historyIndex + 1);
     filterHistory.push(filter);
     historyIndex = filterHistory.length - 1;
-    updateNavButtons();
-}
-
-function navigateBack() {
-    if (historyIndex > 0) {
-        historyIndex--;
-        applyFilter(filterHistory[historyIndex], false);
-        updateNavButtons();
-    }
-}
-
-function navigateForward() {
-    if (historyIndex < filterHistory.length - 1) {
-        historyIndex++;
-        applyFilter(filterHistory[historyIndex], false);
-        updateNavButtons();
-    }
-}
-
-function updateNavButtons() {
-    const backButton = document.querySelector('.xp-btn-back');
-    const forwardButton = document.querySelector('.xp-btn-forward');
-
-    if (backButton) {
-        backButton.disabled = historyIndex <= 0;
-        backButton.style.opacity = historyIndex <= 0 ? '0.5' : '1';
-    }
-
-    if (forwardButton) {
-        forwardButton.disabled = historyIndex >= filterHistory.length - 1;
-        forwardButton.style.opacity = historyIndex >= filterHistory.length - 1 ? '0.5' : '1';
-    }
 }
 
 function applyFilter(filter, addToHistory = true) {
@@ -361,7 +302,7 @@ function applyFilter(filter, addToHistory = true) {
 function filterProjects(filter) {
     allProjects.forEach(card => {
         if (filter === 'all') {
-            card.style.display = '';
+            card.classList.remove('hidden');
             return;
         }
 
@@ -378,62 +319,12 @@ function filterProjects(filter) {
             return false;
         });
 
-        card.style.display = matches ? '' : 'none';
+        card.classList.toggle('hidden', !matches);
     });
 }
 
 function getVisibleProjectCount() {
-    return allProjects.filter(card => card.style.display !== 'none').length;
-}
-
-function refreshProjects() {
-    const refreshButton = document.querySelector('.xp-btn-refresh');
-    if (refreshButton) {
-        refreshButton.style.animation = 'spin 0.8s linear';
-        setTimeout(() => {
-            refreshButton.style.animation = '';
-        }, 800);
-    }
-
-    updateStatusBar('Refreshing...');
-
-    setTimeout(() => {
-        // Shuffle visible projects
-        const grid = document.querySelector('.projects-grid');
-        const visible = allProjects.filter(card => card.style.display !== 'none');
-
-        // Fisher-Yates shuffle
-        for (let i = visible.length - 1; i > 0; i--) {
-            const j = Math.floor(Math.random() * (i + 1));
-            grid.appendChild(visible[j]);
-        }
-
-        updateStatusBar('Done');
-        setTimeout(() => updateStatusBar('Ready'), 1000);
-    }, 800);
-}
-
-function toggleAnimations() {
-    const stopButton = document.querySelector('.xp-btn-stop');
-    const allAnimated = document.querySelectorAll('*');
-
-    if (stopButton.classList.contains('active')) {
-        // Resume animations
-        allAnimated.forEach(el => {
-            el.style.animationPlayState = 'running';
-            el.style.transitionDuration = '';
-        });
-        stopButton.classList.remove('active');
-        updateStatusBar('Ready');
-    } else {
-        // Pause animations
-        allAnimated.forEach(el => {
-            el.style.animationPlayState = 'paused';
-            el.style.transitionDuration = '0s';
-        });
-        stopButton.classList.add('active');
-        updateStatusBar('Stopped');
-    }
+    return allProjects.filter(card => !card.classList.contains('hidden')).length;
 }
 
 function showLoadingState() {
@@ -608,65 +499,6 @@ export function attachProjectCardHandlers() {
 // Add CSS for spin animation
 const style = document.createElement('style');
 style.textContent = `
-@keyframes spin {
-    from { transform: rotate(0deg); }
-    to { transform: rotate(360deg); }
-}
-
-/* Toolbar button styles */
-.xp-toolbar-buttons {
-    display: flex;
-    gap: 2px;
-    padding: 2px 0;
-}
-
-.xp-btn-back,
-.xp-btn-forward,
-.xp-btn-refresh,
-.xp-btn-stop,
-.xp-btn-home {
-    width: 24px;
-    height: 22px;
-    border: 1px solid;
-    background: linear-gradient(180deg, #f1f0e9 0%, #dddad1 85%, #bdb8ae 100%);
-    border-color: #ffffff #888888 #888888 #ffffff;
-    cursor: pointer;
-    font-size: 14px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-family: 'Tahoma', var(--font-sans);
-    color: #000000;
-}
-
-.xp-btn-back:hover,
-.xp-btn-forward:hover,
-.xp-btn-refresh:hover,
-.xp-btn-stop:hover,
-.xp-btn-home:hover {
-    background: linear-gradient(180deg, #fefffe 0%, #e9e6de 85%, #c9c5bd 100%);
-}
-
-.xp-btn-back:active,
-.xp-btn-forward:active,
-.xp-btn-refresh:active,
-.xp-btn-stop:active,
-.xp-btn-home:active {
-    background: linear-gradient(180deg, #c5c2b8 0%, #e4e1d8 100%);
-    border-color: #888888 #ffffff #ffffff #888888;
-}
-
-.xp-btn-back:disabled,
-.xp-btn-forward:disabled {
-    cursor: not-allowed;
-    opacity: 0.5;
-}
-
-.xp-btn-stop.active {
-    background: linear-gradient(180deg, #c5c2b8 0%, #e4e1d8 100%);
-    border-color: #888888 #ffffff #ffffff #888888;
-}
-
 /* Status bar */
 .xp-status {
     background: linear-gradient(180deg, #f5f4f2 0%, #e9e6de 100%);

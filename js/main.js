@@ -1,7 +1,5 @@
 // Main initialization - Critical modules only
 import { initMetrics } from './metrics.js';
-import { initImageOptimization } from './image-optimizer.js';
-
 // Theme Management
 function initTheme() {
     // Auto-detect system preference if no saved preference
@@ -170,7 +168,6 @@ document.addEventListener('DOMContentLoaded', async () => {
     initTypingAnimation();
     initScrollReveal();
     initMetrics();
-    initImageOptimization();
     fetchGitHubStats();
     initConsoleMessage();
 

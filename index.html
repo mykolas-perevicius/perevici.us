@@ -12,6 +12,11 @@
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://perevici.us">
 
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Mykolas Perevicius - Full-Stack Engineer">
+    <meta name="twitter:description" content="Software engineer shipping production code that matters. 90% test coverage advocate, GPU acceleration enthusiast.">
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet">
@@ -129,7 +134,7 @@
                         </ul>
                         <div class="experience-preview">
                             <a href="https://tapiatax.com" target="_blank">
-                                <img src="/assets/projects/tapiatax-preview.png" alt="TapiaTax - Professional Tax Preparation Portal" loading="lazy">
+                                <img src="/assets/projects/tapiatax-preview.png" alt="TapiaTax - Professional Tax Preparation Portal" loading="lazy" width="2400" height="1474">
                             </a>
                         </div>
                         <div class="tech-tags">
@@ -156,7 +161,7 @@
                         </ul>
                         <div class="experience-preview">
                             <a href="https://userauthguard.com" target="_blank">
-                                <img src="/assets/experience/userauthguard-preview.png" alt="UserAuthGuard - K-12 Chromebook Management" loading="lazy">
+                                <img src="/assets/experience/userauthguard-preview.png" alt="UserAuthGuard - K-12 Chromebook Management" loading="lazy" width="2400" height="1474">
                             </a>
                         </div>
                         <div class="tech-tags">
@@ -183,7 +188,7 @@
                         </ul>
                         <div class="experience-preview">
                             <a href="https://www.bessemertrust.com" target="_blank">
-                                <img src="/assets/experience/bessemer-preview.png" alt="Bessemer Trust - Private Wealth Management" loading="lazy">
+                                <img src="/assets/experience/bessemer-preview.png" alt="Bessemer Trust - Private Wealth Management" loading="lazy" width="2400" height="1474">
                             </a>
                         </div>
                         <div class="tech-tags">
@@ -252,7 +257,7 @@
                         </ul>
                         <div class="experience-preview">
                             <a href="https://bergen.edu" target="_blank">
-                                <img src="/assets/experience/bergen-preview.png" alt="Bergen Community College" loading="lazy">
+                                <img src="/assets/experience/bergen-preview.png" alt="Bergen Community College" loading="lazy" width="2400" height="1474">
                             </a>
                         </div>
                         <div class="tech-tags">
@@ -278,7 +283,7 @@
             </button>
 
             <!-- XP Window View (hidden by default) -->
-            <div class="xp-window" style="display: none;">
+            <div class="xp-window hidden">
                 <div class="xp-titlebar">
                     <div class="xp-title">
                         <img class="xp-icon" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath fill='%230054e3' d='M2 2v12h12V2H2zm1 3h10v8H3V5zm1-2h8v1H4V3z'/%3E%3C/svg%3E" alt="Internet Explorer">
@@ -310,8 +315,7 @@
             </div>
 
             <!-- Modern Projects Grid (default view) -->
-            <div class="modern-projects-grid">
-            <div class="projects-grid">
+            <div class="modern-projects-grid projects-grid">
                 <!-- Featured Project: TapiaTax - LIVE -->
                 <div class="project-card featured scroll-reveal">
                     <div class="project-header">
@@ -325,7 +329,7 @@
                     </p>
                     <div class="project-preview">
                         <a href="https://tapiaaccountants.vercel.app" target="_blank">
-                            <img src="/assets/projects/tapiatax-preview.png" alt="TapiaTax - Professional tax preparation portal" loading="lazy">
+                            <img src="/assets/projects/tapiatax-preview.png" alt="TapiaTax - Professional tax preparation portal" loading="lazy" width="2400" height="1474">
                         </a>
                     </div>
                     <div class="project-stats">
@@ -355,7 +359,7 @@
                     </p>
                     <div class="project-preview">
                         <a href="https://stocksandoptions.org" target="_blank">
-                            <img src="/assets/projects/stocksandoptions-preview.png" alt="Stock vs Options Simulator - Interactive calculator" loading="lazy">
+                            <img src="/assets/projects/stocksandoptions-preview.png" alt="Stock vs Options Simulator - Interactive calculator" loading="lazy" width="2400" height="1474">
                         </a>
                     </div>
                     <div class="project-stats">
@@ -504,7 +508,6 @@
                     </div>
                 </div>
             </div>
-            </div> <!-- End modern-projects-grid -->
         </div>
     </section>
 
@@ -575,7 +578,7 @@
 
                 <button type="submit" class="contact-form-submit">
                     <span class="submit-text">Send Message</span>
-                    <span class="submit-loading" style="display: none;">Sending...</span>
+                    <span class="submit-loading hidden">Sending...</span>
                 </button>
 
                 <div class="form-status" id="formStatus"></div>
@@ -601,7 +604,7 @@
                 <div class="terminal-line"><span class="terminal-prompt">mykolas@perevici.us:~$</span> cat philosophy.txt</div>
                 <div class="terminal-line">&gt; "Ship fast. Test everything. Impact users."</div>
                 <div class="terminal-line"></div>
-                <div class="terminal-line" style="color: #00d4ff;">&gt; Press ESC or click outside to close</div>
+                <div class="terminal-line" style="color: var(--primary-color);">&gt; Press ESC or click outside to close</div>
             </div>
         </div>
     </div>

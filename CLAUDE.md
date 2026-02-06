@@ -60,7 +60,7 @@ npm run build-metrics   # Fetch GitHub stats and generate metrics.json (optional
 
 ### CSS Guidelines
 - Define new colors in both `:root` and `[data-theme="light"]` in `theme.css`
-- Fonts: Fraunces (display), Sora (body), JetBrains Mono (code)
+- Fonts: Space Grotesk (display), Inter (body), JetBrains Mono (code)
 - Mobile-first with breakpoints at 480px, 768px
 
 ## Constraints
