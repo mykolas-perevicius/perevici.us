@@ -1,8 +1,8 @@
 {
-  "generatedAt": "2026-02-21T06:08:30.435Z",
+  "generatedAt": "2026-02-21T07:10:55.022Z",
   "username": "mykolas-perevicius",
-  "linesAddedLifetime": 351225,
-  "commitsLastYear": 273,
+  "linesAddedLifetime": 180841,
+  "commitsLastYear": 258,
   "monthlyCommitsLastYear": [
     17,
     38,
@@ -12,9 +12,9 @@
     0,
     0,
     32,
-    111,
-    4,
-    30,
+    98,
+    3,
+    29,
     2
   ],
   "rollingYearStart": "2025-03-01T00:00:00.000Z",
