@@ -1,11 +1,24 @@
 {
-  "generatedAt": "2026-04-28T08:44:57.458Z",
+  "generatedAt": "2026-04-28T09:44:09.683Z",
   "username": "mykolas-perevicius",
-  "linesAddedLifetime": 40366,
-  "commitsLastYear": 0,
-  "monthlyCommitsLastYear": [],
-  "rollingYearStart": null,
-  "rollingYearEnd": null,
+  "linesAddedLifetime": 106961,
+  "commitsLastYear": 19,
+  "monthlyCommitsLastYear": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    19,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+  ],
+  "rollingYearStart": "2025-06-01T00:00:00.000Z",
+  "rollingYearEnd": "2026-05-02T00:00:00.000Z",
   "prsMerged": 3,
   "starsTotal": 7
 }
