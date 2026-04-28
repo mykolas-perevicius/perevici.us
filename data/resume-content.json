@@ -1,130 +1,111 @@
 {
   "header": {
-    "name": "MYKOLAS PEREVICIUS",
+    "name": "Mykolas Perevicius",
     "contactLines": [
       [
-        "perevici.us",
-        "github.com/mykolas-perevicius",
-        "linkedin.com/in/mykolasperevicius"
-      ],
-      [
         "Perevicius.Mykolas@gmail.com",
-        "mp697@njit.edu",
         "201-786-8519",
-        "NYC Metro Area"
+        {"text": "GitHub", "href": "https://github.com/mykolas-perevicius"},
+        {"text": "LinkedIn", "href": "https://linkedin.com/in/mykolasperevicius"}
       ]
     ]
   },
   "education": {
     "school": "New Jersey Institute of Technology",
-    "dates": "Sep 2021 -- Dec 2025",
-    "degree": "B.S. Computer Science | Dean's List",
-    "graduateCoursework": "Compiler Design, Machine Learning, GPU Cluster Programming",
-    "coreCoursework": "Operating Systems, Database Systems, Advanced Data Structures & Algorithms, Linux Programming"
+    "dates": "Sep 2021 – Dec 2025",
+    "degree": "B.S. Computer Science, Dean's List",
+    "coursework": "Operating Systems, Database Systems, Advanced Data Structures & Algorithms, Linux Programming, Compiler Design, Machine Learning, GPU Cluster Programming"
   },
   "experience": [
     {
-      "title": "CTO & Lead Developer",
+      "title": "Founding Engineer",
       "company": "TapiaTax by Tapia Accountants and Associates LLC",
-      "dates": "2025 -- Present",
+      "dates": "Dec 2025 – Present",
       "bullets": [
-        "Architected and deployed full-stack tax preparation portal (tapiatax.com) with secure document management, client workflows, and real-time collaboration for small business clients",
-        "Designed RESTful API layer and relational database schema (Supabase/PostgreSQL) handling sensitive PII with role-based access control and encrypted storage",
-        "Integrated TypeScript/React 19 frontend with backend services; deployed cloud-native application on Vercel with CI/CD automation"
+        "Founding software engineer for a local accounting firm focused on tax returns for individuals and bookkeeping for small businesses.",
+        "Built and deployed landing page + lightweight client portal using React, TypeScript, Supabase, and Vercel.",
+        "Implemented secure client messaging and file upload workflows to support communication with the business, reduce spam, and provide a fallback from SaaS solutions"
       ]
     },
     {
-      "title": "Software Engineer",
+      "title": "Software Engineer Contractor",
       "company": "UserAuthGuard by Asan Digital LLC",
-      "dates": "Oct 2025 -- Feb 2026",
+      "dates": "Oct 2025 – Feb 2026",
       "bullets": [
-        "Spearheaded test-driven development initiative for a Django SaaS platform serving 17,000+ students across multiple school districts, increasing backend coverage with 1,500+ tests (unit, E2E, frontend walkthroughs)",
-        "Built automated testing infrastructure using pytest, Playwright, Factory Boy, and Faker, including BFS-based route discovery that achieved 96% frontend coverage with video-recorded test runs",
-        "Full-stack contributions across Django REST Framework, PostgreSQL, Redis, Celery, and Django Channels (WebSockets), with integrations to Google Workspace, Stripe, and Dell Warranty APIs",
+        "Contracted to improve testing for an internal portal used to manage groups, users, and school-issued devices for a SaaS platform serving 17,000+ students",
+        "Increased backend coverage with 1,500+ tests with pytest-django test suites, CI/CD checks, and automated validation.",
+        "Built automated testing infrastructure using pytest, Playwright and Faker, including BFS-based route discovery that achieved 90%+ frontend coverage with video-recorded test runs",
+        "Contributed Django REST framework backend work for internal portal features and service integrations, including Google Workspace, Stripe",
         "Implemented CI/CD pipelines with GitHub Actions and Docker for automated test execution, coverage reporting, and deployment validation"
       ]
     },
     {
-      "title": "Software Engineer",
-      "company": "Bessemer Trust (Internship)",
-      "dates": "Jun 2023 -- Aug 2023",
+      "title": "Software Engineer Intern",
+      "company": "Bessemer Trust",
+      "dates": "Jun 2023 – Aug 2023",
       "bullets": [
-        "Built securities analysis platform that reduced reconciliation time by 60% for 20+ wealth advisors",
-        "Optimized SQL Server queries and indexes, cutting report generation latency by 45%",
-        "Delivered AI Tech Talk to 100+ employees on practical ML applications",
-        "Tech: C#/.NET Core, ASP.NET Web API, React 18, SQL Server, Redis"
+        "Contributed full-stack features to an internal securities analysis platform using C#/.NET, React/TypeScript, and SQL Server for wealth management analysts and client advisors",
+        "Presented an \"AI Tech Talk\" to 100+ employees on LLM integrations for Bessemer's core business needs & daily operations."
       ]
     },
     {
       "title": "Curriculum Developer & Instructor",
       "company": "The Coding Place",
-      "dates": "Dec 2022 -- Jun 2023",
+      "dates": "Dec 2022 – Jun 2023",
       "bullets": [
-        "Created 117 Jupyter notebooks covering Python from basics to GPU programming; 90% certification rate (120+ students)",
-        "Built automated testing pipeline with GitHub Actions for student code evaluation"
-      ]
-    },
-    {
-      "title": "Software Engineer",
-      "company": "Project Innovate Newark",
-      "dates": "Dec 2019 -- Oct 2025",
-      "bullets": [
-        "Shipped event-planning suite (React, Node.js, PostgreSQL) reducing scheduling conflicts by 30% across 9+ programs",
-        "Containerized with Docker, cut deployment from days to hours; zero critical findings in penetration testing"
+        "Private tutoring focused on supplementary coding education for kids and teens, as well as continuing education for adults.",
+        "Designed and taught lessons in programming basics with Python, web development with JS, OOP + data structures, and personal project development.",
+        "Created Jupyter notebook learning materials to support fundamentals instruction and preparation for PCEP and PCAP certifications, with a high student pass rate."
       ]
     },
     {
       "title": "Research Intern",
-      "company": "Bergen Community College",
-      "dates": "Sep 2021 -- Sep 2022",
+      "company": "STEM Student Scholars (3SP) Research Program, Bergen Community College",
+      "dates": "Sep 2021 – Sep 2022",
       "bullets": [
-        "Engineered CNN-powered recycling-bin prototype attaining 95% material-detection accuracy",
-        "Built Arduino-based EV GUI that improved converted pickup truck range by ~20%"
+        "Participated in Bergen Community College's STEM Student Scholars research program under Dr. Joseph Sivo.",
+        "Built early embedded systems and Python-based research prototypes as part of hands-on technical research experience.",
+        "Contributed to computer vision experimentation with a CNN-based recycling-bin detection prototype built with TensorFlow."
+      ]
+    },
+    {
+      "title": "Curriculum Developer, Instructor, and Software Engineer",
+      "company": "Project Innovate Newark",
+      "dates": "Dec 2019 – Oct 2021",
+      "bullets": [
+        "Contributed to a nonprofit focused on teaching high school students the fundamentals of programming and finance.",
+        "Progressed from learning the stack, to teaching introductory Python classes and projects, to developing curriculum and coding instructional materials.",
+        "Later worked on an internal scheduling portal using React, Node.js, PostgreSQL, Django, JWT authentication, and Docker"
       ]
     }
   ],
   "projects": [
     {
-      "name": "Rosetta Multi-Language Compiler",
-      "tech": "C++, Rust, Python, Java, Kotlin, Haskell, OCaml, Assembly",
-      "link": "github.com/mykolas-perevicius/Building-A-Compiler",
-      "bullets": [
-        "Implemented complete compiler with code generation for 10+ programming languages",
-        "Built comprehensive testing infrastructure with automated cross-language validation"
-      ]
+      "name": "Distributed AlexNet",
+      "tech": "CUDA, MPI, C++, Python",
+      "link": "GitHub",
+      "linkUrl": "https://github.com/mykolas-perevicius/CUDA-MPI-GPU-Cluster-Programming",
+      "description": "Implemented AlexNet via CUDA kernels and MPI orchestration on a cluster to demonstrate scaling laws and techniques."
     },
     {
-      "name": "Distributed AlexNet",
-      "tech": "CUDA, MPI, C++",
-      "link": "github.com/mykolas-perevicius/CUDA-MPI-GPU-Cluster-Programming",
-      "bullets": [
-        "Achieved 4.6x speedup over PyTorch baseline through custom CUDA kernels and MPI orchestration",
-        "Optimized memory management and multi-GPU scheduling on DGX-1 cluster"
-      ]
+      "name": "RIFE Gameplay Interpolation",
+      "tech": "Python, CUDA, FFmpeg, Bash",
+      "link": "GitHub",
+      "linkUrl": "https://github.com/mykolas-perevicius/rife-gameplay-interpolation",
+      "description": "A GPU-accelerated video interpolation pipeline converting 30 FPS gameplay to 60+ FPS with a focus on evaluation and benchmarking."
     },
     {
       "name": "Koala's Forge",
-      "tech": "Python, PowerShell, Bash",
-      "link": "github.com/mykolas-perevicius/koalas-forge",
-      "bullets": [
-        "Built cross-platform system installer (Ninite alternative) supporting 100+ applications with parallel downloads"
-      ]
+      "tech": "PowerShell, Bash, Python",
+      "link": "",
+      "description": "Built a cross-platform installer supporting 100+ applications with automated setup, dependency handling, and rollback-oriented workflows - inspired by Ninite"
     },
     {
-      "name": "Additional Projects",
-      "tech": "Go, React, AWS, TensorFlow, D3.js",
-      "link": "",
-      "bullets": [
-        "Strive Digital Fitness (ML workout tracker), EEG Signal Classification (85%+ accuracy), Static C++ Code Analyzer, Interactive Network Visualization Dashboard"
-      ]
+      "name": "Stock & Options Simulator",
+      "tech": "React, TypeScript",
+      "link": "stocksandoptions.org",
+      "linkUrl": "https://stocksandoptions.org",
+      "description": "Developed an interactive web app for modeling stock and options scenarios with real-time calculations and visualization."
     }
-  ],
-  "skills": {
-    "Languages": ["Python", "C/C++", "Java", "C#", "TypeScript/JavaScript", "Rust", "Go", "SQL", "Assembly", "Bash"],
-    "Backend": ["Django REST Framework", ".NET Core", "ASP.NET Web API", "Spring Boot", "Node.js", "FastAPI"],
-    "Frontend": ["React 18", "TypeScript", "Next.js", "Tailwind CSS", "Redux", "D3.js"],
-    "Infrastructure": ["Docker", "Kubernetes", "AWS (ECS, Lambda, RDS)", "PostgreSQL", "Redis", "MongoDB", "SQL Server"],
-    "Testing": ["pytest-django", "Jest", "JUnit", "Selenium", "GitHub Actions CI/CD"],
-    "Specialized": ["CUDA/GPU Programming", "MPI", "Compiler Design", "PyTorch", "TensorFlow", "scikit-learn"]
-  }
+  ]
 }

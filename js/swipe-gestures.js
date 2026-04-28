@@ -101,7 +101,7 @@ export function initSwipeGestures() {
     document.addEventListener('touchend', handleTouchEnd, { passive: true });
 
     // Also handle modal swipe to close
-    const modals = document.querySelectorAll('.contact-modal, .xp-window');
+    const modals = document.querySelectorAll('.contact-modal');
 
     modals.forEach(modal => {
         let modalTouchStartY = 0;

@@ -1,5 +1,4 @@
 // Main initialization - Critical modules only
-import { initMetrics } from './metrics.js';
 // Theme Management
 function initTheme() {
     // Auto-detect system preference if no saved preference
@@ -82,43 +81,6 @@ function initTypingAnimation() {
     setTimeout(typeRole, 1000);
 }
 
-// GitHub Stats Integration (for footer metrics)
-async function fetchGitHubStats() {
-    try {
-        const response = await fetch('https://api.github.com/users/mykolas-perevicius');
-        const data = await response.json();
-
-        // Update footer metrics
-        const commitsEl = document.getElementById('totalCommits');
-        const reposEl = document.getElementById('totalRepos');
-        const starsEl = document.getElementById('totalStars');
-
-        if (reposEl) reposEl.textContent = data.public_repos || '20+';
-
-        // Fetch repositories to count stars
-        const reposResponse = await fetch('https://api.github.com/users/mykolas-perevicius/repos?per_page=100');
-        const repos = await reposResponse.json();
-        const totalStars = repos.reduce((acc, repo) => acc + (repo.stargazers_count || 0), 0);
-        if (starsEl) starsEl.textContent = totalStars;
-
-        // Fetch commit count (events API - approximation)
-        const eventsResponse = await fetch('https://api.github.com/users/mykolas-perevicius/events/public?per_page=100');
-        const events = await eventsResponse.json();
-        const pushEvents = events.filter(e => e.type === 'PushEvent');
-        const commitCount = pushEvents.reduce((acc, e) => acc + (e.payload?.commits?.length || 0), 0);
-        if (commitsEl) commitsEl.textContent = commitCount > 0 ? `${commitCount}+` : '500+';
-    } catch (error) {
-        console.error('Error fetching GitHub stats:', error);
-        const commitsEl = document.getElementById('totalCommits');
-        const reposEl = document.getElementById('totalRepos');
-        const starsEl = document.getElementById('totalStars');
-
-        if (commitsEl) commitsEl.textContent = '500+';
-        if (reposEl) reposEl.textContent = '20+';
-        if (starsEl) starsEl.textContent = '--';
-    }
-}
-
 // Scroll Reveal Animation
 function initScrollReveal() {
     const observerOptions = {
@@ -167,8 +129,6 @@ document.addEventListener('DOMContentLoaded', async () => {
     initTheme();
     initTypingAnimation();
     initScrollReveal();
-    initMetrics();
-    fetchGitHubStats();
     initConsoleMessage();
 
     // High priority: Load after critical content
@@ -184,7 +144,6 @@ document.addEventListener('DOMContentLoaded', async () => {
     requestIdleCallback(() => {
         Promise.all([
             import('./contact-form.js').then(m => m.initContactForm()),
-            import('./xp-window.js').then(m => m.initXPWindow()),
             import('./word-window.js').then(m => m.initWordWindow()),
             import('./hints.js').then(m => m.initHints())
         ]);

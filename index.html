@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mykolas Perevicius - Full-Stack Engineer</title>
-    <meta name="description" content="Full-stack software engineer with industry experience, shipping production code in Python, React, .NET, and AWS while never losing sight of the user.">
+    <meta name="description" content="Full-stack software engineer with industry experience, shipping production code in Python, React, .NET, and Django while never losing sight of the user.">
 
     <!-- Open Graph -->
     <meta property="og:title" content="Mykolas Perevicius - Full-Stack Engineer">
@@ -35,7 +35,7 @@
       "name": "Mykolas Perevicius",
       "jobTitle": "Software Engineer",
       "alumniOf": "New Jersey Institute of Technology",
-      "knowsAbout": ["Full-Stack Development", "GPU Computing", "Distributed Systems", "Python", "React", "Django", "AWS"],
+      "knowsAbout": ["Full-Stack Development", "GPU Computing", "Distributed Systems", "Python", "React", "Django", "TypeScript"],
       "url": "https://perevici.us",
       "sameAs": [
         "https://github.com/mykolas-perevicius",
@@ -105,32 +105,19 @@
         </div>
     </section>
 
-    <!-- Live GitHub Metrics -->
-    <section id="live-stats" class="stats-section">
-        <div class="container">
-            <h2 class="section-title">Live GitHub Metrics</h2>
-            <div id="liveMetricsContainer" class="live-metrics-container">
-                <!-- Metrics will be dynamically loaded here -->
-            </div>
-            <div id="metricsActivity" class="metrics-activity">
-                <!-- Activity chart will be dynamically loaded here -->
-            </div>
-        </div>
-    </section>
-
     <section id="experience" class="experience" data-hint-anchor="experience">
         <div class="section-content">
             <h2 class="section-title">Experience</h2>
             <div class="timeline">
                 <div class="timeline-item active scroll-reveal">
-                    <div class="timeline-date">2025 - Present</div>
+                    <div class="timeline-date">Dec 2025 - Present</div>
                     <div class="timeline-content">
-                        <h3>CTO & Lead Developer</h3>
+                        <h3>Founding Engineer</h3>
                         <div class="company"><a href="https://tapiatax.com" target="_blank">TapiaTax by Tapia Accountants and Associates LLC</a></div>
                         <ul class="achievements">
-                            <li>Architected and deployed full-stack tax preparation portal (tapiatax.com) with secure document management, client workflows, and real-time collaboration for small business clients</li>
-                            <li>Designed RESTful API layer and relational database schema (Supabase/PostgreSQL) handling sensitive PII with role-based access control and encrypted storage</li>
-                            <li>Integrated TypeScript/React 19 frontend with backend services; deployed cloud-native application on Vercel with CI/CD automation</li>
+                            <li>Founding software engineer for a local accounting firm focused on tax returns for individuals and bookkeeping for small businesses</li>
+                            <li>Built and deployed a landing page and lightweight client portal using React, TypeScript, Supabase, and Vercel</li>
+                            <li>Implemented secure client messaging and file upload workflows to support business communication, reduce spam, and provide a fallback from SaaS solutions</li>
                         </ul>
                         <div class="experience-preview">
                             <a href="https://tapiatax.com" target="_blank">
@@ -151,12 +138,13 @@
                 <div class="timeline-item scroll-reveal">
                     <div class="timeline-date">Oct 2025 - Feb 2026</div>
                     <div class="timeline-content">
-                        <h3>Software Engineer</h3>
+                        <h3>Software Engineer Contractor</h3>
                         <div class="company"><a href="https://userauthguard.com" target="_blank">UserAuthGuard by Asan Digital</a></div>
                         <ul class="achievements">
-                            <li>Spearheaded test-driven development initiative for a Django SaaS platform serving 17,000+ students across multiple school districts, increasing backend coverage with 1,500+ tests (unit, E2E, frontend walkthroughs)</li>
-                            <li>Built automated testing infrastructure using pytest, Playwright, Factory Boy, and Faker, including BFS-based route discovery that achieved 96% frontend coverage with video-recorded test runs</li>
-                            <li>Full-stack contributions across Django REST Framework, PostgreSQL, Redis, Celery, and Django Channels (WebSockets), with integrations to Google Workspace, Stripe, and Dell Warranty APIs</li>
+                            <li>Contracted to improve testing for an internal portal used to manage groups, users, and school-issued devices for a SaaS platform serving 17,000+ students</li>
+                            <li>Increased backend coverage with 1,500+ pytest-django tests with CI/CD checks and automated validation</li>
+                            <li>Built automated testing infrastructure using pytest, Playwright, and Faker, including BFS-based route discovery that achieved 90%+ frontend coverage with video-recorded test runs</li>
+                            <li>Contributed Django REST framework backend work for internal portal features and service integrations including Google Workspace and Stripe</li>
                             <li>Implemented CI/CD pipelines with GitHub Actions and Docker for automated test execution, coverage reporting, and deployment validation</li>
                         </ul>
                         <div class="experience-preview">
@@ -167,10 +155,10 @@
                         <div class="tech-tags">
                             <span class="tag">Django REST</span>
                             <span class="tag">pytest-django</span>
+                            <span class="tag">Playwright</span>
                             <span class="tag">PostgreSQL</span>
-                            <span class="tag">Redis</span>
-                            <span class="tag">Celery</span>
                             <span class="tag">Docker</span>
+                            <span class="tag">GitHub Actions</span>
                         </div>
                     </div>
                 </div>
@@ -181,10 +169,8 @@
                         <h3>Software Engineer (Internship)</h3>
                         <div class="company"><a href="https://www.bessemertrust.com" target="_blank">Bessemer Trust</a></div>
                         <ul class="achievements">
-                            <li>Built securities analysis platform that reduced reconciliation time by 60% for 20+ wealth advisors</li>
-                            <li>Optimized SQL Server queries and indexes, cutting report generation latency by 45%</li>
-                            <li>Delivered AI Tech Talk to 100+ employees on practical ML applications</li>
-                            <li>Developed and tested full-stack C#/.NET & React features for critical internal securities management platform</li>
+                            <li>Contributed full-stack features to an internal securities analysis platform using C#/.NET, React/TypeScript, and SQL Server for wealth management analysts and client advisors</li>
+                            <li>Presented an AI Tech Talk to 100+ employees on LLM integrations for Bessemer's core business needs and daily operations</li>
                         </ul>
                         <div class="experience-preview">
                             <a href="https://www.bessemertrust.com" target="_blank">
@@ -193,10 +179,10 @@
                         </div>
                         <div class="tech-tags">
                             <span class="tag">C#</span>
-                            <span class="tag">.NET Core</span>
-                            <span class="tag">React 18</span>
+                            <span class="tag">.NET</span>
+                            <span class="tag">React</span>
+                            <span class="tag">TypeScript</span>
                             <span class="tag">SQL Server</span>
-                            <span class="tag">Redis</span>
                         </div>
                     </div>
                 </div>
@@ -207,10 +193,9 @@
                         <h3>Curriculum Developer & Instructor</h3>
                         <div class="company">The Coding Place</div>
                         <ul class="achievements">
-                            <li>Created 117 Jupyter notebooks covering Python from basics to GPU programming</li>
-                            <li>Achieved 90% student certification rate (PCEP/PCAP) across 120+ students</li>
-                            <li>Designed and taught 30+ hours of comprehensive coursework covering Web Development, OOP, and Data Structures & Algorithms</li>
-                            <li>Built automated testing pipeline with GitHub Actions for student code evaluation</li>
+                            <li>Provided private tutoring in supplementary coding education for kids, teens, and adults — including continuing education</li>
+                            <li>Designed and taught lessons in programming basics with Python, web development with JavaScript, and OOP plus data structures</li>
+                            <li>Created Jupyter notebook learning materials supporting fundamentals instruction and preparation for PCEP and PCAP certifications, with a high student pass rate</li>
                         </ul>
                         <div class="tech-tags">
                             <span class="tag">Python</span>
@@ -223,15 +208,14 @@
                 </div>
 
                 <div class="timeline-item scroll-reveal">
-                    <div class="timeline-date">Dec 2019 - Oct 2025</div>
+                    <div class="timeline-date">Dec 2019 - Oct 2021</div>
                     <div class="timeline-content">
-                        <h3>Software Engineer</h3>
+                        <h3>Curriculum Developer, Instructor, and Software Engineer</h3>
                         <div class="company">Project Innovate Newark</div>
                         <ul class="achievements">
-                            <li>Developed and launched event-planning suite using React, Node.js, and PostgreSQL, reducing scheduling conflicts by 30% across 9+ programs</li>
-                            <li>Implemented Docker for containerization, significantly reducing release cycles from days to hours</li>
-                            <li>Established role-based access control and JWT authentication, achieving zero critical findings in penetration testing</li>
-                            <li>Contributed to increasing data reporting efficiency by ~30% through modular UI elements and RESTful API integration</li>
+                            <li>Contributed to a nonprofit focused on teaching high school students the fundamentals of programming and finance</li>
+                            <li>Progressed from learning the stack to teaching introductory Python classes and projects, then to developing curriculum and coding instructional materials</li>
+                            <li>Built an internal scheduling portal using React, Node.js, PostgreSQL, Django, JWT authentication, and Docker</li>
                         </ul>
                         <div class="tech-tags">
                             <span class="tag">React</span>
@@ -250,10 +234,9 @@
                         <h3>Research Intern</h3>
                         <div class="company"><a href="https://bergen.edu" target="_blank">Bergen Community College</a></div>
                         <ul class="achievements">
-                            <li>Prototyped embedded systems incorporating GUIs and machine vision capabilities for robotics applications</li>
-                            <li>Engineered CNN-powered recycling-bin prototype attaining 95% material-detection accuracy</li>
-                            <li>Built Arduino-based EV GUI that boosted converted pickup truck range by approximately 20%</li>
-                            <li>Systematically collected, cleaned, processed, and analyzed experimental data using Python libraries</li>
+                            <li>Participated in the STEM Student Scholars (3SP) research program under Dr. Joseph Sivo</li>
+                            <li>Built early embedded systems and Python-based research prototypes as part of hands-on technical research experience</li>
+                            <li>Contributed to computer vision experimentation with a CNN-based recycling-bin detection prototype built with TensorFlow</li>
                         </ul>
                         <div class="experience-preview">
                             <a href="https://bergen.edu" target="_blank">
@@ -262,7 +245,7 @@
                         </div>
                         <div class="tech-tags">
                             <span class="tag">Python</span>
-                            <span class="tag">Arduino</span>
+                            <span class="tag">TensorFlow</span>
                             <span class="tag">CNN</span>
                             <span class="tag">Computer Vision</span>
                         </div>
@@ -276,46 +259,7 @@
         <div class="section-content">
             <h2 class="section-title">Featured Projects</h2>
 
-            <!-- View Toggle Button -->
-            <button class="view-toggle-btn" id="viewToggle" title="Switch to Windows XP view">
-                <span class="toggle-icon">🪟</span>
-                <span class="toggle-text">XP Mode</span>
-            </button>
-
-            <!-- XP Window View (hidden by default) -->
-            <div class="xp-window hidden">
-                <div class="xp-titlebar">
-                    <div class="xp-title">
-                        <img class="xp-icon" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath fill='%230054e3' d='M2 2v12h12V2H2zm1 3h10v8H3V5zm1-2h8v1H4V3z'/%3E%3C/svg%3E" alt="Internet Explorer">
-                        <span>Internet Explorer - Projects Portfolio</span>
-                    </div>
-                    <div class="xp-controls">
-                        <button class="xp-btn xp-minimize" aria-label="Minimize"><span>_</span></button>
-                        <button class="xp-btn xp-maximize" aria-label="Maximize"><span>□</span></button>
-                        <button class="xp-btn xp-close" aria-label="Close"><span>×</span></button>
-                    </div>
-                </div>
-                <div class="xp-toolbar">
-                    <div class="xp-address-bar">
-                        <label class="xp-address-label">Address</label>
-                        <div class="xp-address-input">
-                            <span>https://perevici.us/projects/all</span>
-                        </div>
-                        <button class="xp-go-button">Go</button>
-                    </div>
-                </div>
-                <div class="xp-content">
-                    <div class="projects-grid xp-projects-grid">
-                        <!-- XP view projects will be cloned here by JS -->
-                    </div>
-                </div>
-                <div class="xp-status">
-                    <span class="xp-status-text">Ready</span>
-                </div>
-            </div>
-
-            <!-- Modern Projects Grid (default view) -->
-            <div class="modern-projects-grid projects-grid">
+            <div class="projects-grid">
                 <!-- Featured Project: TapiaTax - LIVE -->
                 <div class="project-card featured scroll-reveal">
                     <div class="project-header">
@@ -325,7 +269,7 @@
                         </div>
                     </div>
                     <p class="project-description">
-                        Full-stack tax preparation portal for Tapia Accountants. Client portal with secure document management, tax filing workflow, and real-time collaboration for small businesses.
+                        Landing page and lightweight client portal for a local accounting firm focused on individual tax returns and small-business bookkeeping. Secure messaging and file upload workflows.
                     </p>
                     <div class="project-preview">
                         <a href="https://tapiaaccountants.vercel.app" target="_blank">
@@ -383,11 +327,11 @@
                         </div>
                     </div>
                     <p class="project-description">
-                        Interactive Python learning platform with 117 Jupyter notebooks. Covers basics to GPU programming with 90% student certification pass rate.
+                        Jupyter notebook learning materials covering Python fundamentals, designed to support PCEP and PCAP certification preparation.
                     </p>
                     <div class="project-stats">
-                        <span class="stat-item">117 Notebooks</span>
-                        <span class="stat-item">90% Pass Rate</span>
+                        <span class="stat-item">Jupyter</span>
+                        <span class="stat-item">PCEP / PCAP</span>
                     </div>
                     <div class="tech-tags">
                         <span class="tag">Python</span>
@@ -405,17 +349,17 @@
                         </div>
                     </div>
                     <p class="project-description">
-                        Custom CUDA kernels and MPI orchestration for AlexNet training. Achieved 4.6x speedup over baseline PyTorch on DGX-1 cluster through optimized memory coalescing and multi-GPU coordination.
+                        AlexNet implemented via custom CUDA kernels and MPI orchestration on a cluster, used to demonstrate scaling laws and parallel-training techniques.
                     </p>
                     <div class="project-stats">
-                        <span class="stat-item">4.6x Faster</span>
+                        <span class="stat-item">GPU Cluster</span>
                         <span class="stat-item">Multi-GPU</span>
                     </div>
                     <div class="tech-tags">
                         <span class="tag">CUDA</span>
                         <span class="tag">C++</span>
                         <span class="tag">MPI</span>
-                        <span class="tag">PyTorch</span>
+                        <span class="tag">Python</span>
                     </div>
                 </div>
 
@@ -428,38 +372,40 @@
                         </div>
                     </div>
                     <p class="project-description">
-                        Interactive piano learning application with real-time feedback. Practice scales, chords, and songs with visual guidance and progress tracking.
+                        Browser-based piano trainer mapping QWERTY to a 30+ note chromatic instrument. Eight scales, real-time piano visualization, and scale-practice with progress tracking.
                     </p>
                     <div class="project-stats">
-                        <span class="stat-item">Interactive</span>
+                        <span class="stat-item">8 Scales</span>
                         <span class="stat-item">Real-time</span>
                     </div>
                     <div class="tech-tags">
-                        <span class="tag">JavaScript</span>
+                        <span class="tag">React</span>
+                        <span class="tag">TypeScript</span>
+                        <span class="tag">Tailwind</span>
                         <span class="tag">Web Audio API</span>
-                        <span class="tag">Canvas</span>
                     </div>
                 </div>
 
-                <!-- Video Frame Interpolation - GitHub -->
+                <!-- RIFE Gameplay Interpolation - GitHub -->
                 <div class="project-card scroll-reveal">
                     <div class="project-header">
-                        <h3>Video Frame Interpolation</h3>
+                        <h3>RIFE Gameplay Interpolation</h3>
                         <div class="project-links">
-                            <a href="https://github.com/mykolas-perevicius/Video-Frame-Interpolation" target="_blank">GitHub</a>
+                            <a href="https://github.com/mykolas-perevicius/rife-gameplay-interpolation" target="_blank">GitHub</a>
                         </div>
                     </div>
                     <p class="project-description">
-                        ML-powered video frame interpolation for smooth slow-motion effects. Generates intermediate frames using deep learning to increase video frame rates.
+                        GPU-accelerated video interpolation pipeline converting 30 FPS gameplay to 60+ FPS, focused on evaluation and benchmarking.
                     </p>
                     <div class="project-stats">
-                        <span class="stat-item">ML-Powered</span>
-                        <span class="stat-item">Video Processing</span>
+                        <span class="stat-item">30→60 FPS</span>
+                        <span class="stat-item">GPU-accelerated</span>
                     </div>
                     <div class="tech-tags">
                         <span class="tag">Python</span>
-                        <span class="tag">PyTorch</span>
-                        <span class="tag">Computer Vision</span>
+                        <span class="tag">CUDA</span>
+                        <span class="tag">FFmpeg</span>
+                        <span class="tag">Bash</span>
                     </div>
                 </div>
 
@@ -472,7 +418,7 @@
                         </div>
                     </div>
                     <p class="project-description">
-                        Free, cross-platform system installer supporting 100+ applications. Automated package management with dependency resolution and rollback support.
+                        Cross-platform installer (inspired by Ninite) supporting 100+ applications. Automated setup, dependency handling, and rollback-oriented workflows.
                     </p>
                     <div class="project-stats">
                         <span class="stat-item">100+ Apps</span>
@@ -485,25 +431,21 @@
                     </div>
                 </div>
 
-                <!-- Rosetta - In Progress -->
+                <!-- Static C++ Code Analyzer -->
                 <div class="project-card scroll-reveal">
                     <div class="project-header">
-                        <h3>Rosetta</h3>
-                        <span class="project-badge in-progress">In Progress</span>
-                        <div class="project-links">
-                            <a href="https://github.com/mykolas-perevicius/Building-A-Compiler" target="_blank">GitHub</a>
-                        </div>
+                        <h3>Static C++ Code Analyzer</h3>
                     </div>
                     <p class="project-description">
-                        Multi-language compiler targeting 10+ languages including C++, Rust, Python, Java, Kotlin, Haskell, OCaml, and Assembly. Exploring compiler design from lexing to code generation.
+                        Parser and static analysis tool for a C++ subset. Identifies type errors and unused variables using AST generation and control-flow analysis. (Sep 2023 – Jan 2024)
                     </p>
                     <div class="project-stats">
-                        <span class="stat-item">10+ Languages</span>
-                        <span class="stat-item">Compiler Design</span>
+                        <span class="stat-item">AST</span>
+                        <span class="stat-item">Static Analysis</span>
                     </div>
                     <div class="tech-tags">
                         <span class="tag">C++</span>
-                        <span class="tag">LLVM</span>
+                        <span class="tag">AST</span>
                         <span class="tag">Compilers</span>
                     </div>
                 </div>
@@ -533,19 +475,9 @@
     </section>
 
     <footer class="footer glass-panel">
-        <div class="footer-content">
-            <div class="footer-links">
-                <a href="https://github.com/mykolas-perevicius" target="_blank">GitHub</a>
-                <a href="https://linkedin.com/in/mykolasperevicius" target="_blank">LinkedIn</a>
-                <a href="mailto:Perevicius.Mykolas@gmail.com">Email</a>
-            </div>
-            <div class="footer-metrics" id="githubMetrics">
-                <span class="metric"><span id="totalCommits">--</span> commits</span>
-                <span class="metric"><span id="totalRepos">--</span> repos</span>
-                <span class="metric"><span id="totalStars">--</span> stars</span>
-            </div>
-        </div>
-        <p class="footer-copyright">&copy; 2025 Mykolas Perevicius</p>
+        <button class="dos-mode-toggle" id="dosModeToggle" title="Enter MS-DOS Mode">
+            C:\&gt;_
+        </button>
     </footer>
 
     <!-- Contact Form Modal -->
@@ -611,11 +543,6 @@
 
     <!-- Matrix Rain Canvas (Konami Code Easter Egg) -->
     <canvas class="matrix-rain" id="matrixCanvas"></canvas>
-
-    <!-- MS-DOS Mode Button -->
-    <button class="dos-mode-toggle" id="dosModeToggle" title="Enter MS-DOS Mode">
-        C:\&gt;_
-    </button>
 
     <canvas id="threejsBackground"></canvas>
 
